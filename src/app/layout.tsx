@@ -15,8 +15,27 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Loop Easy — Video Channels That Never Stop",
-  description: "Create, share, and loop video channels. The Spotify of video playlists.",
+  title: "LoopEasy | Video Channels Curated by AI, Built by Creators",
+  description: "Discover endless video channels or create your own. Watch free or go Premium. Creators earn 70% of ad revenue. Your taste is your talent.",
+  keywords: ["video channels", "curated content", "creator economy", "video curation", "ai video", "fitness tv", "gym content"],
+  authors: [{ name: "LoopEasy" }],
+  openGraph: {
+    title: "LoopEasy | Video Channels Curated by AI, Built by Creators",
+    description: "Discover endless video channels or create your own. Creators earn 70% of ad revenue. Your taste is your talent.",
+    url: "https://loopeasy.com",
+    siteName: "LoopEasy",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "LoopEasy | Video Channels Curated by AI",
+    description: "Discover endless video channels or create your own. Creators earn 70% of ad revenue.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
