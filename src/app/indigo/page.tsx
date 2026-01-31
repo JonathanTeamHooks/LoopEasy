@@ -2,7 +2,33 @@
 
 import { useState, useEffect } from "react";
 
-export default function Home() {
+// Premium Indigo Theme - SaaS/Stripe energy
+const theme = {
+  accent: "#6366f1",
+  accentHover: "#818cf8",
+  accentGlow: "rgba(99, 102, 241, 0.4)",
+  accentMuted: "rgba(99, 102, 241, 0.15)",
+  gradient: "from-[#6366f1] via-[#8b5cf6] to-[#a855f7]",
+};
+
+// Memorable Loop Logo - Infinity symbol with play button
+const LoopLogo = ({ size = "default" }: { size?: "small" | "default" }) => {
+  const dimensions = size === "small" ? "w-8 h-8" : "w-10 h-10";
+  const iconSize = size === "small" ? "w-4 h-4" : "w-5 h-5";
+  
+  return (
+    <div className={`${dimensions} rounded-xl bg-gradient-to-br ${theme.gradient} flex items-center justify-center relative overflow-hidden`}>
+      <svg className={iconSize} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        {/* Infinity loop */}
+        <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z" className="text-white"/>
+      </svg>
+      {/* Subtle shine effect */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent" />
+    </div>
+  );
+};
+
+export default function IndigoTheme() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -11,24 +37,25 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0b] noise overflow-hidden">
+      {/* Theme indicator */}
+      <div className="fixed top-4 right-4 z-[100] px-4 py-2 bg-[#141416] border border-[#2a2a2e] rounded-full text-sm">
+        <span className="text-[#a1a1a6]">Theme:</span> <span className="text-[#6366f1] font-semibold">Premium Indigo</span>
+      </div>
+
       {/* Ambient background effects */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-[#ff3366] rounded-full blur-[200px] opacity-10 animate-pulse-slow" />
-        <div className="absolute bottom-[-30%] right-[-10%] w-[800px] h-[800px] bg-[#ff6b35] rounded-full blur-[250px] opacity-8 animate-pulse-slow" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-[40%] right-[20%] w-[400px] h-[400px] bg-[#f7931a] rounded-full blur-[180px] opacity-5 animate-pulse-slow" style={{ animationDelay: '4s' }} />
+        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-[#6366f1] rounded-full blur-[200px] opacity-10 animate-pulse-slow" />
+        <div className="absolute bottom-[-30%] right-[-10%] w-[800px] h-[800px] bg-[#8b5cf6] rounded-full blur-[250px] opacity-8 animate-pulse-slow" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-[40%] right-[20%] w-[400px] h-[400px] bg-[#a855f7] rounded-full blur-[180px] opacity-5 animate-pulse-slow" style={{ animationDelay: '4s' }} />
       </div>
 
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#ff3366] to-[#ff6b35] flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
-            </div>
+            <LoopLogo />
             <span className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight">
-              Loop<span className="text-[#ff3366]">Easy</span>
+              Loop<span className="text-[#6366f1]">Easy</span>
             </span>
           </div>
           
@@ -43,7 +70,7 @@ export default function Home() {
             <button className="text-sm text-[#a1a1a6] hover:text-white transition-colors">
               Sign In
             </button>
-            <button className="px-5 py-2.5 bg-[#ff3366] hover:bg-[#ff4d7a] text-white text-sm font-medium rounded-full transition-all hover:shadow-[0_0_30px_rgba(255,51,102,0.4)]">
+            <button className="px-5 py-2.5 bg-[#6366f1] hover:bg-[#818cf8] text-white text-sm font-semibold rounded-full transition-all hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]">
               Get Started
             </button>
           </div>
@@ -59,7 +86,7 @@ export default function Home() {
               className={`transition-all duration-1000 delay-100 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             >
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1c1c1f] border border-[#2a2a2e] text-sm text-[#a1a1a6] mb-8">
-                <span className="w-2 h-2 rounded-full bg-[#ff3366] animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-[#6366f1] animate-pulse" />
                 Now in Public Beta
               </span>
             </div>
@@ -69,7 +96,7 @@ export default function Home() {
             >
               Video Channels
               <br />
-              <span className="text-gradient glow-text">That Never Stop</span>
+              <span className="bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] bg-clip-text text-transparent" style={{ textShadow: '0 0 30px rgba(99, 102, 241, 0.5)' }}>That Never Stop</span>
             </h1>
 
             <p 
@@ -83,7 +110,7 @@ export default function Home() {
             <div 
               className={`flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-1000 delay-400 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             >
-              <button className="w-full sm:w-auto px-8 py-4 bg-[#ff3366] hover:bg-[#ff4d7a] text-white font-semibold rounded-full transition-all hover:shadow-[0_0_40px_rgba(255,51,102,0.5)] hover:scale-105">
+              <button className="w-full sm:w-auto px-8 py-4 bg-[#6366f1] hover:bg-[#818cf8] text-white font-semibold rounded-full transition-all hover:shadow-[0_0_40px_rgba(99,102,241,0.5)] hover:scale-105">
                 Start Creating — It&apos;s Free
               </button>
               <button className="w-full sm:w-auto px-8 py-4 bg-[#1c1c1f] hover:bg-[#252528] text-white font-medium rounded-full border border-[#2a2a2e] hover:border-[#3a3a3f] transition-all flex items-center justify-center gap-2">
@@ -101,7 +128,7 @@ export default function Home() {
           >
             {/* Browser mockup */}
             <div className="relative mx-auto max-w-5xl">
-              <div className="absolute inset-0 bg-gradient-to-b from-[#ff3366]/20 to-transparent rounded-3xl blur-3xl -z-10" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#6366f1]/20 to-transparent rounded-3xl blur-3xl -z-10" />
               
               <div className="bg-[#141416] rounded-2xl border border-[#2a2a2e] overflow-hidden shadow-2xl">
                 {/* Browser header */}
@@ -148,7 +175,7 @@ export default function Home() {
                       <div className="space-y-1">
                         {["Lofi Beats 24/7", "Epic Trailers", "Morning Motivation"].map((channel, i) => (
                           <div key={i} className="flex items-center gap-3 px-3 py-2 rounded-lg text-[#a1a1a6] hover:bg-[#1c1c1f] hover:text-white transition-colors cursor-pointer">
-                            <div className="w-8 h-8 rounded bg-gradient-to-br from-[#ff3366] to-[#ff6b35] opacity-80" />
+                            <div className={`w-8 h-8 rounded bg-gradient-to-br ${theme.gradient} opacity-80`} />
                             <span className="text-sm truncate">{channel}</span>
                           </div>
                         ))}
@@ -161,17 +188,17 @@ export default function Home() {
                     <div className="flex items-center justify-between mb-6">
                       <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold">Good evening</h2>
                       <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#ff3366] to-[#ff6b35]" />
+                        <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${theme.gradient}`} />
                       </div>
                     </div>
                     
                     {/* Quick picks grid */}
                     <div className="grid grid-cols-2 gap-3 mb-8">
                       {[
-                        { name: "Lofi Beats 24/7", color: "from-[#1e3a5f] to-[#0d1b2a]" },
-                        { name: "Epic Trailers", color: "from-[#5f1e3a] to-[#2a0d1b]" },
-                        { name: "Morning Coffee", color: "from-[#3a5f1e] to-[#1b2a0d]" },
-                        { name: "Focus Mode", color: "from-[#5f3a1e] to-[#2a1b0d]" },
+                        { name: "Lofi Beats 24/7", color: "from-[#1e1e5f] to-[#0d0d2a]" },
+                        { name: "Epic Trailers", color: "from-[#3d1e5f] to-[#1a0d2a]" },
+                        { name: "Morning Coffee", color: "from-[#1e3d5f] to-[#0d1a2a]" },
+                        { name: "Focus Mode", color: "from-[#2d1e5f] to-[#140d2a]" },
                       ].map((item, i) => (
                         <div key={i} className={`flex items-center gap-4 bg-gradient-to-r ${item.color} rounded-lg overflow-hidden hover:bg-opacity-80 transition-all cursor-pointer group`}>
                           <div className="w-16 h-16 bg-black/30 flex items-center justify-center">
@@ -190,9 +217,9 @@ export default function Home() {
                       {[1, 2, 3, 4].map((i) => (
                         <div key={i} className="group cursor-pointer">
                           <div className="aspect-square rounded-lg bg-gradient-to-br from-[#2a2a2e] to-[#1c1c1f] mb-3 overflow-hidden relative">
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#ff3366]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-[#6366f1]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                              <div className="w-12 h-12 rounded-full bg-[#ff3366] flex items-center justify-center shadow-lg">
+                              <div className="w-12 h-12 rounded-full bg-[#6366f1] flex items-center justify-center shadow-lg">
                                 <svg className="w-5 h-5 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
                                   <path d="M8 5v14l11-7z"/>
                                 </svg>
@@ -210,7 +237,7 @@ export default function Home() {
                 {/* Player bar */}
                 <div className="h-20 bg-[#1c1c1f] border-t border-[#2a2a2e] flex items-center px-4 gap-4">
                   <div className="flex items-center gap-3 w-64">
-                    <div className="w-14 h-14 rounded bg-gradient-to-br from-[#ff3366] to-[#ff6b35]" />
+                    <div className={`w-14 h-14 rounded bg-gradient-to-br ${theme.gradient}`} />
                     <div>
                       <div className="text-sm font-medium">Currently Playing</div>
                       <div className="text-xs text-[#6b6b70]">Channel Name</div>
@@ -238,14 +265,14 @@ export default function Home() {
                     <div className="w-full max-w-md flex items-center gap-2">
                       <span className="text-xs text-[#6b6b70]">1:24</span>
                       <div className="flex-1 h-1 bg-[#3a3a3f] rounded-full overflow-hidden">
-                        <div className="w-1/3 h-full bg-white rounded-full" />
+                        <div className="w-1/3 h-full bg-[#6366f1] rounded-full" />
                       </div>
                       <span className="text-xs text-[#6b6b70]">4:32</span>
                     </div>
                   </div>
                   
                   <div className="w-64 flex items-center justify-end gap-3">
-                    <button className="text-[#a1a1a6] hover:text-white transition-colors p-2 rounded-lg hover:bg-[#252528]" title="Loop">
+                    <button className="text-[#a1a1a6] hover:text-[#6366f1] transition-colors p-2 rounded-lg hover:bg-[#252528]" title="Loop">
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
                       </svg>
@@ -273,7 +300,7 @@ export default function Home() {
             <h2 className="font-[family-name:var(--font-display)] text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
               Everything you need to
               <br />
-              <span className="text-gradient">create & share</span>
+              <span className="bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] bg-clip-text text-transparent">create & share</span>
             </h2>
             <p className="text-lg text-[#a1a1a6] max-w-2xl mx-auto">
               Whether you&apos;re a creator building an audience or a business running displays, Loop Easy has you covered.
@@ -310,8 +337,8 @@ export default function Home() {
                 description: "Get followers, build subscribers, and monetize your channels. Turn your curation skills into a community."
               }
             ].map((feature, i) => (
-              <div key={i} className="group p-8 rounded-2xl bg-[#141416] border border-[#2a2a2e] hover:border-[#ff3366]/50 transition-all hover:-translate-y-1">
-                <div className="w-14 h-14 rounded-xl bg-[#ff3366]/10 flex items-center justify-center text-[#ff3366] mb-6 group-hover:bg-[#ff3366] group-hover:text-white transition-all">
+              <div key={i} className="group p-8 rounded-2xl bg-[#141416] border border-[#2a2a2e] hover:border-[#6366f1]/50 transition-all hover:-translate-y-1">
+                <div className="w-14 h-14 rounded-xl bg-[#6366f1]/10 flex items-center justify-center text-[#6366f1] mb-6 group-hover:bg-[#6366f1] group-hover:text-white transition-all">
                   {feature.icon}
                 </div>
                 <h3 className="font-[family-name:var(--font-display)] text-xl font-bold mb-3">{feature.title}</h3>
@@ -326,7 +353,7 @@ export default function Home() {
       <section className="py-32 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#ff3366]/20 via-[#ff6b35]/20 to-[#f7931a]/20 rounded-3xl blur-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#6366f1]/20 via-[#8b5cf6]/20 to-[#a855f7]/20 rounded-3xl blur-3xl" />
             <div className="relative bg-[#141416] border border-[#2a2a2e] rounded-3xl p-12 md:p-16">
               <h2 className="font-[family-name:var(--font-display)] text-4xl sm:text-5xl font-bold mb-6">
                 Ready to start looping?
@@ -334,7 +361,7 @@ export default function Home() {
               <p className="text-lg text-[#a1a1a6] mb-8 max-w-lg mx-auto">
                 Join thousands of creators and businesses already using Loop Easy. It&apos;s free to get started.
               </p>
-              <button className="px-10 py-4 bg-[#ff3366] hover:bg-[#ff4d7a] text-white font-semibold rounded-full transition-all hover:shadow-[0_0_50px_rgba(255,51,102,0.5)] hover:scale-105 text-lg">
+              <button className="px-10 py-4 bg-[#6366f1] hover:bg-[#818cf8] text-white font-semibold rounded-full transition-all hover:shadow-[0_0_50px_rgba(99,102,241,0.5)] hover:scale-105 text-lg">
                 Create Your First Channel
               </button>
             </div>
@@ -346,13 +373,9 @@ export default function Home() {
       <footer className="border-t border-[#2a2a2e] py-12 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#ff3366] to-[#ff6b35] flex items-center justify-center">
-              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
-            </div>
+            <LoopLogo size="small" />
             <span className="font-[family-name:var(--font-display)] text-lg font-bold">
-              Loop<span className="text-[#ff3366]">Easy</span>
+              Loop<span className="text-[#6366f1]">Easy</span>
             </span>
           </div>
           
