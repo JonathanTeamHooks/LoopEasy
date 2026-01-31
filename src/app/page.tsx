@@ -179,6 +179,105 @@ export default function Home() {
         </div>
       </section>
 
+      {/* YOUR MISSION - Pick Your Experience */}
+      <section className="py-32 px-6 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#6366f1]/5 via-transparent to-[#a855f7]/5" />
+        
+        <div className="max-w-6xl mx-auto relative">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+              Come with a mission.
+              <br />
+              <span className="bg-gradient-to-r from-[#6366f1] to-[#a855f7] bg-clip-text text-transparent">
+                Leave transformed.
+              </span>
+            </h2>
+            <p className="text-xl text-[#a1a1a6] max-w-2xl mx-auto">
+              Tell us what you're here for. We'll deliver exactly that — continuously, endlessly, perfectly.
+            </p>
+          </div>
+
+          {/* Mission Picker Interactive */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left - Mission Selection */}
+            <div>
+              <div className="text-sm text-[#6b6b70] uppercase tracking-wider mb-6">What's your mission today?</div>
+              
+              <div className="space-y-4">
+                {[
+                  { emoji: "💪", mission: "I want to get fit", result: "Non-stop workouts, HIIT, yoga, stretching — plays until you're done", channels: "2,400+ fitness channels" },
+                  { emoji: "🎸", mission: "I want to learn guitar", result: "Lessons, tutorials, practice sessions — structured learning on repeat", channels: "800+ music education channels" },
+                  { emoji: "🧘", mission: "I need to relax", result: "Meditation, ambient sounds, calm visuals — peace that doesn't end", channels: "1,200+ wellness channels" },
+                  { emoji: "🧠", mission: "I need to focus", result: "Lo-fi beats, study music, concentration flows — your productivity soundtrack", channels: "3,100+ focus channels" },
+                  { emoji: "😂", mission: "I want to laugh", result: "Comedy, sketches, funny moments — endless entertainment", channels: "1,800+ comedy channels" },
+                ].map((item, i) => (
+                  <div 
+                    key={i}
+                    className="group p-5 rounded-2xl bg-[#141416] border border-[#2a2a2e] hover:border-[#6366f1] transition-all cursor-pointer"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="text-3xl">{item.emoji}</div>
+                      <div className="flex-1">
+                        <div className="font-semibold text-lg group-hover:text-[#a855f7] transition-colors">"{item.mission}"</div>
+                        <div className="text-[#a1a1a6] text-sm mt-1">{item.result}</div>
+                        <div className="text-[#6366f1] text-xs mt-2 font-medium">{item.channels}</div>
+                      </div>
+                      <svg className="w-5 h-5 text-[#6b6b70] group-hover:text-[#6366f1] group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right - Or Browse Curated */}
+            <div>
+              <div className="p-8 rounded-3xl bg-gradient-to-br from-[#6366f1]/10 to-[#a855f7]/10 border border-[#6366f1]/30">
+                <div className="text-sm text-[#6366f1] uppercase tracking-wider mb-4">Or explore curated experiences</div>
+                <h3 className="text-2xl font-bold mb-4">
+                  Channels built by people who get it
+                </h3>
+                <p className="text-[#a1a1a6] mb-6">
+                  Creators design complete viewing experiences — from morning routines to late-night vibes. 
+                  Pick one, press play, and let someone else's taste guide you.
+                </p>
+                
+                {/* Sample curated channels */}
+                <div className="space-y-3">
+                  {[
+                    { name: "Morning Power Hour", creator: "@fitnessmike", vibe: "Wake up → Workout → Meditation", viewers: "2.4K watching" },
+                    { name: "Late Night Chill", creator: "@lofimaster", vibe: "Beats → Visuals → Sleep", viewers: "8.1K watching" },
+                    { name: "Sunday Recovery", creator: "@yogawithsara", vibe: "Stretch → Breathe → Reset", viewers: "1.2K watching" },
+                  ].map((channel, i) => (
+                    <div key={i} className="flex items-center gap-4 p-3 rounded-xl bg-[#0a0a0b]/50 hover:bg-[#0a0a0b] transition-colors cursor-pointer">
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#6366f1] to-[#a855f7] flex items-center justify-center text-lg font-bold">
+                        {channel.name.charAt(0)}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-medium truncate">{channel.name}</div>
+                        <div className="text-xs text-[#6b6b70]">{channel.vibe}</div>
+                      </div>
+                      <div className="text-xs text-[#22c55e] flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse" />
+                        {channel.viewers}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <Link href="/browse" className="mt-6 w-full py-3 bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-white font-semibold rounded-xl flex items-center justify-center gap-2 hover:shadow-lg transition-all">
+                  Explore All Channels
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* THE PRODUCT - Show Don't Tell */}
       <section className="py-32 px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#6366f1]/5 via-transparent to-[#a855f7]/5" />
