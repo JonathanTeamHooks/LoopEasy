@@ -1,9 +1,17 @@
 import { createClient } from '@/lib/supabase/server'
-import { stripe, PLANS } from '@/lib/stripe'
+import { stripe, PLANS, LAUNCH_MODE } from '@/lib/stripe'
 import { NextResponse } from 'next/server'
 
 // POST /api/checkout - Create a Stripe checkout session
 export async function POST(req: Request) {
+  // Payments disabled during launch
+  if (LAUNCH_MODE || !PLANS.premium.priceId) {
+    return NextResponse.json(
+      { error: 'Payments are not yet enabled. Everything is free during launch!' },
+      { status: 503 }
+    )
+  }
+
   try {
     const supabase = await createClient()
     
@@ -50,7 +58,7 @@ export async function POST(req: Request) {
       payment_method_types: ['card'],
       line_items: [
         {
-          price: PLANS.premium.priceId,
+          price: PLANS.premium.priceId!,
           quantity: 1,
         },
       ],

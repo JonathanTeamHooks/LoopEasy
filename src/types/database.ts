@@ -6,7 +6,7 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
-export interface Database {
+export type Database = {
   public: {
     Tables: {
       profiles: {
@@ -58,6 +58,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       channels: {
         Row: {
@@ -108,6 +109,14 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: "channels_owner_id_fkey"
+            columns: ["owner_id"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       videos: {
         Row: {
@@ -164,6 +173,20 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: "videos_channel_id_fkey"
+            columns: ["channel_id"]
+            referencedRelation: "channels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "videos_owner_id_fkey"
+            columns: ["owner_id"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       follows: {
         Row: {
@@ -184,6 +207,20 @@ export interface Database {
           channel_id?: string
           created_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: "follows_follower_id_fkey"
+            columns: ["follower_id"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "follows_channel_id_fkey"
+            columns: ["channel_id"]
+            referencedRelation: "channels"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       watch_history: {
         Row: {
@@ -219,6 +256,26 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: "watch_history_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "watch_history_video_id_fkey"
+            columns: ["video_id"]
+            referencedRelation: "videos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "watch_history_channel_id_fkey"
+            columns: ["channel_id"]
+            referencedRelation: "channels"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       subscriptions: {
         Row: {
@@ -257,6 +314,14 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       earnings: {
         Row: {
@@ -292,7 +357,33 @@ export interface Database {
           stripe_transfer_id?: string | null
           created_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: "earnings_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "earnings_channel_id_fkey"
+            columns: ["channel_id"]
+            referencedRelation: "channels"
+            referencedColumns: ["id"]
+          }
+        ]
       }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      [_ in never]: never
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
     }
   }
 }

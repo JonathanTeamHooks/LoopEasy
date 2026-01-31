@@ -1,4 +1,4 @@
-import { stripe } from '@/lib/stripe'
+import { stripe, LAUNCH_MODE } from '@/lib/stripe'
 import { createClient } from '@supabase/supabase-js'
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
@@ -11,6 +11,11 @@ const supabaseAdmin = createClient(
 )
 
 export async function POST(req: Request) {
+  // Skip webhooks if in launch mode
+  if (LAUNCH_MODE || !process.env.STRIPE_WEBHOOK_SECRET) {
+    return NextResponse.json({ received: true, mode: 'launch' })
+  }
+
   const body = await req.text()
   const headersList = await headers()
   const signature = headersList.get('stripe-signature') as string
@@ -38,14 +43,14 @@ export async function POST(req: Request) {
 
       case 'customer.subscription.created':
       case 'customer.subscription.updated': {
-        const subscription = event.data.object as Stripe.Subscription
-        await handleSubscriptionChange(subscription)
+        const subscription = event.data.object
+        await handleSubscriptionChange(subscription as any)
         break
       }
 
       case 'customer.subscription.deleted': {
-        const subscription = event.data.object as Stripe.Subscription
-        await handleSubscriptionCanceled(subscription)
+        const subscription = event.data.object
+        await handleSubscriptionCanceled(subscription as any)
         break
       }
 
@@ -83,7 +88,7 @@ async function handleCheckoutComplete(session: Stripe.Checkout.Session) {
     .eq('id', userId)
 }
 
-async function handleSubscriptionChange(subscription: Stripe.Subscription) {
+async function handleSubscriptionChange(subscription: any) {
   const customerId = subscription.customer as string
   
   // Find user by stripe customer ID
@@ -125,7 +130,7 @@ async function handleSubscriptionChange(subscription: Stripe.Subscription) {
     })
 }
 
-async function handleSubscriptionCanceled(subscription: Stripe.Subscription) {
+async function handleSubscriptionCanceled(subscription: any) {
   const customerId = subscription.customer as string
   
   const { data: profile } = await supabaseAdmin
