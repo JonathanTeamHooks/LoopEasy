@@ -559,7 +559,7 @@ export default function Home() {
                       <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#f59e0b] to-[#ef4444] flex items-center justify-center text-xl font-bold">JM</div>
                       <div>
                         <div className="font-bold text-white">Creator Dashboard</div>
-                        <div className="text-[#f59e0b] text-sm">Creator Pro</div>
+                        <div className="text-[#f59e0b] text-sm">Monetized Creator ✓</div>
                       </div>
                       <div className="ml-auto text-right">
                         <div className="text-3xl font-bold text-[#22c55e]">$2,847</div>
@@ -613,8 +613,9 @@ export default function Home() {
               <div className="text-2xl font-bold text-[#6366f1]">24/7</div>
             </div>
             <div className="absolute -left-4 bottom-1/4 px-4 py-3 bg-[#141416] border border-[#f59e0b]/30 rounded-2xl shadow-xl">
-              <div className="text-sm text-[#6b6b70]">You keep</div>
+              <div className="text-sm text-[#6b6b70]">At 1K followers</div>
               <div className="text-2xl font-bold text-[#f59e0b]">70%</div>
+              <div className="text-xs text-[#6b6b70]">revenue share</div>
             </div>
           </div>
         </div>
@@ -687,7 +688,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                quote: "I made $800 in my first month. On YouTube I couldn't even monetize yet.",
+                quote: "Hit 1K followers in 2 weeks, started earning immediately. On YouTube that takes months.",
                 name: "Sarah K.",
                 role: "Fitness Creator",
                 avatar: "🏋️",

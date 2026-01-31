@@ -118,8 +118,19 @@ Video channels curated by AI, built by creators. The differentiator: AI-powered 
 
 ---
 
-## Notes
+## Pricing Model
 
-- Free tier: ads supported
-- Premium ($9.99/mo): ad-free
-- Creator Pro ($19.99/mo): all tools + 70% revenue share
+**Simple two-tier pricing — everyone can create:**
+
+| Plan | Price | Features |
+|------|-------|----------|
+| **Free** | $0 | Watch + Create with ads. Full AI creator tools. |
+| **Premium** | $9.99/mo | Ad-free watching + creating. Priority support. |
+
+**Creator Monetization:**
+- All users can create channels from day one
+- Monetization unlocks at **1,000 followers**
+- Once eligible: **70% revenue share** on channel ad revenue
+- Premium creators earn on their content; their viewers see ads (unless viewer is also Premium)
+
+This model removes friction for creators, drives content growth, and keeps pricing dead simple.
