@@ -1,337 +1,415 @@
 # LoopEasy Email Sequences
 
-## Cold Outreach Sequence
+## Cold Email Sequence (B2B Fitness Studios)
 
-### Email 1: Problem-Focused (Day 0)
-
-**Subject lines (A/B test):**
-- What's on your gym TVs right now?
-- Quick question about [Studio Name]
-- The screens your members stare at every day
+### Email 1: The Problem
+**Subject Lines (A/B Test):**
+- "What's on your gym TVs right now?"
+- "Quick question about [Studio Name]'s member experience"
+- "Your gym TVs could be working harder"
 
 **Body:**
 ```
-Hi [First Name],
+Hi [Name],
 
-Quick question — what are you showing on the TVs at [Studio Name]?
+Quick question: What's playing on your gym TVs right now?
 
-Most studios I talk to say CNN, ESPN, or just random YouTube. Nothing 
-branded, nothing that actually helps members.
+If it's cable news, ESPN on mute, or random music videos — you're not alone. Most studios have the same setup.
 
-We built LoopEasy specifically for fitness studios — curated workout 
-content, auto-updating class schedules, member shoutouts — all branded 
-to your studio.
+But here's the thing: Your TVs are prime real estate. Every member sees them for 30-60 minutes per session.
 
-$49/month. Works on any smart TV.
+What if instead they saw:
+→ High-energy workout content
+→ Member PRs and achievements
+→ Your brand, everywhere
 
-Would you be open to a quick demo? Takes 10 minutes.
+That's what LoopEasy does. Curated fitness content, automatic member recognition, your branding. Runs itself.
+
+$29-49/month. Takes 5 minutes to set up.
+
+Want to see what it could look like for [Studio Name]?
 
 Best,
-Cody
+[Name]
+LoopEasy
 
-P.S. We're offering the first month free for studios that sign up this week.
+P.S. — First 50 studios get founding member pricing: 50% off forever.
 ```
 
 ---
 
-### Email 2: Value-Focused (Day 3)
-
-**Subject lines:**
-- How [Studio Name]'s TVs could look
-- Turning gym TVs into member engagement tools
+### Email 2: The Social Proof (3 days later)
+**Subject Lines:**
+- "This gym owner increased member retention by 15%"
+- "What other studios are doing..."
+- "The TV upgrade that pays for itself"
 
 **Body:**
 ```
-Hi [First Name],
+Hi [Name],
 
-Following up on my note about your gym TVs.
+Following up on my note about LoopEasy.
 
-Here's what studios are doing with LoopEasy:
+Here's what Jessica M., owner of Iron Tribe Fitness, told us:
 
-✅ Curated workout clips that match their vibe (no more random YouTube)
-✅ Class schedules that update automatically from Mindbody
-✅ Member PR boards ("John just hit a 300lb deadlift!")
-✅ Branded content that looks professional
+"Our members actually watch the TVs now. They love seeing their PRs celebrated on screen. It's become part of our culture."
 
-Takes 5 minutes to set up. Works on any smart TV or Fire Stick.
+The member recognition features are a game-changer:
+→ PR boards (automatic when members log lifts)
+→ Achievement shoutouts
+→ Member milestones
 
-Free 14-day trial, no credit card: [link]
-
-What do you think?
+Would you like to see what it could look like for [Studio Name]?
 
 Best,
-Cody
+[Name]
 ```
 
 ---
 
-### Email 3: Social Proof (Day 7)
-
-**Subject lines:**
-- What other studio owners are saying
-- "Our members actually watch the TVs now"
+### Email 3: The Value Proposition (5 days later)
+**Subject Lines:**
+- "3 reasons your TVs are costing you members"
+- "Turn screen time into retention time"
+- "The $49/month upgrade that builds community"
 
 **Body:**
 ```
-Hi [First Name],
+Hi [Name],
 
-Quick note with some feedback from studio owners:
+Your gym TVs are prime real estate. Here's how LoopEasy turns them into retention machines:
 
-"Our members actually stop and watch the TVs now. The workout clips 
-get people pumped, and the PR board has become a thing — people 
-celebrate each other's wins."
-— Mike K., CrossFit Box Owner
+1. **Recognition → Retention**
+   Members who feel celebrated stay longer. PR boards and achievements matter.
 
-"I was paying $300/month for digital signage I had to update manually. 
-LoopEasy is $49 and runs itself. No brainer."
-— Jennifer L., Yoga Studio Owner
+2. **Branded environment → Professional feel**
+   Your logo, your colors, your vibe. Every screen reinforces who you are.
 
-If you've got 10 minutes, happy to show you how it works.
+3. **Curated content → Better energy**
+   No more CNN or random YouTube. Just high-quality fitness content.
 
-Calendly: [link]
+It's $49/month for Pro. Most studios cover that with a single member staying one extra month.
 
-Or just reply to this email with any questions.
+14-day free trial, no credit card required.
+
+Want me to set one up for [Studio Name]?
 
 Best,
-Cody
+[Name]
 ```
 
 ---
 
-### Email 4: Last Chance (Day 14)
-
-**Subject lines:**
-- Last note about your gym TVs
-- Closing the loop on this
+### Email 4: The Breakup (7 days later)
+**Subject Lines:**
+- "Should I close your file?"
+- "Last note from me"
+- "One final thing about [Studio Name]"
 
 **Body:**
 ```
-Hi [First Name],
+Hi [Name],
 
-Last note on this — didn't want to keep bothering you.
+I've reached out a few times about LoopEasy — the gym TV solution that shows curated content and celebrates your members.
 
-If upgrading your gym TVs isn't a priority right now, totally 
-understand. But if it's something you've been meaning to do, 
-LoopEasy makes it ridiculously easy:
+I don't want to be annoying, so this will be my last email unless you'd like to chat.
 
-• 5-minute setup
-• $49/month (no contracts)
-• Works on any TV
-• 14-day free trial
+Quick recap:
+- Curated fitness content + member recognition + your branding
+- $29-99/month (vs $200+ for enterprise)
+- 5-minute setup, runs automatically
+- 14-day free trial
 
-Link: [link]
+If the timing isn't right, no worries. But if you ever want to upgrade those TVs, just reply.
 
-Either way, wishing you a great [season] at [Studio Name].
-
-Best,
-Cody
+Wishing [Studio Name] all the best,
+[Name]
 ```
 
 ---
 
-## Welcome/Onboarding Sequence
+## Welcome Sequence (Post-Signup)
 
 ### Email 1: Welcome (Immediate)
-
-**Subject:** Welcome to LoopEasy! Here's how to get started
+**Subject:** Welcome to LoopEasy! Let's get your screen live 🎯
 
 **Body:**
 ```
-Hey [First Name]! 👋
+Hi [Name],
 
-Welcome to LoopEasy! Excited to help you transform your gym TVs.
+You're in! Welcome to LoopEasy.
 
-Here's your quick-start checklist:
+Getting started is easy — here's what to do next:
 
-1️⃣ Upload your logo
-   → [Dashboard link]
+**Step 1: Open your dashboard**
+[Link to dashboard]
 
-2️⃣ Choose your content categories
-   → Workout clips, schedules, motivational content
+**Step 2: Upload your logo**
+This brands all your content automatically.
 
-3️⃣ Connect your TV
-   → Smart TV, Fire Stick, Chromecast — any device works
-   → Just open [your-studio].loopeasy.com on your TV browser
+**Step 3: Connect your gym management app (optional)**
+For automatic PR tracking and member recognition.
 
-That's it. You should be up and running in 5 minutes.
+**Step 4: Connect your TV**
+Open loopeasy.com/tv/[your-code] on any smart TV, Fire Stick, or browser.
 
-Need help? Reply to this email or book a free setup call: [Calendly]
+That's it. Your gym TVs just got an upgrade.
 
-Let's make your gym TVs awesome.
+Questions? Just reply to this email.
 
-— The LoopEasy Team
+Welcome to the LoopEasy family,
+[Name]
 ```
 
 ---
 
-### Email 2: Day 2 Check-in
-
-**Subject:** How's your LoopEasy setup going?
-
-**Body:**
-```
-Hey [First Name],
-
-Just checking in — how's your LoopEasy setup going?
-
-If you haven't connected your first TV yet, here's a 2-minute video 
-walkthrough: [video link]
-
-Common questions:
-
-Q: What device should I use?
-A: Any smart TV, Fire Stick ($30), or Chromecast works great.
-
-Q: How do I connect my class schedule?
-A: Dashboard → Integrations → Connect Mindbody/WellnessLiving
-
-Q: Can I upload my own videos?
-A: Yep! Dashboard → Content → Upload
-
-Need a hand? Just reply to this email.
-
-— Cody
-```
-
----
-
-### Email 3: Day 5 - Feature Highlight
-
-**Subject:** Have you set up your member PR board yet?
+### Email 2: Feature Highlight - PR Board (Day 3)
+**Subject:** Have you set up the PR Board yet?
 
 **Body:**
 ```
-Hey [First Name],
+Hi [Name],
 
-One feature studios LOVE is the Member PR Board.
+One of our most loved features is the **PR Board**.
 
-Here's how it works:
-• Members hit a PR → you add it in the dashboard
-• Their name + achievement shows on the TV
-• Builds community, motivation, and friendly competition
+Here's how studios are using it:
 
-"The PR board has become a thing — people celebrate each other's 
-wins and it creates this awesome energy." — Mike K.
+💪 **Celebrate member achievements** — PRs display automatically
+🏆 **Monthly challenges** — Show leaderboards on screen
+🎉 **Create healthy competition** — Members love seeing their names
 
-To set it up: Dashboard → Member Highlights → Add PR
+To enable it:
+Dashboard → Features → PR Board → Connect your tracking system
 
-Takes 30 seconds. Try it today!
+If you use BTWB, SugarWOD, or another tracking app, it syncs automatically.
 
-— Cody
-```
-
----
-
-### Email 4: Day 10 - Trial Ending Soon
-
-**Subject:** Your trial ends in 4 days
-
-**Body:**
-```
-Hey [First Name],
-
-Quick heads up — your LoopEasy trial ends in 4 days.
-
-If you're loving it, you don't need to do anything. We'll move you 
-to your selected plan automatically.
-
-If you need more time, just reply to this email and I'll extend it.
-
-If something's not working, let's fix it! Reply with any issues and 
-I'll personally help you out.
-
-Hope you're enjoying the upgraded gym TVs!
-
-— Cody
-```
-
----
-
-## Re-engagement Sequence (Churned Users)
-
-### Email 1: We Miss You (Day 7 after cancel)
-
-**Subject:** We noticed you left...
-
-**Body:**
-```
-Hey [First Name],
-
-Noticed you cancelled your LoopEasy account. No hard feelings — 
-but I'm curious: what didn't work for you?
-
-• Setup too complicated?
-• Not the right content?
-• Price too high?
-• Found something better?
-
-Your feedback genuinely helps us improve.
-
-If there's anything we can do to win you back, just say the word.
-
-— Cody
-```
-
----
-
-## Newsletter / Updates
-
-### Monthly Product Update Template
-
-**Subject:** What's new in LoopEasy (January 2026)
-
-**Body:**
-```
-Hey [First Name],
-
-Quick update on what's new this month:
-
-🆕 NEW FEATURES
-• Mindbody integration now live — class schedules auto-update
-• New workout category: "Mobility & Recovery"
-• Seasonal templates: New Year themes available
-
-📈 BY THE NUMBERS
-• 47 new workout clips added this month
-• Studios are averaging 2.3 hours of screen time per day
-• Member PR highlights: up 34% month-over-month
-
-💡 TIP OF THE MONTH
-Try showing different content at different times. Morning? Energizing 
-HIIT clips. Evening? Stretching and mobility. Set this up in 
-Dashboard → Scheduling.
+Pro tip: Members share photos of their name on the board. Free marketing!
 
 Questions? Just reply.
 
-— The LoopEasy Team
+Best,
+[Name]
 ```
 
 ---
 
-## Referral Request
-
-**Subject:** Know any other studio owners?
+### Email 3: Value Reminder (Day 10)
+**Subject:** Are your members noticing the new TVs?
 
 **Body:**
 ```
-Hey [First Name],
+Hi [Name],
 
-Quick favor to ask.
+You're 10 days into your LoopEasy trial — how's it going?
 
-You've been using LoopEasy for a few months now, and we'd love your 
-help spreading the word.
+Here's what other studios tell us they notice:
 
-Know any other studio owners who might benefit?
+✅ Members actually look at the TVs
+✅ More excitement around PRs and achievements
+✅ Professional, branded feel in the space
+✅ Positive comments about the "new setup"
 
-Here's your personal referral link: [link]
+Your trial ends in 4 days. If you're seeing value, your subscription starts automatically.
 
-For every studio that signs up using your link:
-• They get their first month free
-• You get a $50 credit
+Questions about which plan is right for [Studio Name]? Just reply.
 
-No limit on how many you can refer.
+Best,
+[Name]
+```
 
-Thanks for being part of the LoopEasy community!
+---
 
-— Cody
+### Email 4: Trial Ending (Day 13)
+**Subject:** Your LoopEasy trial ends tomorrow
+
+**Body:**
+```
+Hi [Name],
+
+Quick heads up — your 14-day LoopEasy trial ends tomorrow.
+
+**If you're happy with it:** 
+Your subscription starts automatically. No action needed.
+
+**If you need more time:**
+Reply "EXTEND" and I'll give you another week.
+
+**If it's not the right fit:**
+No worries. Cancel in Dashboard → Account → Cancel.
+
+Thanks for giving LoopEasy a try. We built this specifically for studios like [Studio Name].
+
+Best,
+[Name]
+```
+
+---
+
+## Creator Welcome Sequence (LoopEasy Creator Pro)
+
+### Email 1: Welcome Creator (Immediate)
+**Subject:** Welcome to LoopEasy Creator Pro! 🎬
+
+**Body:**
+```
+Hi [Name],
+
+You're officially a LoopEasy creator! Let's get you set up to start earning.
+
+**Quick Start:**
+
+1. **Create your first channel**
+   Dashboard → Channels → New Channel
+   Give it a name, description, and category.
+
+2. **Add content**
+   Curate videos from YouTube, Vimeo, or our partner library.
+   Our AI assistant can suggest content that matches your theme.
+
+3. **Customize your creator profile**
+   Add your photo and bio. Viewers want to know who's curating.
+
+4. **Publish and promote**
+   Share your channel link. The more viewers, the more you earn.
+
+**Your earning potential:**
+You keep 70% of ad revenue from your channels. Top creators earn $2,000-10,000/month.
+
+Questions? Just reply.
+
+Let's build something great,
+[Name]
+```
+
+---
+
+### Email 2: First Channel Tips (Day 2)
+**Subject:** 5 tips for your first channel
+
+**Body:**
+```
+Hi [Name],
+
+Here's what successful creators do differently:
+
+1. **Pick a niche** — "Kettlebell HIIT" > "Fitness Videos"
+
+2. **Curate ruthlessly** — Only add content you'd actually watch
+
+3. **Update weekly** — Fresh content = returning viewers
+
+4. **Write great descriptions** — Help people discover your channel
+
+5. **Share everywhere** — Instagram, Reddit, Twitter, forums
+
+Your first channel doesn't need to be perfect. Just start.
+
+Questions? Reply anytime.
+
+Best,
+[Name]
+```
+
+---
+
+### Email 3: Your First Week Stats (Day 7)
+**Subject:** Your first week on LoopEasy 📊
+
+**Body:**
+```
+Hi [Name],
+
+You've been a creator for one week! Here's how you're doing:
+
+**Your Stats:**
+→ Channels: [X]
+→ Total Views: [X]
+→ Followers: [X]
+→ Estimated Earnings: $[X]
+
+[If doing well:]
+Great start! Keep adding content and promoting your channels.
+
+[If slow:]
+Building an audience takes time. Keep curating great content — the views will come.
+
+**Top tip this week:**
+Cross-promote in relevant communities. If you have a yoga channel, share in yoga subreddits and Facebook groups.
+
+Keep going!
+[Name]
+```
+
+---
+
+## Referral Request (Day 30)
+
+**Subject:** Know another studio owner?
+
+**Body:**
+```
+Hi [Name],
+
+You've been using LoopEasy for a month — hopefully your members are loving it!
+
+Quick favor: Know any other gym owners who might benefit?
+
+Refer a studio that signs up, and you both get a free month.
+
+Share this link:
+loopeasy.com/?ref=[studio-code]
+
+Thanks for being part of the family!
+
+Best,
+[Name]
+```
+
+---
+
+## Re-engagement (Churned Customers)
+
+### Email 1: We Miss You (7 days after cancel)
+**Subject:** We miss you at LoopEasy 💪
+
+**Body:**
+```
+Hi [Name],
+
+We noticed you cancelled your LoopEasy subscription.
+
+Was there something we could have done better? I'd love your honest feedback.
+
+If there was a specific issue, I'd like the chance to make it right.
+
+Just reply — I read every response.
+
+Best,
+[Name]
+```
+
+---
+
+### Email 2: Win-Back Offer (30 days after cancel)
+**Subject:** 50% off if you come back
+
+**Body:**
+```
+Hi [Name],
+
+It's been a month since you left LoopEasy.
+
+If you'd give us another shot, I'll give you **50% off for 3 months**.
+
+That's Pro for just $24.50/month.
+
+We've also shipped some improvements:
+- [New feature 1]
+- [New feature 2]
+- [New feature 3]
+
+Interested? Reply "YES" and I'll set it up.
+
+Best,
+[Name]
 ```

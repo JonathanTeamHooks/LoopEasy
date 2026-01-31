@@ -2,298 +2,328 @@
 
 ## Google Ads
 
-### Search Ads
+### Search Campaign: B2B Fitness Studios
 
-**Campaign: Gym TV Software**
-
-**Ad Group 1: Direct Intent**
-
-Keywords: gym tv software, fitness studio digital signage, gym display screen, crossfit tv, yoga studio tv
-
-```
-Ad 1:
-Headline 1: Gym TV Software | $49/mo
-Headline 2: Curated Workout Content
-Headline 3: Free 14-Day Trial
-Description 1: Stop showing CNN on your gym TVs. Show curated fitness content, class schedules & member shoutouts. Works on any smart TV.
-Description 2: AI-powered TV content for fitness studios. Setup in 5 minutes. No contracts. Start free trial today.
-```
-
-```
-Ad 2:
-Headline 1: What's On Your Gym TVs?
-Headline 2: Probably Not This
-Headline 3: LoopEasy - $49/month
-Description 1: Most gyms show cable news. Smart studios show curated workout content, auto-updating schedules & member PRs. See the difference.
-Description 2: Built for CrossFit, yoga, pilates & boutique studios. Works on any TV. 5-minute setup. Try free for 14 days.
-```
-
-```
-Ad 3:
-Headline 1: Digital Signage for Gyms
-Headline 2: 10x Cheaper Than Enterprise
-Headline 3: Start Free Trial
-Description 1: UPshow charges $300+/month. LoopEasy is $49 with better fitness content. Curated workouts, schedules, member highlights.
-Description 2: Built specifically for fitness studios. Connects to Mindbody. Works on any smart TV. No IT required.
-```
-
-**Ad Group 2: Problem-Aware**
-
-Keywords: what to show on gym tv, gym tv ideas, fitness studio display ideas, crossfit box tv
-
-```
-Ad 1:
-Headline 1: 10 Ideas for Your Gym TVs
-Headline 2: Beyond CNN & ESPN
-Headline 3: Free Setup Guide
-Description 1: Stop showing boring cable news. Here's what smart studios display: workout demos, class schedules, member achievements & more.
-Description 2: LoopEasy curates fitness content automatically. $49/month, works on any TV. Download our free gym TV guide.
-```
-
-**Ad Group 3: Competitor**
-
-Keywords: upshow alternative, screencloud for gyms, gym digital signage cheap
-
-```
-Ad 1:
-Headline 1: UPshow Alternative | $49/mo
-Headline 2: Built for Fitness Studios
-Headline 3: 10x More Affordable
-Description 1: Tired of overpriced digital signage? LoopEasy is purpose-built for gyms at a fraction of the cost. Same features, better content.
-Description 2: Curated workout videos, auto-updating schedules, member shoutouts. Works on any TV. Try free for 14 days.
-```
+**Keywords:**
+- gym tv content
+- fitness studio digital signage
+- crossfit box tv
+- gym digital display
+- fitness center tv system
+- boutique fitness tv
+- gym member engagement
 
 ---
 
-### Display Ads
+**Ad Group 1: Gym TV Content**
 
-**Responsive Display Ad**
+**Headlines (30 char max):**
+1. "Gym TV Content That Works"
+2. "Fitness Studio TV Solution"
+3. "Better Than ESPN on Mute"
+4. "Curated Workout Content"
+5. "Member Recognition on Screen"
+6. "PR Boards, Auto-Updated"
+7. "Starts at Just $29/Month"
+8. "5-Minute Setup"
+9. "14-Day Free Trial"
+10. "Your Brand, Every Screen"
 
-Headlines:
-- Stop Showing CNN on Your Gym TVs
-- Gym TV Software for $49/month
-- What Are Your Gym TVs Showing?
-- Curated Workout Content for Studios
-- The Gym TV Upgrade Your Members Deserve
+**Descriptions (90 char max):**
+1. "Curated fitness content + member PRs + your branding. All automatic. From $29/mo."
+2. "Your gym TVs could show more than cable news. Member achievements, workout content, your brand."
+3. "PR boards that update automatically. Members love seeing their achievements on screen."
+4. "Enterprise gym TV costs $200+. LoopEasy is $29-99/mo with better fitness content."
 
-Long Headlines:
-- Turn Your Gym TVs Into Member Engagement Machines
-- Curated Workout Content, Class Schedules & Member Shoutouts
+---
 
-Descriptions:
-- AI-powered TV content for fitness studios. Curated workouts, auto-updating schedules, member PRs. $49/month.
-- Stop showing cable news. Start showing content that energizes your members and promotes your brand.
-- Works on any smart TV or Fire Stick. Setup takes 5 minutes. Free 14-day trial.
+**Ad Group 2: Member Engagement**
+
+**Headlines:**
+1. "Boost Member Retention"
+2. "Celebrate Member Wins"
+3. "Automatic PR Boards"
+4. "Recognition = Retention"
+5. "Members Love This Feature"
+6. "Build Gym Community"
+
+**Descriptions:**
+1. "Members who feel celebrated stay longer. PR boards and achievements on every screen."
+2. "Turn your gym TVs into member engagement machines. Recognition features included."
+
+---
+
+### Display Campaign: Retargeting
+
+**Image Ad Headlines:**
+- "Still thinking about LoopEasy?"
+- "Your gym TVs deserve better"
+- "14 days free — no card required"
+- "Join 500+ fitness studios"
 
 ---
 
 ## Facebook/Instagram Ads
 
-### Ad Set 1: Problem/Solution
+### Ad Set 1: Problem Awareness (B2B)
 
 **Primary Text:**
 ```
-Most gym TVs show CNN or random YouTube videos.
+What's on your gym TVs right now?
 
-Here's what the best studios are doing instead:
+If it's ESPN on mute or random YouTube — your screens are wasting potential.
 
-✅ Curated workout clips that match their vibe
-✅ Auto-updating class schedules from Mindbody
-✅ Member PR boards and shoutouts
-✅ Branded content that looks professional
-
-LoopEasy runs on any smart TV. Takes 5 minutes to set up. $49/month.
-
-Free 14-day trial → [link]
-```
-
-**Headline:** Turn Your Gym TVs Into Engagement Machines
-**Description:** Curated workout content for fitness studios. Free trial.
-
----
-
-### Ad Set 2: Social Proof
-
-**Primary Text:**
-```
-"Our members actually stop and watch the TVs now. The workout clips get people pumped, and the PR board has become a thing."
-
-— Mike K., CrossFit Box Owner
-
-LoopEasy is AI-powered TV content for fitness studios:
-• Curated workout clips
-• Auto-updating class schedules
-• Member achievement highlights
-• Your branding, everywhere
-
-$49/month. Works on any TV. Free trial.
-```
-
-**Headline:** What Studio Owners Are Saying About LoopEasy
-**Description:** Join hundreds of studios upgrading their gym TVs.
-
----
-
-### Ad Set 3: Price Comparison
-
-**Primary Text:**
-```
-Enterprise digital signage: $300-500/month
-Generic TV software: Doesn't understand fitness
-Cable TV: Off-brand, zero engagement
-
-LoopEasy: $49/month
-✅ Built specifically for fitness studios
+LoopEasy turns them into:
 ✅ Curated workout content
-✅ Connects to Mindbody
-✅ Works on any smart TV
+✅ Member PR boards
+✅ Your branding everywhere
 
-Why pay more for less?
+Runs automatically. $29-99/month.
 
-Free 14-day trial → [link]
+🎯 14-day free trial. No credit card.
 ```
 
-**Headline:** Gym TV Software for $49/month
-**Description:** 10x cheaper than enterprise. Purpose-built for studios.
+**Headline:** Gym TV That Actually Works
+**Description:** Curated content. Member recognition. Your brand.
+**CTA:** Sign Up
 
 ---
 
-### Ad Set 4: Feature Focus - PR Board
+### Ad Set 2: Member Recognition Feature
 
 **Primary Text:**
 ```
-The feature studio owners love most? The Member PR Board.
+Imagine your members' faces when they see their PR on the gym TV.
 
-🏆 "Sarah M. — Deadlift: 225 lbs!"
-🏆 "John T. — First muscle-up!"
-🏆 "Lisa R. — 100th class!"
+That's the LoopEasy PR Board.
 
-It shows on your gym TVs automatically. Members celebrate each other. Creates community and motivation.
+🏋️ Auto-updates when members log lifts
+📊 Shows leaderboards and challenges
+🎉 Creates healthy competition
 
-One of many features in LoopEasy — $49/month for fitness studios.
+Members stay longer when they feel celebrated.
 
-See it in action → [link]
+$29/mo. 14-day free trial.
 ```
 
-**Headline:** Turn Member Wins Into Community Moments
-**Description:** Member PR boards, workout content & more. Free trial.
+**Headline:** Automatic PR Boards for Your Gym
+**Description:** Members love seeing their achievements.
+**CTA:** Learn More
 
 ---
 
-### Ad Set 5: Before/After Visual
+### Ad Set 3: Price Comparison (B2B)
 
 **Primary Text:**
 ```
-Your gym TVs right now: 📺 CNN on mute
+Enterprise gym TV systems cost $200-400/month.
 
-Your gym TVs with LoopEasy: 💪 Curated workout clips, your class schedule, member achievements, your branding
+LoopEasy costs $29.
 
-The upgrade takes 5 minutes. $49/month.
+Same features:
+✅ Custom branding
+✅ Curated content
+✅ Member recognition
+✅ Multi-screen support
 
-14-day free trial → [link]
+Why pay 10x more?
+
+14-day free trial. No credit card.
 ```
 
-**Headline:** Before & After: Gym TV Edition
-**Description:** See what your screens could look like.
+**Headline:** Gym TV for $29/mo
+**Description:** Enterprise features. Fair price.
+**CTA:** Get Started
 
 ---
 
-### Retargeting Ads
+### Ad Set 4: B2C Consumer (Video Platform)
 
-**Visited Website, Didn't Sign Up:**
-
+**Primary Text:**
 ```
-Still thinking about upgrading your gym TVs?
+Tired of the YouTube algorithm?
 
-Here's what you're missing:
-• Curated workout content (not random YouTube)
-• Class schedules that update automatically
-• Member shoutouts and PR boards
-• Professional branding on every screen
+LoopEasy is different.
 
-14-day free trial. No credit card required.
+→ Human-curated video channels
+→ AI-powered discovery
+→ No clickbait, no drama
 
-Give it 5 minutes → [link]
+Free to watch (with ads) or $9.99/mo for Premium.
+
+Fitness, music, motivation, relaxation — whatever your mood.
+
+Join the loop. ♾️
 ```
 
-**Started Trial, Didn't Convert:**
+**Headline:** Video Channels, Human-Curated
+**Description:** Discover content you'll actually love.
+**CTA:** Start Watching
 
+---
+
+### Ad Set 5: Creator Economy
+
+**Primary Text:**
 ```
-Hey! Your LoopEasy trial is waiting.
+You don't need to create videos to make money from video.
 
-You signed up but haven't connected a screen yet. Need help?
+You need good taste.
 
-Reply to this ad or email support@loopeasy.com — we'll walk you through it.
+LoopEasy lets you:
+→ Curate channels from existing content
+→ Build an audience
+→ Earn 70% of ad revenue
 
-Or just log in and follow the 3-step setup: [link]
+Top creators make $2,000-10,000/month.
+
+Your taste is literally your talent.
+```
+
+**Headline:** Curate. Build. Earn.
+**Description:** 70% revenue share for creators.
+**CTA:** Become a Creator
+
+---
+
+## LinkedIn Ads
+
+**Ad 1: Gym Owner Focus**
+
+**Text:**
+```
+Your gym TVs are showing ESPN on mute.
+
+Meanwhile, your best members are hitting PRs that no one notices.
+
+LoopEasy fixes both:
+→ Curated workout content
+→ Automatic PR boards
+→ Your branding everywhere
+
+500+ studios already use it. $29-99/month.
+
+14-day free trial: loopeasy.com
+```
+
+**Headline:** Gym TV That Builds Community
+**CTA:** Learn More
+
+---
+
+**Ad 2: ROI Focus**
+
+**Text:**
+```
+The ROI math on LoopEasy:
+
+→ Average member pays $150/month
+→ Members who feel celebrated stay 2+ months longer
+→ LoopEasy costs $29-49/month
+
+If PR boards keep even ONE member from churning, it pays for itself 3x over.
+
+That's why 500+ studios use LoopEasy.
+
+14-day free trial.
+```
+
+**Headline:** The Gym TV That Pays for Itself
+**CTA:** Sign Up
+
+---
+
+## Reddit Ads (r/crossfit, r/homegym, r/fitness)
+
+**Ad 1:**
+```
+🏋️ Built something for gym owners
+
+My gym's TVs showed ESPN on mute. Boring.
+
+So I built LoopEasy — curated workout content + automatic PR boards + your branding.
+
+$29/month. 14-day free trial.
+
+Would love feedback from the community.
+
+loopeasy.com
 ```
 
 ---
 
 ## Video Ad Scripts
 
-### 30-Second Script
+### Script 1: B2B Problem/Solution (30 sec)
 
-```
-[SCENE: Boring gym TV showing CNN]
+**[Scene: Gym with CNN on TV, bored members on treadmills]**
 
-VOICEOVER: "This is what's playing on most gym TVs right now."
+VOICEOVER: "Your gym TVs are showing cable news. Your members don't even look at them."
 
-[SCENE: Switch to LoopEasy showing workout content, class schedule, member PRs]
+**[Scene transitions to LoopEasy showing workout content and PR boards]**
 
-VOICEOVER: "This is what members actually want to see."
+VOICEOVER: "LoopEasy shows curated fitness content, member achievements, and your branding — automatically."
 
-"LoopEasy — curated workout content, auto-updating schedules, 
-member shoutouts. All branded to your studio."
+**[Scene: Member smiling, pointing at their name on PR board]**
 
-[SCENE: Owner setting up on TV in 5 seconds]
+VOICEOVER: "Recognition builds retention."
 
-VOICEOVER: "Setup takes 5 minutes. Works on any smart TV. $49 a month."
+**[End card: LoopEasy logo]**
 
-[END CARD: LoopEasy logo + "Free 14-Day Trial"]
-
-VOICEOVER: "Try it free for 14 days."
-```
-
-### 15-Second Script
-
-```
-[SCENE: Split screen - CNN on left, LoopEasy on right]
-
-VOICEOVER: "Your gym TVs could be showing this..."
-
-[Highlight LoopEasy side with workouts, schedules, PRs]
-
-"...instead of this."
-
-[CNN fades]
-
-"LoopEasy. $49/month. Free trial."
-
-[END CARD]
-```
+VOICEOVER: "LoopEasy. Gym TV that works. Try free for 14 days."
 
 ---
 
-## LinkedIn Ads (B2B Focus)
+### Script 2: Creator Economy (15 sec)
 
-**Sponsored Content:**
+**[Scene: Person scrolling through videos on phone]**
 
-```
-To every fitness studio owner still showing CNN on their gym TVs:
+VOICEOVER: "You know what content hits different."
 
-There's a better way.
+**[Scene: Dashboard showing curated channel]**
 
-LoopEasy turns your screens into member engagement tools:
-→ Curated workout clips (not random YouTube)
-→ Class schedules that sync with Mindbody
-→ Member achievement boards
-→ Your branding, professionally displayed
+VOICEOVER: "Turn that taste into income. LoopEasy creators earn 70%."
 
-$49/month. Works on any smart TV. Setup in 5 minutes.
+**[End card]**
 
-We're offering a free 14-day trial for studio owners who want to 
-see the difference.
+TEXT: "loopeasy.com/creators"
 
-[CTA: Start Free Trial]
-```
+---
+
+## Targeting Recommendations
+
+### Facebook/Instagram (B2B)
+- **Job titles:** Gym Owner, CrossFit Affiliate, Fitness Studio Owner, Personal Trainer (business owner)
+- **Interests:** CrossFit, NASM, boutique fitness, gym business
+- **Behaviors:** Small business owners
+- **Lookalike:** Based on existing customers
+
+### Facebook/Instagram (B2C)
+- **Interests:** Fitness, workout videos, home workout, yoga, HIIT
+- **Age:** 18-45
+- **Behaviors:** Streaming service subscribers
+
+### Google (B2B)
+- **Keywords:** High-intent gym/fitness studio terms
+- **Placement:** Fitness business websites
+
+### LinkedIn
+- **Job titles:** Owner, Manager, Director at gyms/fitness studios
+- **Industries:** Health & Fitness
+- **Company size:** 1-50 employees
+
+---
+
+## Budget Recommendations
+
+### Month 1 Test (B2B Focus)
+| Channel | Budget | Expected CPA |
+|---------|--------|--------------|
+| Google Ads | $1,000 | $80-120 |
+| Facebook Ads | $750 | $60-100 |
+| LinkedIn Ads | $250 | $100-150 |
+| Reddit Ads | $250 | $50-80 |
+| **Total** | **$2,250** | |
+
+### Month 2+ Scale
+Double budget on channels with CPA <$100, cut channels with CPA >$150.
