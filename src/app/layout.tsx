@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Syne, DM_Sans } from "next/font/google";
+import { Syne, DM_Sans, Caveat } from "next/font/google";
 import "./globals.css";
 
 const syne = Syne({
@@ -10,6 +10,12 @@ const syne = Syne({
 
 const dmSans = DM_Sans({
   variable: "--font-body",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const caveat = Caveat({
+  variable: "--font-handwritten",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
@@ -45,7 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${syne.variable} ${dmSans.variable} antialiased`}>
+      <body className={`${syne.variable} ${dmSans.variable} ${caveat.variable} antialiased`}>
         {children}
       </body>
     </html>

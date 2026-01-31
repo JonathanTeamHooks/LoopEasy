@@ -102,9 +102,14 @@ function WatchContent() {
         <div className={`absolute top-0 left-0 right-0 p-6 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href={`/channel/${channelId}`} className="p-2 bg-black/30 hover:bg-black/50 rounded-full transition-colors">
+              <Link href={`/channel/${channelId}`} className="p-2 bg-black/30 hover:bg-black/50 rounded-full transition-colors" title="Back to channel">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </Link>
+              <Link href="/browse" className="p-2 bg-black/30 hover:bg-black/50 rounded-full transition-colors" title="Browse channels">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
                 </svg>
               </Link>
               <div>

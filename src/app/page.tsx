@@ -9,7 +9,27 @@ export default function Home() {
   const [activeDemo, setActiveDemo] = useState(0);
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [aiPrompt, setAiPrompt] = useState("");
+  const [aiState, setAiState] = useState<"idle" | "thinking" | "result">("idle");
+  const [selectedMood, setSelectedMood] = useState<number | null>(null);
   const videoRef = useRef<HTMLDivElement>(null);
+
+  const moods = [
+    { emoji: "☀️", label: "Morning devotional", result: "Your Morning Ritual", channels: ["Your saved devotionals", "New from creators you follow", "Recommended for you"], color: "from-amber-400 to-orange-500" },
+    { emoji: "💪", label: "Kettlebell workout", result: "Your Fitness Curators", channels: ["@KettlebellKing (subscribed)", "@FitWithMaria (subscribed)", "New: @IronCore"], color: "from-orange-500 to-red-500" },
+    { emoji: "🔥", label: "Get me motivated", result: "Motivation Boost", channels: ["Your saved speakers", "Trending motivation", "Quick 5-min fire-ups"], color: "from-red-500 to-pink-500" },
+    { emoji: "💻", label: "Help me code React", result: "Coding Tutorials", channels: ["React tutorials", "Live coding sessions", "Code-along projects"], color: "from-cyan-500 to-blue-500" },
+    { emoji: "🎵", label: "Chill vibes while I work", result: "Background Flow", channels: ["Lo-fi + visuals", "Coffee shop ambience", "Gentle movement scenes"], color: "from-violet-500 to-purple-500" },
+    { emoji: "😂", label: "Funny ski fails", result: "Comedy Clips", channels: ["Ski & snowboard fails", "Winter sports bloopers", "Viral snow moments"], color: "from-yellow-500 to-orange-500" },
+    { emoji: "🎬", label: "Watch a movie", result: "Long-Form Content", channels: ["Indie films", "Blockbuster hits", "Binge-worthy series"], color: "from-rose-500 to-red-500" },
+    { emoji: "🧘", label: "Wind down for bed", result: "Evening Routine", channels: ["Gentle yoga", "Guided meditation", "Sound machine"], color: "from-indigo-500 to-purple-500" },
+  ];
+
+  const handleMoodClick = (index: number) => {
+    setSelectedMood(index);
+    setAiState("thinking");
+    setTimeout(() => setAiState("result"), 1500);
+  };
 
   useEffect(() => {
     setIsLoaded(true);
@@ -37,28 +57,25 @@ export default function Home() {
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1] via-[#8b5cf6] to-[#a855f7] flex items-center justify-center">
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1] via-[#8b5cf6] to-[#a855f7] flex items-center justify-center shadow-lg shadow-[#6366f1]/25">
               <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/>
               </svg>
             </div>
-            <span className="text-xl font-bold">Loop<span className="text-[#a855f7]">Easy</span></span>
-          </div>
+            <span className="text-xl font-bold">Loop<span className="bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#ec4899] bg-clip-text text-transparent">Easy</span><span className="text-xs ml-0.5">✨</span></span>
+          </Link>
           
           <div className="flex items-center gap-4">
             <Link href="/auth" className="text-sm text-[#a1a1a6] hover:text-white transition-colors">Sign In</Link>
-            <Link href="/auth" className="px-5 py-2.5 bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-white text-sm font-semibold rounded-full hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] transition-all">
-              Start Free
-            </Link>
           </div>
         </div>
       </nav>
 
-      {/* HERO - The Punch */}
+      {/* HERO - Pain → AI Magic */}
       <section className="relative min-h-screen flex items-center justify-center px-6 pt-20">
         <div className="max-w-6xl mx-auto text-center">
-          {/* The Problem - Strike First */}
+          {/* The Pain */}
           <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#ef4444]/10 border border-[#ef4444]/30 text-[#ef4444] text-sm font-medium mb-8">
               <span className="w-2 h-2 rounded-full bg-[#ef4444] animate-pulse" />
@@ -66,21 +83,171 @@ export default function Home() {
             </div>
           </div>
 
-          <h1 className={`text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight mb-8 transition-all duration-1000 delay-100 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <span className="block text-[#6b6b70]">YouTube is chaos.</span>
-            <span className="block text-[#6b6b70]">Netflix is passive.</span>
-            <span className="block mt-4 bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#ec4899] bg-clip-text text-transparent">
-              This is neither.
-            </span>
-          </h1>
+          <div className={`mb-8 transition-all duration-1000 delay-100 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="text-2xl sm:text-3xl text-[#6b6b70] font-medium mb-4">
+              YouTube is chaos — Netflix is passive
+            </div>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold">
+              <span className="text-white">Loop is </span>
+              <span className="relative inline-block">
+                <span className="bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#ec4899] bg-clip-text text-transparent">Easy</span>
+                <span className="absolute -top-1 -right-6 text-2xl animate-pulse">✨</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#ec4899] blur-2xl opacity-30 -z-10" />
+              </span>
+            </h1>
+          </div>
 
-          <p className={`text-xl sm:text-2xl text-[#a1a1a6] max-w-3xl mx-auto mb-12 leading-relaxed transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <span className="text-white font-semibold">Curated video channels</span> that play forever.
-            <br />
-            <span className="text-white font-semibold">Created by anyone</span> with AI-powered tools.
-            <br />
-            <span className="text-white font-semibold">Watch free</span> or go premium. <span className="text-[#f59e0b] font-semibold">Creators earn 70%.</span>
-          </p>
+          {/* Interactive AI Demo */}
+          <div className={`mt-12 mb-12 transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            
+            {/* The AI Box */}
+            <div className="max-w-2xl mx-auto">
+              <div className="relative rounded-3xl bg-[#141416] border border-[#2a2a2e] overflow-hidden">
+                {/* Content Area */}
+                <div className="p-6">
+                  {aiState === "idle" && (
+                    <>
+                      <div className="text-xl font-semibold text-white mb-2 text-left">What are you in the mood for?</div>
+                      <p className="text-[#6b6b70] text-sm mb-4 text-left">Just say it — we'll pull from your curators or find new ones you'll love</p>
+                      
+                      {/* Text Input */}
+                      <div className="relative mb-4">
+                        <input
+                          type="text"
+                          placeholder="I want to..."
+                          value={aiPrompt}
+                          onChange={(e) => setAiPrompt(e.target.value)}
+                          onKeyDown={(e) => e.key === "Enter" && aiPrompt.trim() && handleMoodClick(2)}
+                          className="w-full px-5 py-4 bg-[#1c1c1f] border border-[#2a2a2e] rounded-2xl text-white placeholder-[#6b6b70] focus:outline-none focus:border-[#6366f1] transition-all"
+                        />
+                        <button 
+                          onClick={() => aiPrompt.trim() && handleMoodClick(2)}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-2 bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-white text-sm font-medium rounded-xl hover:shadow-lg transition-all"
+                        >
+                          Go ✨
+                        </button>
+                      </div>
+
+                      {/* Quick Picks */}
+                      <div className="text-xs text-[#6b6b70] mb-3 text-left">Or try a quick pick:</div>
+                      <div className="flex flex-wrap gap-2">
+                        {moods.map((mood, i) => (
+                          <button
+                            key={i}
+                            onClick={() => handleMoodClick(i)}
+                            className="group px-4 py-2 rounded-full bg-[#1c1c1f] border border-[#2a2a2e] hover:border-[#6366f1] transition-all hover:scale-[1.02] flex items-center gap-2"
+                          >
+                            <span>{mood.emoji}</span>
+                            <span className="text-sm text-white group-hover:text-[#a855f7] transition-colors">{mood.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                      
+                      {/* Creator CTA */}
+                      <div className="mt-6 pt-6 border-t border-[#2a2a2e]">
+                        <Link href="/upload" className="group flex items-center justify-between p-4 rounded-2xl bg-gradient-to-r from-[#f59e0b]/10 to-[#ef4444]/10 border border-[#f59e0b]/30 hover:border-[#f59e0b] transition-all">
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#f59e0b] to-[#ef4444] flex items-center justify-center">
+                              <span className="text-lg">🎬</span>
+                            </div>
+                            <div className="text-left">
+                              <div className="font-semibold text-white group-hover:text-[#f59e0b] transition-colors">Build your own loop</div>
+                              <div className="text-xs text-[#a1a1a6]">Upload, AI enhances, display anywhere — no other software needed</div>
+                            </div>
+                          </div>
+                          <svg className="w-5 h-5 text-[#f59e0b] group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                      </div>
+                      
+                      {/* AI Branding - Bottom */}
+                      <div className="mt-6 pt-4 border-t border-[#2a2a2e] flex items-center justify-center gap-2 text-sm text-[#6b6b70]">
+                        <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-[#6366f1] to-[#a855f7] flex items-center justify-center">
+                          <span className="text-xs">✨</span>
+                        </div>
+                        <span>Powered by <span className="text-[#a855f7]">LoopEasy AI</span></span>
+                      </div>
+                    </>
+                  )}
+
+                  {aiState === "thinking" && selectedMood !== null && (
+                    <div className="py-8 text-center">
+                      <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#6366f1]/20 text-[#a855f7] font-medium mb-4">
+                        <div className="w-5 h-5 border-2 border-[#a855f7] border-t-transparent rounded-full animate-spin" />
+                        AI is building your stream...
+                      </div>
+                      <div className="text-[#6b6b70]">Curating channels for "{moods[selectedMood].label}"</div>
+                    </div>
+                  )}
+
+                  {aiState === "result" && selectedMood !== null && (
+                    <div className="text-left">
+                      <div className="flex items-center gap-2 mb-4">
+                        <span className="text-[#22c55e]">✓</span>
+                        <span className="text-white font-semibold">Your stream is ready</span>
+                      </div>
+                      
+                      {/* Result Preview */}
+                      <div className={`p-4 rounded-2xl bg-gradient-to-br ${moods[selectedMood].color} mb-4`}>
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="text-3xl">{moods[selectedMood].emoji}</div>
+                          <div>
+                            <div className="font-bold text-white text-lg">{moods[selectedMood].result}</div>
+                            <div className="text-white/70 text-sm">Curated for you • Plays continuously</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                          <span className="text-white/90 text-sm">Ready to play</span>
+                        </div>
+                      </div>
+
+                      {/* Channel List with follow status */}
+                      <div className="space-y-2 mb-4">
+                        {moods[selectedMood].channels.map((channel, i) => (
+                          <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-[#1c1c1f]">
+                            <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${moods[selectedMood].color} flex items-center justify-center text-white font-bold`}>
+                              {i + 1}
+                            </div>
+                            <div className="flex-1">
+                              <div className="font-medium text-white">{channel}</div>
+                            </div>
+                            {channel.includes("subscribed") ? (
+                              <div className="text-xs text-[#22c55e] flex items-center gap-1">
+                                <span>✓</span> Following
+                              </div>
+                            ) : channel.includes("New:") || channel.includes("Recommended") || channel.includes("Trending") ? (
+                              <button className="text-xs px-2 py-1 rounded-full bg-[#6366f1]/20 text-[#a855f7] hover:bg-[#6366f1]/30 transition-all">
+                                + Follow
+                              </button>
+                            ) : (
+                              <div className="text-xs text-[#6b6b70]">24/7</div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="flex gap-3">
+                        <button className="flex-1 py-3 bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-white font-semibold rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                          </svg>
+                          Start Watching
+                        </button>
+                        <button 
+                          onClick={() => { setAiState("idle"); setSelectedMood(null); }}
+                          className="px-4 py-3 bg-[#1c1c1f] text-white rounded-xl hover:bg-[#2a2a2e] transition-all"
+                        >
+                          Try Another
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* CTA */}
           <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -124,154 +291,175 @@ export default function Home() {
         </div>
       </section>
 
-      {/* THE VOID - What's Missing */}
+      {/* YOUR DAY, YOUR WAY */}
       <section className="py-32 px-6 relative">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-              What you've been missing
+              Your entire day, <span className="bg-gradient-to-r from-[#6366f1] to-[#a855f7] bg-clip-text text-transparent">reimagined</span>
             </h2>
             <p className="text-xl text-[#a1a1a6] max-w-2xl mx-auto">
-              You've accepted a broken experience. Let us show you what video should feel like.
+              From the moment you wake up to the moment you fall asleep — just tell us what you need.
             </p>
           </div>
 
+          {/* Day Timeline */}
+          <div className="grid md:grid-cols-4 gap-6 mb-16">
+            {[
+              { time: "Morning", emoji: "☀️", actions: ["Devotionals", "Morning news", "Quick workout"], color: "from-amber-500 to-orange-500" },
+              { time: "Workday", emoji: "💼", actions: ["Focus music", "Coding tutorials", "Motivation boost"], color: "from-blue-500 to-cyan-500" },
+              { time: "Evening", emoji: "🌆", actions: ["Funny videos", "Movies & shows", "Learn something new"], color: "from-purple-500 to-pink-500" },
+              { time: "Night", emoji: "🌙", actions: ["Yoga & stretch", "Meditation", "Sleep sounds"], color: "from-indigo-500 to-violet-500" },
+            ].map((period, i) => (
+              <div key={i} className="group p-6 rounded-3xl bg-gradient-to-b from-[#141416] to-[#0a0a0b] border border-[#2a2a2e] hover:border-[#6366f1]/50 transition-all">
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${period.color} flex items-center justify-center text-2xl mb-4`}>
+                  {period.emoji}
+                </div>
+                <div className="text-lg font-bold text-white mb-3">{period.time}</div>
+                <div className="space-y-2">
+                  {period.actions.map((action, j) => (
+                    <div key={j} className="text-sm text-[#a1a1a6] flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#6366f1]" />
+                      {action}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Key Differentiators */}
           <div className="grid md:grid-cols-3 gap-8">
-            {/* Problem 1 */}
             <div className="group p-8 rounded-3xl bg-gradient-to-b from-[#141416] to-[#0a0a0b] border border-[#2a2a2e] hover:border-[#6366f1]/50 transition-all">
-              <div className="text-4xl mb-6">😩</div>
-              <h3 className="text-xl font-bold mb-3 text-[#ef4444]">The Endless Scroll</h3>
+              <div className="text-4xl mb-6">🎯</div>
+              <h3 className="text-xl font-bold mb-3 text-white">It Knows You</h3>
               <p className="text-[#a1a1a6] mb-4">
-                YouTube dumps you in an ocean of thumbnails. You spend more time <em>choosing</em> than watching.
+                Follow curators you love. Save your favorites. Next time you ask, it pulls from <em>your</em> people first.
               </p>
               <div className="pt-4 border-t border-[#2a2a2e]">
-                <div className="text-sm text-[#6366f1] font-medium">With LoopEasy:</div>
-                <div className="text-white mt-1">Pick a channel. Press play. It never stops.</div>
+                <div className="text-sm text-[#22c55e] font-medium">"Kettlebell workout"</div>
+                <div className="text-white mt-1">→ Your subscribed fitness curators, instantly</div>
               </div>
             </div>
 
-            {/* Problem 2 */}
+            <div className="group p-8 rounded-3xl bg-gradient-to-b from-[#141416] to-[#0a0a0b] border border-[#2a2a2e] hover:border-[#6366f1]/50 transition-all">
+              <div className="text-4xl mb-6">🔮</div>
+              <h3 className="text-xl font-bold mb-3 text-white">Get Specific</h3>
+              <p className="text-[#a1a1a6] mb-4">
+                Not just "funny videos" — say "funny ski fails" and watch AI find exactly that and loop it forever.
+              </p>
+              <div className="pt-4 border-t border-[#2a2a2e]">
+                <div className="text-sm text-[#22c55e] font-medium">"Funny cat videos from Japan"</div>
+                <div className="text-white mt-1">→ Curated, looped, endless entertainment</div>
+              </div>
+            </div>
+
             <div className="group p-8 rounded-3xl bg-gradient-to-b from-[#141416] to-[#0a0a0b] border border-[#2a2a2e] hover:border-[#6366f1]/50 transition-all">
               <div className="text-4xl mb-6">🎬</div>
-              <h3 className="text-xl font-bold mb-3 text-[#ef4444]">The Creation Gap</h3>
+              <h3 className="text-xl font-bold mb-3 text-white">Short or Long</h3>
               <p className="text-[#a1a1a6] mb-4">
-                You have taste. You know what's good. But editing video? That's a whole career.
+                Quick clips, background vibes, OR full movies and series. You decide the format, we deliver.
               </p>
               <div className="pt-4 border-t border-[#2a2a2e]">
-                <div className="text-sm text-[#6366f1] font-medium">With LoopEasy:</div>
-                <div className="text-white mt-1">AI edits for you. Upload → Enhance → Publish. Done.</div>
-              </div>
-            </div>
-
-            {/* Problem 3 */}
-            <div className="group p-8 rounded-3xl bg-gradient-to-b from-[#141416] to-[#0a0a0b] border border-[#2a2a2e] hover:border-[#6366f1]/50 transition-all">
-              <div className="text-4xl mb-6">💸</div>
-              <h3 className="text-xl font-bold mb-3 text-[#ef4444]">The Creator Squeeze</h3>
-              <p className="text-[#a1a1a6] mb-4">
-                YouTube takes 45%. You need 1,000 subs. The algorithm decides if you exist.
-              </p>
-              <div className="pt-4 border-t border-[#2a2a2e]">
-                <div className="text-sm text-[#f59e0b] font-medium">With LoopEasy:</div>
-                <div className="text-white mt-1">You keep 70%. Start earning day one. No gatekeepers.</div>
+                <div className="text-sm text-[#22c55e] font-medium">"I want to watch a movie"</div>
+                <div className="text-white mt-1">→ Indie films, blockbusters, binge-worthy series</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* YOUR MISSION - Pick Your Experience */}
+      {/* FOLLOW YOUR CURATORS */}
       <section className="py-32 px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-[#6366f1]/5 via-transparent to-[#a855f7]/5" />
         
         <div className="max-w-6xl mx-auto relative">
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-              Come with a mission.
+              Follow curators.
               <br />
               <span className="bg-gradient-to-r from-[#6366f1] to-[#a855f7] bg-clip-text text-transparent">
-                Leave transformed.
+                Build your universe.
               </span>
             </h2>
             <p className="text-xl text-[#a1a1a6] max-w-2xl mx-auto">
-              Tell us what you're here for. We'll deliver exactly that — continuously, endlessly, perfectly.
+              Discover creators you love. Follow them. Next time you ask for something, we pull from YOUR people first.
             </p>
           </div>
 
-          {/* Mission Picker Interactive */}
+          {/* How it works */}
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left - Mission Selection */}
+            {/* Left - The Flow */}
             <div>
-              <div className="text-sm text-[#6b6b70] uppercase tracking-wider mb-6">What's your mission today?</div>
+              <div className="text-sm text-[#6b6b70] uppercase tracking-wider mb-6">How it learns you</div>
               
               <div className="space-y-4">
                 {[
-                  { emoji: "💪", mission: "I want to get fit", result: "Non-stop workouts, HIIT, yoga, stretching — plays until you're done", channels: "2,400+ fitness channels" },
-                  { emoji: "🎸", mission: "I want to learn guitar", result: "Lessons, tutorials, practice sessions — structured learning on repeat", channels: "800+ music education channels" },
-                  { emoji: "🧘", mission: "I need to relax", result: "Meditation, ambient sounds, calm visuals — peace that doesn't end", channels: "1,200+ wellness channels" },
-                  { emoji: "🧠", mission: "I need to focus", result: "Lo-fi beats, study music, concentration flows — your productivity soundtrack", channels: "3,100+ focus channels" },
-                  { emoji: "😂", mission: "I want to laugh", result: "Comedy, sketches, funny moments — endless entertainment", channels: "1,800+ comedy channels" },
+                  { step: "1", emoji: "🎯", title: "Ask for anything", desc: "\"I want a kettlebell workout\" — be as specific as you want" },
+                  { step: "2", emoji: "✨", title: "We find the best", desc: "AI surfaces top curators and content that matches your request" },
+                  { step: "3", emoji: "❤️", title: "Follow what you love", desc: "Found a creator you vibe with? Hit follow. They're now YOUR curator." },
+                  { step: "4", emoji: "🔁", title: "It remembers", desc: "Next time you ask, your followed curators come up first — instantly" },
                 ].map((item, i) => (
                   <div 
                     key={i}
-                    className="group p-5 rounded-2xl bg-[#141416] border border-[#2a2a2e] hover:border-[#6366f1] transition-all cursor-pointer"
+                    className="group p-5 rounded-2xl bg-[#141416] border border-[#2a2a2e] hover:border-[#6366f1] transition-all"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="text-3xl">{item.emoji}</div>
-                      <div className="flex-1">
-                        <div className="font-semibold text-lg group-hover:text-[#a855f7] transition-colors">"{item.mission}"</div>
-                        <div className="text-[#a1a1a6] text-sm mt-1">{item.result}</div>
-                        <div className="text-[#6366f1] text-xs mt-2 font-medium">{item.channels}</div>
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1] to-[#a855f7] flex items-center justify-center text-white font-bold">
+                        {item.step}
                       </div>
-                      <svg className="w-5 h-5 text-[#6b6b70] group-hover:text-[#6366f1] group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
+                      <div className="flex-1">
+                        <div className="font-semibold text-lg text-white flex items-center gap-2">
+                          <span>{item.emoji}</span> {item.title}
+                        </div>
+                        <div className="text-[#a1a1a6] text-sm mt-1">{item.desc}</div>
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Right - Or Browse Curated */}
+            {/* Right - Example */}
             <div>
               <div className="p-8 rounded-3xl bg-gradient-to-br from-[#6366f1]/10 to-[#a855f7]/10 border border-[#6366f1]/30">
-                <div className="text-sm text-[#6366f1] uppercase tracking-wider mb-4">Or explore curated experiences</div>
-                <h3 className="text-2xl font-bold mb-4">
-                  Channels built by people who get it
+                <div className="text-sm text-[#6366f1] uppercase tracking-wider mb-4">Your curators</div>
+                <h3 className="text-2xl font-bold mb-2">
+                  People you follow
                 </h3>
-                <p className="text-[#a1a1a6] mb-6">
-                  Creators design complete viewing experiences — from morning routines to late-night vibes. 
-                  Pick one, press play, and let someone else's taste guide you.
+                <p className="text-[#a1a1a6] mb-6 text-sm">
+                  These creators appear first when you ask for related content
                 </p>
                 
-                {/* Sample curated channels */}
+                {/* Sample followed creators */}
                 <div className="space-y-3">
                   {[
-                    { name: "Morning Power Hour", creator: "@fitnessmike", vibe: "Wake up → Workout → Meditation", viewers: "2.4K watching" },
-                    { name: "Late Night Chill", creator: "@lofimaster", vibe: "Beats → Visuals → Sleep", viewers: "8.1K watching" },
-                    { name: "Sunday Recovery", creator: "@yogawithsara", vibe: "Stretch → Breathe → Reset", viewers: "1.2K watching" },
-                  ].map((channel, i) => (
+                    { name: "@KettlebellKing", category: "Fitness", avatar: "💪", content: "342 workouts" },
+                    { name: "@DevWithMaria", category: "Coding", avatar: "👩‍💻", content: "89 tutorials" },
+                    { name: "@ZenMaster_J", category: "Meditation", avatar: "🧘", content: "156 sessions" },
+                    { name: "@ComedyCarl", category: "Entertainment", avatar: "😂", content: "500+ clips" },
+                  ].map((creator, i) => (
                     <div key={i} className="flex items-center gap-4 p-3 rounded-xl bg-[#0a0a0b]/50 hover:bg-[#0a0a0b] transition-colors cursor-pointer">
-                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#6366f1] to-[#a855f7] flex items-center justify-center text-lg font-bold">
-                        {channel.name.charAt(0)}
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#6366f1] to-[#a855f7] flex items-center justify-center text-xl">
+                        {creator.avatar}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="font-medium truncate">{channel.name}</div>
-                        <div className="text-xs text-[#6b6b70]">{channel.vibe}</div>
+                        <div className="font-medium truncate">{creator.name}</div>
+                        <div className="text-xs text-[#6b6b70]">{creator.category} • {creator.content}</div>
                       </div>
-                      <div className="text-xs text-[#22c55e] flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse" />
-                        {channel.viewers}
+                      <div className="text-xs px-2 py-1 rounded-full bg-[#22c55e]/20 text-[#22c55e]">
+                        Following
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <Link href="/browse" className="mt-6 w-full py-3 bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-white font-semibold rounded-xl flex items-center justify-center gap-2 hover:shadow-lg transition-all">
-                  Explore All Channels
+                <button className="mt-6 w-full py-3 bg-[#1c1c1f] border border-[#2a2a2e] text-white font-medium rounded-xl flex items-center justify-center gap-2 hover:border-[#6366f1] transition-all">
+                  Discover More Curators
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -593,20 +781,20 @@ export default function Home() {
       <footer className="border-t border-[#1c1c1f] py-12 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1] to-[#a855f7] flex items-center justify-center">
+            <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1] to-[#a855f7] flex items-center justify-center shadow-lg shadow-[#6366f1]/25">
                 <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/>
                 </svg>
               </div>
-              <span className="font-bold">LoopEasy</span>
-            </div>
+              <span className="font-bold">Loop<span className="bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#ec4899] bg-clip-text text-transparent">Easy</span><span className="text-xs ml-0.5">✨</span></span>
+            </Link>
             <div className="flex gap-8 text-sm text-[#6b6b70]">
-              <a href="#" className="hover:text-white transition-colors">About</a>
-              <a href="#" className="hover:text-white transition-colors">Creators</a>
-              <a href="#" className="hover:text-white transition-colors">Pricing</a>
-              <a href="#" className="hover:text-white transition-colors">Support</a>
-              <a href="#" className="hover:text-white transition-colors">Terms</a>
+              <Link href="/browse" className="hover:text-white transition-colors">Browse</Link>
+              <Link href="/upload" className="hover:text-white transition-colors">Creators</Link>
+              <Link href="/auth" className="hover:text-white transition-colors">Sign Up</Link>
+              <Link href="/dashboard" className="hover:text-white transition-colors">Dashboard</Link>
+              <Link href="/profile" className="hover:text-white transition-colors">Account</Link>
             </div>
             <div className="text-sm text-[#6b6b70]">© 2026 LoopEasy</div>
           </div>

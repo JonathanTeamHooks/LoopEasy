@@ -42,14 +42,14 @@ export default function AuthPage() {
         
         {/* Content */}
         <div className="relative z-10 flex flex-col justify-center px-16">
-          <div className="flex items-center gap-3 mb-8">
+          <Link href="/" className="flex items-center gap-3 mb-8 hover:opacity-80 transition-opacity">
             <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center">
               <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/>
               </svg>
             </div>
             <span className="text-3xl font-bold text-white">LoopEasy</span>
-          </div>
+          </Link>
           
           <h1 className="text-5xl font-bold text-white leading-tight mb-6">
             Video Channels<br />
@@ -85,14 +85,14 @@ export default function AuthPage() {
           {step === "auth" && (
             <>
               {/* Mobile Logo */}
-              <div className="lg:hidden flex items-center justify-center gap-3 mb-8">
+              <Link href="/" className="lg:hidden flex items-center justify-center gap-3 mb-8 hover:opacity-80 transition-opacity">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#6366f1] to-[#a855f7] flex items-center justify-center">
                   <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/>
                   </svg>
                 </div>
                 <span className="text-2xl font-bold">LoopEasy</span>
-              </div>
+              </Link>
 
               <h2 className="text-3xl font-bold mb-2">
                 {mode === "signup" ? "Create your account" : "Welcome back"}
