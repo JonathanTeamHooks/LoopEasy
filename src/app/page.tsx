@@ -2,50 +2,105 @@
 
 import { useState, useEffect } from "react";
 
+// Premium Indigo Theme - Chosen for SaaS conversion
+const theme = {
+  accent: "#6366f1",
+  accentHover: "#818cf8",
+  gradient: "from-[#6366f1] via-[#8b5cf6] to-[#a855f7]",
+};
+
+// Memorable Loop Logo
+const LoopLogo = ({ size = "default" }: { size?: "small" | "default" | "large" }) => {
+  const dimensions = size === "small" ? "w-8 h-8" : size === "large" ? "w-16 h-16" : "w-10 h-10";
+  const iconSize = size === "small" ? "w-4 h-4" : size === "large" ? "w-8 h-8" : "w-5 h-5";
+  
+  return (
+    <div className={`${dimensions} rounded-xl bg-gradient-to-br ${theme.gradient} flex items-center justify-center relative overflow-hidden`}>
+      <svg className={iconSize} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z" className="text-white"/>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent" />
+    </div>
+  );
+};
+
+// Feature icons
+const icons = {
+  workout: (
+    <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h4v12H4zM16 6h4v12h-4zM8 10h8M8 14h8M2 12h2M20 12h2" />
+    </svg>
+  ),
+  schedule: (
+    <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>
+  ),
+  trophy: (
+    <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 3h14M5 3v4a7 7 0 0014 0V3M5 3H3v4a4 4 0 004 4M19 3h2v4a4 4 0 01-4 4M12 14v4M8 21h8M12 18h.01" />
+    </svg>
+  ),
+  brand: (
+    <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+    </svg>
+  ),
+  tv: (
+    <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+    </svg>
+  ),
+  zap: (
+    <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+    </svg>
+  ),
+};
+
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: Connect to email service
+    setSubmitted(true);
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0a0b] noise overflow-hidden">
       {/* Ambient background effects */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-[#ff3366] rounded-full blur-[200px] opacity-10 animate-pulse-slow" />
-        <div className="absolute bottom-[-30%] right-[-10%] w-[800px] h-[800px] bg-[#ff6b35] rounded-full blur-[250px] opacity-8 animate-pulse-slow" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-[40%] right-[20%] w-[400px] h-[400px] bg-[#f7931a] rounded-full blur-[180px] opacity-5 animate-pulse-slow" style={{ animationDelay: '4s' }} />
+        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-[#6366f1] rounded-full blur-[200px] opacity-10 animate-pulse-slow" />
+        <div className="absolute bottom-[-30%] right-[-10%] w-[800px] h-[800px] bg-[#8b5cf6] rounded-full blur-[250px] opacity-8 animate-pulse-slow" style={{ animationDelay: '2s' }} />
       </div>
 
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#ff3366] to-[#ff6b35] flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
-            </div>
+            <LoopLogo />
             <span className="font-[family-name:var(--font-display)] text-xl font-bold tracking-tight">
-              Loop<span className="text-[#ff3366]">Easy</span>
+              Loop<span className="text-[#6366f1]">Easy</span>
             </span>
           </div>
           
           <div className="hidden md:flex items-center gap-8 text-sm text-[#a1a1a6]">
             <a href="#features" className="hover:text-white transition-colors">Features</a>
-            <a href="#creators" className="hover:text-white transition-colors">For Creators</a>
-            <a href="#business" className="hover:text-white transition-colors">For Business</a>
             <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
+            <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
           </div>
 
           <div className="flex items-center gap-4">
-            <button className="text-sm text-[#a1a1a6] hover:text-white transition-colors">
-              Sign In
-            </button>
-            <button className="px-5 py-2.5 bg-[#ff3366] hover:bg-[#ff4d7a] text-white text-sm font-medium rounded-full transition-all hover:shadow-[0_0_30px_rgba(255,51,102,0.4)]">
-              Get Started
-            </button>
+            <a href="#pricing" className="px-5 py-2.5 bg-[#6366f1] hover:bg-[#818cf8] text-white text-sm font-semibold rounded-full transition-all hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]">
+              Start Free Trial
+            </a>
           </div>
         </div>
       </nav>
@@ -53,212 +108,129 @@ export default function Home() {
       {/* Hero Section */}
       <main className="relative pt-32 pb-20 px-6">
         <div className="max-w-7xl mx-auto">
-          {/* Hero Content */}
           <div className="text-center max-w-4xl mx-auto">
-            <div 
-              className={`transition-all duration-1000 delay-100 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-            >
+            {/* Badge */}
+            <div className={`transition-all duration-1000 delay-100 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1c1c1f] border border-[#2a2a2e] text-sm text-[#a1a1a6] mb-8">
-                <span className="w-2 h-2 rounded-full bg-[#ff3366] animate-pulse" />
-                Now in Public Beta
+                <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse" />
+                Built for Fitness Studios
               </span>
             </div>
 
-            <h1 
-              className={`font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight mb-8 transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-            >
-              Video Channels
+            {/* Headline */}
+            <h1 className={`font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-7xl font-bold leading-[0.95] tracking-tight mb-8 transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              Stop Showing CNN
               <br />
-              <span className="text-gradient glow-text">That Never Stop</span>
+              <span className={`bg-gradient-to-r ${theme.gradient} bg-clip-text text-transparent`}>
+                On Your Gym TVs
+              </span>
             </h1>
 
-            <p 
-              className={`text-lg sm:text-xl text-[#a1a1a6] max-w-2xl mx-auto mb-12 leading-relaxed transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-            >
-              Create curated video channels that play in perfect sequence. 
-              Share with your audience or loop for your business. 
-              <span className="text-white">Spotify, but for video.</span>
+            {/* Subheadline */}
+            <p className={`text-lg sm:text-xl text-[#a1a1a6] max-w-2xl mx-auto mb-12 leading-relaxed transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              AI-powered TV content for fitness studios. Curated workout clips, auto-updating class schedules, member shoutouts — all branded to your studio.
+              <span className="text-white block mt-2 font-medium">$49/month. Works on any smart TV.</span>
             </p>
 
-            <div 
-              className={`flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-1000 delay-400 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-            >
-              <button className="w-full sm:w-auto px-8 py-4 bg-[#ff3366] hover:bg-[#ff4d7a] text-white font-semibold rounded-full transition-all hover:shadow-[0_0_40px_rgba(255,51,102,0.5)] hover:scale-105">
-                Start Creating — It&apos;s Free
-              </button>
-              <button className="w-full sm:w-auto px-8 py-4 bg-[#1c1c1f] hover:bg-[#252528] text-white font-medium rounded-full border border-[#2a2a2e] hover:border-[#3a3a3f] transition-all flex items-center justify-center gap-2">
+            {/* CTA */}
+            <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-1000 delay-400 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <a href="#pricing" className="w-full sm:w-auto px-8 py-4 bg-[#6366f1] hover:bg-[#818cf8] text-white font-semibold rounded-full transition-all hover:shadow-[0_0_40px_rgba(99,102,241,0.5)] hover:scale-105 text-center">
+                Start 14-Day Free Trial
+              </a>
+              <a href="#demo" className="w-full sm:w-auto px-8 py-4 bg-[#1c1c1f] hover:bg-[#252528] text-white font-medium rounded-full border border-[#2a2a2e] hover:border-[#3a3a3f] transition-all flex items-center justify-center gap-2">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z"/>
                 </svg>
                 Watch Demo
-              </button>
+              </a>
             </div>
+
+            {/* Social proof */}
+            <p className={`text-sm text-[#6b6b70] mt-8 transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              No credit card required • Setup in 5 minutes • Cancel anytime
+            </p>
           </div>
 
-          {/* Hero Visual */}
-          <div 
-            className={`mt-20 relative transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-          >
-            {/* Browser mockup */}
+          {/* Hero Image - Gym TV Mockup */}
+          <div className={`mt-20 relative transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <div className="relative mx-auto max-w-5xl">
-              <div className="absolute inset-0 bg-gradient-to-b from-[#ff3366]/20 to-transparent rounded-3xl blur-3xl -z-10" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#6366f1]/20 to-transparent rounded-3xl blur-3xl -z-10" />
               
+              {/* TV Mockup */}
               <div className="bg-[#141416] rounded-2xl border border-[#2a2a2e] overflow-hidden shadow-2xl">
-                {/* Browser header */}
-                <div className="flex items-center gap-2 px-4 py-3 bg-[#1c1c1f] border-b border-[#2a2a2e]">
-                  <div className="flex gap-2">
-                    <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-                    <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
-                    <div className="w-3 h-3 rounded-full bg-[#28c840]" />
-                  </div>
-                  <div className="flex-1 mx-4">
-                    <div className="bg-[#0a0a0b] rounded-lg px-4 py-1.5 text-sm text-[#6b6b70] text-center">
-                      loopeasy.com/channel/awesome-music-videos
-                    </div>
-                  </div>
-                </div>
-                
-                {/* App interface mockup */}
-                <div className="flex h-[500px]">
-                  {/* Sidebar */}
-                  <div className="w-64 bg-[#0a0a0b] border-r border-[#2a2a2e] p-4 hidden md:block">
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-3 px-3 py-2 rounded-lg bg-[#1c1c1f] text-white">
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-                        </svg>
-                        <span className="text-sm font-medium">Home</span>
-                      </div>
-                      <div className="flex items-center gap-3 px-3 py-2 rounded-lg text-[#a1a1a6] hover:bg-[#1c1c1f] hover:text-white transition-colors">
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                        </svg>
-                        <span className="text-sm font-medium">Explore</span>
-                      </div>
-                      <div className="flex items-center gap-3 px-3 py-2 rounded-lg text-[#a1a1a6] hover:bg-[#1c1c1f] hover:text-white transition-colors">
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8 12.5v-9l6 4.5-6 4.5z"/>
-                        </svg>
-                        <span className="text-sm font-medium">Your Library</span>
-                      </div>
-                    </div>
-                    
-                    <div className="mt-8">
-                      <div className="text-xs font-semibold text-[#6b6b70] uppercase tracking-wider mb-3 px-3">Your Channels</div>
-                      <div className="space-y-1">
-                        {["Lofi Beats 24/7", "Epic Trailers", "Morning Motivation"].map((channel, i) => (
-                          <div key={i} className="flex items-center gap-3 px-3 py-2 rounded-lg text-[#a1a1a6] hover:bg-[#1c1c1f] hover:text-white transition-colors cursor-pointer">
-                            <div className="w-8 h-8 rounded bg-gradient-to-br from-[#ff3366] to-[#ff6b35] opacity-80" />
-                            <span className="text-sm truncate">{channel}</span>
+                {/* TV Bezel */}
+                <div className="bg-gradient-to-b from-[#2a2a2e] to-[#1c1c1f] p-2">
+                  <div className="bg-[#0a0a0b] rounded-lg overflow-hidden">
+                    {/* Screen Content */}
+                    <div className="relative aspect-video">
+                      {/* Background Video Placeholder */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#1e1e5f] via-[#2d1e5f] to-[#1c1c1f]">
+                        {/* Workout clip placeholder */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="text-center">
+                            <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-[#6366f1]/20 flex items-center justify-center">
+                              <svg className="w-8 h-8 text-[#6366f1]" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"/>
+                              </svg>
+                            </div>
+                            <p className="text-[#6b6b70] text-sm">Workout content playing</p>
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Main content */}
-                  <div className="flex-1 p-6 overflow-hidden">
-                    <div className="flex items-center justify-between mb-6">
-                      <h2 className="font-[family-name:var(--font-display)] text-2xl font-bold">Good evening</h2>
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#ff3366] to-[#ff6b35]" />
-                      </div>
-                    </div>
-                    
-                    {/* Quick picks grid */}
-                    <div className="grid grid-cols-2 gap-3 mb-8">
-                      {[
-                        { name: "Lofi Beats 24/7", color: "from-[#1e3a5f] to-[#0d1b2a]" },
-                        { name: "Epic Trailers", color: "from-[#5f1e3a] to-[#2a0d1b]" },
-                        { name: "Morning Coffee", color: "from-[#3a5f1e] to-[#1b2a0d]" },
-                        { name: "Focus Mode", color: "from-[#5f3a1e] to-[#2a1b0d]" },
-                      ].map((item, i) => (
-                        <div key={i} className={`flex items-center gap-4 bg-gradient-to-r ${item.color} rounded-lg overflow-hidden hover:bg-opacity-80 transition-all cursor-pointer group`}>
-                          <div className="w-16 h-16 bg-black/30 flex items-center justify-center">
-                            <svg className="w-6 h-6 text-white/80" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M8 5v14l11-7z"/>
-                            </svg>
-                          </div>
-                          <span className="font-semibold text-sm">{item.name}</span>
                         </div>
-                      ))}
-                    </div>
-                    
-                    {/* Trending section */}
-                    <h3 className="font-[family-name:var(--font-display)] text-xl font-bold mb-4">Trending Channels</h3>
-                    <div className="grid grid-cols-4 gap-4">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="group cursor-pointer">
-                          <div className="aspect-square rounded-lg bg-gradient-to-br from-[#2a2a2e] to-[#1c1c1f] mb-3 overflow-hidden relative">
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#ff3366]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                              <div className="w-12 h-12 rounded-full bg-[#ff3366] flex items-center justify-center shadow-lg">
-                                <svg className="w-5 h-5 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                  <path d="M8 5v14l11-7z"/>
-                                </svg>
-                              </div>
+                      </div>
+                      
+                      {/* Overlay UI */}
+                      <div className="absolute inset-0 p-6 flex flex-col justify-between">
+                        {/* Top bar */}
+                        <div className="flex items-start justify-between">
+                          {/* Logo */}
+                          <div className="flex items-center gap-3 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-lg">
+                            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center font-bold text-white">
+                              CF
+                            </div>
+                            <div>
+                              <div className="font-semibold text-white">CrossFit Downtown</div>
+                              <div className="text-xs text-[#a1a1a6]">Est. 2019</div>
                             </div>
                           </div>
-                          <div className="text-sm font-medium truncate">Channel Name</div>
-                          <div className="text-xs text-[#6b6b70]">12.5K followers</div>
+                          
+                          {/* Time */}
+                          <div className="bg-black/50 backdrop-blur-sm px-4 py-2 rounded-lg text-right">
+                            <div className="text-2xl font-bold text-white">9:45 AM</div>
+                            <div className="text-xs text-[#a1a1a6]">Thursday, Jan 30</div>
+                          </div>
                         </div>
-                      ))}
+                        
+                        {/* Bottom bar */}
+                        <div className="flex gap-4">
+                          {/* Next class */}
+                          <div className="flex-1 bg-black/50 backdrop-blur-sm p-4 rounded-lg">
+                            <div className="text-xs text-[#a1a1a6] mb-1">NEXT CLASS</div>
+                            <div className="font-semibold text-white">HIIT Strength</div>
+                            <div className="text-sm text-[#6366f1]">Starts in 15 min</div>
+                          </div>
+                          
+                          {/* Member PR */}
+                          <div className="flex-1 bg-black/50 backdrop-blur-sm p-4 rounded-lg">
+                            <div className="text-xs text-[#a1a1a6] mb-1">🎉 NEW PR</div>
+                            <div className="font-semibold text-white">Sarah M.</div>
+                            <div className="text-sm text-[#22c55e]">Deadlift: 225 lbs</div>
+                          </div>
+                          
+                          {/* Trainer */}
+                          <div className="flex-1 bg-black/50 backdrop-blur-sm p-4 rounded-lg">
+                            <div className="text-xs text-[#a1a1a6] mb-1">TODAY&apos;S COACH</div>
+                            <div className="font-semibold text-white">Mike Johnson</div>
+                            <div className="text-sm text-[#a1a1a6]">CF-L2 Trainer</div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
                 
-                {/* Player bar */}
-                <div className="h-20 bg-[#1c1c1f] border-t border-[#2a2a2e] flex items-center px-4 gap-4">
-                  <div className="flex items-center gap-3 w-64">
-                    <div className="w-14 h-14 rounded bg-gradient-to-br from-[#ff3366] to-[#ff6b35]" />
-                    <div>
-                      <div className="text-sm font-medium">Currently Playing</div>
-                      <div className="text-xs text-[#6b6b70]">Channel Name</div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex-1 flex flex-col items-center">
-                    <div className="flex items-center gap-4 mb-2">
-                      <button className="text-[#a1a1a6] hover:text-white transition-colors">
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
-                        </svg>
-                      </button>
-                      <button className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:scale-105 transition-transform">
-                        <svg className="w-5 h-5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z"/>
-                        </svg>
-                      </button>
-                      <button className="text-[#a1a1a6] hover:text-white transition-colors">
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
-                        </svg>
-                      </button>
-                    </div>
-                    <div className="w-full max-w-md flex items-center gap-2">
-                      <span className="text-xs text-[#6b6b70]">1:24</span>
-                      <div className="flex-1 h-1 bg-[#3a3a3f] rounded-full overflow-hidden">
-                        <div className="w-1/3 h-full bg-white rounded-full" />
-                      </div>
-                      <span className="text-xs text-[#6b6b70]">4:32</span>
-                    </div>
-                  </div>
-                  
-                  <div className="w-64 flex items-center justify-end gap-3">
-                    <button className="text-[#a1a1a6] hover:text-white transition-colors p-2 rounded-lg hover:bg-[#252528]" title="Loop">
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
-                      </svg>
-                    </button>
-                    <div className="flex items-center gap-2">
-                      <svg className="w-5 h-5 text-[#a1a1a6]" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-                      </svg>
-                      <div className="w-24 h-1 bg-[#3a3a3f] rounded-full overflow-hidden">
-                        <div className="w-2/3 h-full bg-white rounded-full" />
-                      </div>
-                    </div>
-                  </div>
+                {/* TV Stand indicator */}
+                <div className="h-8 bg-[#1c1c1f] flex items-center justify-center">
+                  <div className="w-24 h-1 bg-[#2a2a2e] rounded-full" />
                 </div>
               </div>
             </div>
@@ -266,52 +238,84 @@ export default function Home() {
         </div>
       </main>
 
+      {/* Problem Section */}
+      <section className="py-20 px-6 border-t border-[#1c1c1f]">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl font-bold mb-6">
+            Your gym TVs are wasting potential
+          </h2>
+          <p className="text-lg text-[#a1a1a6] mb-12">
+            Right now, most studios show cable news, random YouTube, or nothing at all. 
+            That&apos;s prime real estate going unused — screens your members look at every day.
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-6 text-left">
+            <div className="p-6 rounded-xl bg-[#141416] border border-[#2a2a2e]">
+              <div className="text-3xl mb-3">📺</div>
+              <h3 className="font-semibold mb-2 text-white">Off-Brand Content</h3>
+              <p className="text-sm text-[#a1a1a6]">CNN and ESPN don&apos;t represent your studio&apos;s energy and values.</p>
+            </div>
+            <div className="p-6 rounded-xl bg-[#141416] border border-[#2a2a2e]">
+              <div className="text-3xl mb-3">⏰</div>
+              <h3 className="font-semibold mb-2 text-white">No Time to Manage</h3>
+              <p className="text-sm text-[#a1a1a6]">You&apos;re running a gym, not a TV station. Who has time to update content?</p>
+            </div>
+            <div className="p-6 rounded-xl bg-[#141416] border border-[#2a2a2e]">
+              <div className="text-3xl mb-3">💸</div>
+              <h3 className="font-semibold mb-2 text-white">Expensive Alternatives</h3>
+              <p className="text-sm text-[#a1a1a6]">Enterprise digital signage costs $200-500/month. Way too much.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section id="features" className="py-32 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
-            <h2 className="font-[family-name:var(--font-display)] text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-              Everything you need to
-              <br />
-              <span className="text-gradient">create & share</span>
+            <h2 className="font-[family-name:var(--font-display)] text-4xl sm:text-5xl font-bold mb-6">
+              Everything your gym TV needs
             </h2>
             <p className="text-lg text-[#a1a1a6] max-w-2xl mx-auto">
-              Whether you&apos;re a creator building an audience or a business running displays, Loop Easy has you covered.
+              LoopEasy runs itself. Set it up once, and your screens stay fresh, branded, and engaging — automatically.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                icon: (
-                  <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8 12.5v-9l6 4.5-6 4.5z"/>
-                  </svg>
-                ),
-                title: "Curated Channels",
-                description: "Build video channels that play in your exact sequence. No algorithms, no surprises — just your vision."
+                icon: icons.workout,
+                title: "Curated Workout Content",
+                description: "AI-curated clips from top fitness creators. Kettlebells, HIIT, yoga, mobility — matching your studio's vibe."
               },
               {
-                icon: (
-                  <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
-                  </svg>
-                ),
-                title: "Infinite Loop",
-                description: "Set it and forget it. Your channels play on repeat 24/7 — perfect for lobbies, waiting rooms, or background vibes."
+                icon: icons.schedule,
+                title: "Auto-Updating Schedules",
+                description: "Connects to Mindbody, WellnessLiving, and more. Your class schedule updates automatically."
               },
               {
-                icon: (
-                  <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-                  </svg>
-                ),
-                title: "Grow Your Audience",
-                description: "Get followers, build subscribers, and monetize your channels. Turn your curation skills into a community."
+                icon: icons.trophy,
+                title: "Member PR Boards",
+                description: "Celebrate member wins. \"Sarah hit a 225lb deadlift!\" builds community and motivation."
+              },
+              {
+                icon: icons.brand,
+                title: "Your Branding",
+                description: "Upload your logo, pick your colors. Every screen looks professionally designed."
+              },
+              {
+                icon: icons.tv,
+                title: "Works on Any TV",
+                description: "Smart TV, Fire Stick, Chromecast, Apple TV — if it has a screen, LoopEasy runs on it."
+              },
+              {
+                icon: icons.zap,
+                title: "5-Minute Setup",
+                description: "No IT degree required. Sign up, connect your TV, choose your content. Done."
               }
             ].map((feature, i) => (
-              <div key={i} className="group p-8 rounded-2xl bg-[#141416] border border-[#2a2a2e] hover:border-[#ff3366]/50 transition-all hover:-translate-y-1">
-                <div className="w-14 h-14 rounded-xl bg-[#ff3366]/10 flex items-center justify-center text-[#ff3366] mb-6 group-hover:bg-[#ff3366] group-hover:text-white transition-all">
+              <div key={i} className="group p-8 rounded-2xl bg-[#141416] border border-[#2a2a2e] hover:border-[#6366f1]/50 transition-all hover:-translate-y-1">
+                <div className="w-14 h-14 rounded-xl bg-[#6366f1]/10 flex items-center justify-center text-[#6366f1] mb-6 group-hover:bg-[#6366f1] group-hover:text-white transition-all">
                   {feature.icon}
                 </div>
                 <h3 className="font-[family-name:var(--font-display)] text-xl font-bold mb-3">{feature.title}</h3>
@@ -322,21 +326,287 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Social Proof */}
+      <section className="py-20 px-6 border-t border-[#1c1c1f]">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold mb-4">
+              What studio owners are saying
+            </h2>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="p-6 rounded-xl bg-[#141416] border border-[#2a2a2e]">
+              <p className="text-[#a1a1a6] mb-4 italic">
+                &quot;Our members actually stop and watch the TVs now. The workout clips get people pumped, and the PR board has become a thing — people celebrate each other&apos;s wins.&quot;
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-bold text-sm">MK</div>
+                <div>
+                  <div className="font-semibold text-white">Mike K.</div>
+                  <div className="text-sm text-[#6b6b70]">CrossFit Box Owner, Austin TX</div>
+                </div>
+              </div>
+            </div>
+            <div className="p-6 rounded-xl bg-[#141416] border border-[#2a2a2e]">
+              <p className="text-[#a1a1a6] mb-4 italic">
+                &quot;I was paying $300/month for a digital signage solution that I had to manually update. LoopEasy is $49 and it runs itself. No brainer.&quot;
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm">JL</div>
+                <div>
+                  <div className="font-semibold text-white">Jennifer L.</div>
+                  <div className="text-sm text-[#6b6b70]">Yoga Studio Owner, Denver CO</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="py-32 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="font-[family-name:var(--font-display)] text-4xl sm:text-5xl font-bold mb-6">
+              Simple, transparent pricing
+            </h2>
+            <p className="text-lg text-[#a1a1a6]">
+              Start free. Upgrade when you&apos;re ready. Cancel anytime.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Starter */}
+            <div className="p-8 rounded-2xl bg-[#141416] border border-[#2a2a2e]">
+              <div className="mb-6">
+                <h3 className="font-[family-name:var(--font-display)] text-xl font-bold mb-2">Starter</h3>
+                <p className="text-sm text-[#a1a1a6]">Perfect for single-location studios</p>
+              </div>
+              <div className="mb-6">
+                <span className="text-4xl font-bold">$29</span>
+                <span className="text-[#a1a1a6]">/month</span>
+              </div>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-center gap-3 text-sm">
+                  <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-[#a1a1a6]">1 screen</span>
+                </li>
+                <li className="flex items-center gap-3 text-sm">
+                  <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-[#a1a1a6]">Curated workout content</span>
+                </li>
+                <li className="flex items-center gap-3 text-sm">
+                  <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-[#a1a1a6]">Basic branding (logo)</span>
+                </li>
+                <li className="flex items-center gap-3 text-sm">
+                  <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-[#a1a1a6]">Email support</span>
+                </li>
+              </ul>
+              <button className="w-full py-3 rounded-full border border-[#2a2a2e] hover:border-[#6366f1] text-white font-medium transition-all">
+                Start Free Trial
+              </button>
+            </div>
+
+            {/* Pro - Highlighted */}
+            <div className="p-8 rounded-2xl bg-gradient-to-b from-[#6366f1]/20 to-[#141416] border-2 border-[#6366f1] relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#6366f1] rounded-full text-xs font-semibold">
+                MOST POPULAR
+              </div>
+              <div className="mb-6">
+                <h3 className="font-[family-name:var(--font-display)] text-xl font-bold mb-2">Pro</h3>
+                <p className="text-sm text-[#a1a1a6]">For growing studios</p>
+              </div>
+              <div className="mb-6">
+                <span className="text-4xl font-bold">$49</span>
+                <span className="text-[#a1a1a6]">/month</span>
+              </div>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-center gap-3 text-sm">
+                  <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-[#a1a1a6]"><strong className="text-white">3 screens</strong></span>
+                </li>
+                <li className="flex items-center gap-3 text-sm">
+                  <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-[#a1a1a6]">Everything in Starter</span>
+                </li>
+                <li className="flex items-center gap-3 text-sm">
+                  <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-[#a1a1a6]"><strong className="text-white">Custom branding</strong></span>
+                </li>
+                <li className="flex items-center gap-3 text-sm">
+                  <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-[#a1a1a6]"><strong className="text-white">Class schedules</strong> (Mindbody, etc.)</span>
+                </li>
+                <li className="flex items-center gap-3 text-sm">
+                  <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-[#a1a1a6]"><strong className="text-white">Member shoutouts</strong></span>
+                </li>
+                <li className="flex items-center gap-3 text-sm">
+                  <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-[#a1a1a6]">Priority support</span>
+                </li>
+              </ul>
+              <button className="w-full py-3 rounded-full bg-[#6366f1] hover:bg-[#818cf8] text-white font-semibold transition-all hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]">
+                Start Free Trial
+              </button>
+            </div>
+
+            {/* Studio */}
+            <div className="p-8 rounded-2xl bg-[#141416] border border-[#2a2a2e]">
+              <div className="mb-6">
+                <h3 className="font-[family-name:var(--font-display)] text-xl font-bold mb-2">Studio</h3>
+                <p className="text-sm text-[#a1a1a6]">For multi-location or large studios</p>
+              </div>
+              <div className="mb-6">
+                <span className="text-4xl font-bold">$99</span>
+                <span className="text-[#a1a1a6]">/month</span>
+              </div>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-center gap-3 text-sm">
+                  <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-[#a1a1a6]"><strong className="text-white">Unlimited screens</strong></span>
+                </li>
+                <li className="flex items-center gap-3 text-sm">
+                  <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-[#a1a1a6]">Everything in Pro</span>
+                </li>
+                <li className="flex items-center gap-3 text-sm">
+                  <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-[#a1a1a6]"><strong className="text-white">AI content curation</strong></span>
+                </li>
+                <li className="flex items-center gap-3 text-sm">
+                  <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-[#a1a1a6]"><strong className="text-white">Analytics dashboard</strong></span>
+                </li>
+                <li className="flex items-center gap-3 text-sm">
+                  <svg className="w-5 h-5 text-[#22c55e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="text-[#a1a1a6]">Dedicated account manager</span>
+                </li>
+              </ul>
+              <button className="w-full py-3 rounded-full border border-[#2a2a2e] hover:border-[#6366f1] text-white font-medium transition-all">
+                Start Free Trial
+              </button>
+            </div>
+          </div>
+
+          {/* Annual discount note */}
+          <p className="text-center text-sm text-[#6b6b70] mt-8">
+            💡 Save 2 months with annual billing
+          </p>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="py-20 px-6 border-t border-[#1c1c1f]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="font-[family-name:var(--font-display)] text-3xl font-bold mb-12 text-center">
+            Frequently asked questions
+          </h2>
+          
+          <div className="space-y-6">
+            {[
+              {
+                q: "What devices does LoopEasy work on?",
+                a: "Any smart TV, Amazon Fire Stick, Chromecast, Apple TV, Roku, or any device with a web browser. If it can display a webpage, it can run LoopEasy."
+              },
+              {
+                q: "How long does setup take?",
+                a: "About 5 minutes. Sign up, upload your logo, choose your content categories, and paste the URL into your TV browser. That's it."
+              },
+              {
+                q: "Where does the workout content come from?",
+                a: "We curate clips from top fitness creators on Instagram, TikTok, and YouTube. All content is properly embedded and licensed. You can also upload your own videos."
+              },
+              {
+                q: "Does it integrate with my booking software?",
+                a: "Yes! We integrate with Mindbody, WellnessLiving, TeamUp, Pike13, and more. Your class schedule updates automatically."
+              },
+              {
+                q: "Can I cancel anytime?",
+                a: "Absolutely. No contracts, no commitments. Cancel with one click from your dashboard."
+              },
+              {
+                q: "What if I need help setting up?",
+                a: "We offer free onboarding calls for all new customers. Our support team will walk you through everything and make sure your screens look perfect."
+              }
+            ].map((faq, i) => (
+              <div key={i} className="p-6 rounded-xl bg-[#141416] border border-[#2a2a2e]">
+                <h3 className="font-semibold text-white mb-2">{faq.q}</h3>
+                <p className="text-[#a1a1a6] text-sm">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
       <section className="py-32 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#ff3366]/20 via-[#ff6b35]/20 to-[#f7931a]/20 rounded-3xl blur-3xl" />
+            <div className={`absolute inset-0 bg-gradient-to-r ${theme.gradient} opacity-20 rounded-3xl blur-3xl`} />
             <div className="relative bg-[#141416] border border-[#2a2a2e] rounded-3xl p-12 md:p-16">
               <h2 className="font-[family-name:var(--font-display)] text-4xl sm:text-5xl font-bold mb-6">
-                Ready to start looping?
+                Ready to upgrade your gym TVs?
               </h2>
               <p className="text-lg text-[#a1a1a6] mb-8 max-w-lg mx-auto">
-                Join thousands of creators and businesses already using Loop Easy. It&apos;s free to get started.
+                Join hundreds of studios already using LoopEasy. Start your free trial — no credit card required.
               </p>
-              <button className="px-10 py-4 bg-[#ff3366] hover:bg-[#ff4d7a] text-white font-semibold rounded-full transition-all hover:shadow-[0_0_50px_rgba(255,51,102,0.5)] hover:scale-105 text-lg">
-                Create Your First Channel
-              </button>
+              
+              {!submitted ? (
+                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                  <input 
+                    type="email" 
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="flex-1 px-5 py-4 rounded-full bg-[#1c1c1f] border border-[#2a2a2e] text-white placeholder-[#6b6b70] focus:outline-none focus:border-[#6366f1]"
+                  />
+                  <button 
+                    type="submit"
+                    className="px-8 py-4 bg-[#6366f1] hover:bg-[#818cf8] text-white font-semibold rounded-full transition-all hover:shadow-[0_0_40px_rgba(99,102,241,0.5)]"
+                  >
+                    Get Started
+                  </button>
+                </form>
+              ) : (
+                <div className="text-[#22c55e] font-medium">
+                  ✅ You&apos;re on the list! We&apos;ll be in touch soon.
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -346,24 +616,20 @@ export default function Home() {
       <footer className="border-t border-[#2a2a2e] py-12 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#ff3366] to-[#ff6b35] flex items-center justify-center">
-              <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
-            </div>
+            <LoopLogo size="small" />
             <span className="font-[family-name:var(--font-display)] text-lg font-bold">
-              Loop<span className="text-[#ff3366]">Easy</span>
+              Loop<span className="text-[#6366f1]">Easy</span>
             </span>
           </div>
           
           <div className="flex items-center gap-8 text-sm text-[#6b6b70]">
             <a href="#" className="hover:text-white transition-colors">Terms</a>
             <a href="#" className="hover:text-white transition-colors">Privacy</a>
-            <a href="#" className="hover:text-white transition-colors">Contact</a>
+            <a href="mailto:hello@loopeasy.com" className="hover:text-white transition-colors">Contact</a>
           </div>
           
           <div className="text-sm text-[#6b6b70]">
-            © 2026 Loop Easy. All rights reserved.
+            © 2026 LoopEasy. All rights reserved.
           </div>
         </div>
       </footer>
