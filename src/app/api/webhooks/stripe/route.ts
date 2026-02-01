@@ -1,14 +1,16 @@
 import { stripe, LAUNCH_MODE } from '@/lib/stripe'
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
 import type Stripe from 'stripe'
 
-// Use service role for webhook operations
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+// Create supabase admin client lazily (not at module load time for build)
+function getSupabaseAdmin(): SupabaseClient {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+}
 
 export async function POST(req: Request) {
   // Skip webhooks if in launch mode
@@ -81,6 +83,8 @@ async function handleCheckoutComplete(session: Stripe.Checkout.Session) {
   const userId = session.metadata?.user_id
   if (!userId) return
 
+  const supabaseAdmin = getSupabaseAdmin()
+
   // Update user's stripe customer ID
   await supabaseAdmin
     .from('profiles')
@@ -90,6 +94,7 @@ async function handleCheckoutComplete(session: Stripe.Checkout.Session) {
 
 async function handleSubscriptionChange(subscription: any) {
   const customerId = subscription.customer as string
+  const supabaseAdmin = getSupabaseAdmin()
   
   // Find user by stripe customer ID
   const { data: profile } = await supabaseAdmin
@@ -132,6 +137,7 @@ async function handleSubscriptionChange(subscription: any) {
 
 async function handleSubscriptionCanceled(subscription: any) {
   const customerId = subscription.customer as string
+  const supabaseAdmin = getSupabaseAdmin()
   
   const { data: profile } = await supabaseAdmin
     .from('profiles')

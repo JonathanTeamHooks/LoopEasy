@@ -14,14 +14,14 @@ export default function Home() {
   const videoRef = useRef<HTMLDivElement>(null);
 
   const moods = [
-    { emoji: "☀️", label: "Morning devotional", category: "Music", color: "from-amber-400 to-orange-500" },
+    { emoji: "☀️", label: "Morning devotional", category: "Devotional", color: "from-amber-400 to-orange-500" },
     { emoji: "💪", label: "Kettlebell workout", category: "Fitness", color: "from-orange-500 to-red-500" },
-    { emoji: "🔥", label: "Get me motivated", category: "Entertainment", color: "from-red-500 to-pink-500" },
-    { emoji: "💻", label: "Help me code React", category: "Technology", color: "from-cyan-500 to-blue-500" },
-    { emoji: "🎵", label: "Chill vibes while I work", category: "Music", color: "from-violet-500 to-purple-500" },
-    { emoji: "😂", label: "Funny ski fails", category: "Entertainment", color: "from-yellow-500 to-orange-500" },
+    { emoji: "🔥", label: "Motivation boost", category: "Entertainment", color: "from-red-500 to-pink-500" },
+    { emoji: "💻", label: "Coding tutorials", category: "Technology", color: "from-cyan-500 to-blue-500" },
+    { emoji: "🎵", label: "Lo-fi focus music", category: "Music", color: "from-violet-500 to-purple-500" },
+    { emoji: "😂", label: "Funny videos", category: "Entertainment", color: "from-yellow-500 to-orange-500" },
     { emoji: "🎬", label: "Watch a movie", category: "Entertainment", color: "from-rose-500 to-red-500" },
-    { emoji: "🧘", label: "Wind down for bed", category: "Fitness", color: "from-indigo-500 to-purple-500" },
+    { emoji: "🧘", label: "Meditation & sleep", category: "Wellness", color: "from-indigo-500 to-purple-500" },
   ];
 
   useEffect(() => {

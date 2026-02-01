@@ -1,14 +1,16 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
 import crypto from 'crypto'
 import { getThumbnailUrl } from '@/lib/mux'
 
-// Use service role for webhook operations
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+// Create supabase admin client lazily (not at module load time for build)
+function getSupabaseAdmin(): SupabaseClient {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+}
 
 // Verify Mux webhook signature
 function verifyWebhookSignature(body: string, signature: string): boolean {
@@ -81,6 +83,8 @@ async function handleUploadComplete(data: {
   // passthrough contains our video ID
   if (!passthrough) return
 
+  const supabaseAdmin = getSupabaseAdmin()
+  
   // Update video with Mux asset ID
   await supabaseAdmin
     .from('videos')
@@ -101,6 +105,8 @@ async function handleAssetReady(data: {
   
   const playbackId = playback_ids?.[0]?.id
   if (!playbackId) return
+
+  const supabaseAdmin = getSupabaseAdmin()
 
   // Find video by Mux asset ID and update
   const { data: video } = await supabaseAdmin
@@ -135,6 +141,8 @@ async function handleAssetError(data: {
   const { id: assetId, errors } = data
   
   console.error('Mux asset error:', errors)
+
+  const supabaseAdmin = getSupabaseAdmin()
 
   // Find video and mark as error
   await supabaseAdmin
