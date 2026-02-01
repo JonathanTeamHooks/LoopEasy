@@ -88,46 +88,29 @@ export default function VideoPlayer({
     );
   }
 
-  // MUX HLS stream
+  // MUX video - use MP4 for browser compatibility
   if (muxPlaybackId || embedType === "mux") {
     const playbackId = embedId || muxPlaybackId;
-    const streamUrl = `https://stream.mux.com/${playbackId}.m3u8`;
-    const posterUrl = `https://image.mux.com/${playbackId}/thumbnail.jpg?width=1920`;
+    // MUX provides MP4 renditions that work in all browsers
+    const mp4Url = `https://stream.mux.com/${playbackId}/high.mp4`;
+    const posterUrl = `https://image.mux.com/${playbackId}/thumbnail.jpg?width=1280&height=720&fit_mode=smartcrop`;
 
     return (
       <div className="relative w-full h-full bg-black group">
         <video
           ref={videoRef}
-          src={streamUrl}
           poster={posterUrl}
           className="absolute inset-0 w-full h-full object-contain"
           autoPlay={autoPlay}
           loop={loop}
           playsInline
-          muted={false}
+          muted
+          controls
           onEnded={onEnded}
-          onClick={() => setIsPlaying(!isPlaying)}
-        />
-        
-        {/* Play/Pause overlay */}
-        <div 
-          className={`absolute inset-0 flex items-center justify-center transition-opacity ${
-            isPlaying ? "opacity-0 group-hover:opacity-100" : "opacity-100"
-          }`}
-          onClick={() => setIsPlaying(!isPlaying)}
         >
-          <button className="w-20 h-20 rounded-full bg-black/50 backdrop-blur flex items-center justify-center">
-            {isPlaying ? (
-              <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
-              </svg>
-            ) : (
-              <svg className="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
-            )}
-          </button>
-        </div>
+          <source src={mp4Url} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
     );
   }
