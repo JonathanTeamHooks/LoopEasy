@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import type { Channel, Video } from "@/types/database";
 import type { User } from "@supabase/supabase-js";
+import { useToast } from "@/components/Toast";
 
 function formatDuration(seconds: number | null): string {
   if (!seconds) return "0:00";
@@ -30,6 +31,7 @@ export default function ChannelPage() {
   const [isFollowing, setIsFollowing] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const { showToast } = useToast();
 
   useEffect(() => {
     const supabase = createClient();
@@ -199,7 +201,14 @@ export default function ChannelPage() {
             
             {/* Follow Button */}
             <button
-              onClick={() => setIsFollowing(!isFollowing)}
+              onClick={() => {
+                setIsFollowing(!isFollowing);
+                if (!isFollowing) {
+                  showToast(`Following ${channel.name}! 🎉`, "success");
+                } else {
+                  showToast(`Unfollowed ${channel.name}`, "info");
+                }
+              }}
               className={`px-6 py-3 rounded-full font-medium transition-all ${
                 isFollowing
                   ? "bg-white/10 text-white hover:bg-white/20"

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Syne, DM_Sans, Caveat } from "next/font/google";
 import "./globals.css";
 import FeedbackWidget from "@/components/FeedbackWidget";
+import { ToastProvider } from "@/components/Toast";
 
 const syne = Syne({
   variable: "--font-display",
@@ -53,8 +54,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${syne.variable} ${dmSans.variable} ${caveat.variable} antialiased`}>
-        {children}
-        <FeedbackWidget />
+        <ToastProvider>
+          {children}
+          <FeedbackWidget />
+        </ToastProvider>
       </body>
     </html>
   );

@@ -248,8 +248,53 @@ export default function BrowsePage() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8">
+        {/* Trending Section - Only show on "All" */}
+        {activeCategory === "All" && !loading && channels.length > 0 && (
+          <section className="mb-10">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/20 text-red-400 text-sm font-medium">
+                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                Trending Now
+              </span>
+            </div>
+            <div className="relative">
+              <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+                {channels.slice(0, 3).map((channel, i) => (
+                  <Link 
+                    key={channel.id}
+                    href={`/channel/${channel.id}`}
+                    className="relative flex-shrink-0 w-80 group"
+                  >
+                    <div className="aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] relative">
+                      {channel.thumbnail_url && (
+                        <img src={channel.thumbnail_url} alt={channel.name} className="absolute inset-0 w-full h-full object-cover" />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      <div className="absolute top-3 left-3 px-2 py-1 rounded-lg bg-red-500 text-white text-xs font-bold flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                        #{i + 1} Trending
+                      </div>
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <h3 className="text-lg font-bold text-white mb-1">{channel.name}</h3>
+                        <p className="text-white/70 text-sm">{channel.follower_count.toLocaleString()} followers • {channel.total_views.toLocaleString()} views</p>
+                      </div>
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
+                        <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                          <svg className="w-8 h-8 text-[#6366f1] ml-1" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         <h1 className="text-2xl font-bold mb-6">
-          {activeCategory === "All" ? "Discover Channels" : activeCategory}
+          {activeCategory === "All" ? "All Channels" : activeCategory}
         </h1>
         
         {loading ? (
