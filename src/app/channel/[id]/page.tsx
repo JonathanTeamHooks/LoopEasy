@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import type { Channel, Video } from "@/types/database";
+import type { User } from "@supabase/supabase-js";
 
 function formatDuration(seconds: number | null): string {
   if (!seconds) return "0:00";
@@ -27,6 +28,19 @@ export default function ChannelPage() {
   const [videos, setVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
     async function fetchChannel() {
@@ -105,9 +119,36 @@ export default function ChannelPage() {
               <Link href="/browse" className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-sm font-medium">
                 Browse
               </Link>
-              <Link href="/auth" className="px-4 py-2 rounded-full bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:opacity-90 transition-opacity text-sm font-medium">
-                Sign In
-              </Link>
+              {user ? (
+                <div className="relative">
+                  <button onClick={() => setShowUserMenu(!showUserMenu)} className="flex items-center gap-2">
+                    {user.user_metadata?.avatar_url ? (
+                      <img src={user.user_metadata.avatar_url} alt="Profile" className="w-9 h-9 rounded-full border-2 border-[#6366f1]" />
+                    ) : (
+                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#6366f1] to-[#a855f7] flex items-center justify-center font-medium">
+                        {(user.user_metadata?.full_name || user.email || "U").charAt(0).toUpperCase()}
+                      </div>
+                    )}
+                  </button>
+                  {showUserMenu && (
+                    <>
+                      <div className="fixed inset-0 z-40" onClick={() => setShowUserMenu(false)} />
+                      <div className="absolute right-0 mt-2 w-48 rounded-xl bg-gray-800 border border-white/10 shadow-xl z-50 py-2">
+                        <Link href="/dashboard" className="block px-4 py-2 text-sm hover:bg-white/10">Dashboard</Link>
+                        <Link href="/profile" className="block px-4 py-2 text-sm hover:bg-white/10">Profile</Link>
+                        <button 
+                          onClick={async () => { const supabase = createClient(); await supabase.auth.signOut(); window.location.href = "/"; }}
+                          className="block w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-white/10"
+                        >Sign Out</button>
+                      </div>
+                    </>
+                  )}
+                </div>
+              ) : (
+                <Link href="/auth" className="px-4 py-2 rounded-full bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:opacity-90 transition-opacity text-sm font-medium">
+                  Sign In
+                </Link>
+              )}
             </div>
           </div>
         </div>
