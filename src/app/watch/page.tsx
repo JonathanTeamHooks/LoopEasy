@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import type { Video, Channel } from "@/types/database";
+import VideoPlayer from "@/components/VideoPlayer";
 
 function formatViews(count: number): string {
   if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M`;
@@ -127,21 +128,16 @@ function WatchContent() {
       {/* Video Section */}
       <div className={`flex-1 relative ${showChat ? "" : "w-full"}`}>
         {/* Video Player */}
-        <div className="absolute inset-0" onClick={togglePlay}>
-          {video.video_url ? (
-            <video
-              ref={videoRef}
-              src={video.video_url}
-              autoPlay
-              loop
-              playsInline
-              className="w-full h-full object-contain bg-black"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
-              <p className="text-gray-400">Video not available</p>
-            </div>
-          )}
+        <div className="absolute inset-0">
+          <VideoPlayer
+            embedType={video.embed_type}
+            embedId={video.embed_id}
+            muxPlaybackId={video.mux_playback_id}
+            videoUrl={video.video_url}
+            title={video.title}
+            autoPlay={true}
+            loop={true}
+          />
         </div>
         
         {/* Controls Overlay */}

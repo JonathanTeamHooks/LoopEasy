@@ -129,6 +129,8 @@ export type Database = {
           video_url: string | null
           mux_asset_id: string | null
           mux_playback_id: string | null
+          embed_type: string | null  // 'youtube', 'vimeo', 'mux', 'direct'
+          embed_id: string | null     // External platform video ID
           duration: number | null
           status: string
           view_count: number
@@ -147,6 +149,8 @@ export type Database = {
           video_url?: string | null
           mux_asset_id?: string | null
           mux_playback_id?: string | null
+          embed_type?: string | null
+          embed_id?: string | null
           duration?: number | null
           status?: string
           view_count?: number
@@ -165,6 +169,8 @@ export type Database = {
           video_url?: string | null
           mux_asset_id?: string | null
           mux_playback_id?: string | null
+          embed_type?: string | null
+          embed_id?: string | null
           duration?: number | null
           status?: string
           view_count?: number

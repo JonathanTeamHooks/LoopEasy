@@ -34,3 +34,12 @@ CREATE INDEX IF NOT EXISTS idx_waitlist_email ON public.waitlist(email);
 CREATE INDEX IF NOT EXISTS idx_waitlist_created ON public.waitlist(created_at DESC);
 ALTER TABLE public.waitlist ENABLE ROW LEVEL SECURITY;
 COMMENT ON TABLE public.waitlist IS 'Email signups from homepage';
+
+-- ======================
+-- VIDEO EMBED SUPPORT
+-- ======================
+-- Add columns for external video embeds (YouTube, Vimeo, etc.)
+ALTER TABLE public.videos ADD COLUMN IF NOT EXISTS embed_type text;
+ALTER TABLE public.videos ADD COLUMN IF NOT EXISTS embed_id text;
+COMMENT ON COLUMN public.videos.embed_type IS 'Video platform: youtube, vimeo, dailymotion, mux, direct';
+COMMENT ON COLUMN public.videos.embed_id IS 'Video ID on external platform';
