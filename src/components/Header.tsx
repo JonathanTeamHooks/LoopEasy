@@ -55,15 +55,24 @@ export default function Header({ variant = "default", showSearch = false }: Head
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 ${bgClass}`}>
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1] via-[#8b5cf6] to-[#a855f7] flex items-center justify-center shadow-lg shadow-[#6366f1]/25">
-            <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/>
-            </svg>
-          </div>
-          <span className="text-xl font-bold text-white">Loop<span className="bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#ec4899] bg-clip-text text-transparent">Easy</span></span>
-        </Link>
+        {/* Logo + Nav */}
+        <div className="flex items-center gap-6">
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1] via-[#8b5cf6] to-[#a855f7] flex items-center justify-center shadow-lg shadow-[#6366f1]/25">
+              <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/>
+              </svg>
+            </div>
+            <span className="text-xl font-bold text-white">Loop<span className="bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#ec4899] bg-clip-text text-transparent">Easy</span></span>
+          </Link>
+          
+          {/* Main Nav */}
+          <nav className="hidden sm:flex items-center gap-1">
+            <Link href="/browse" className="px-4 py-2 text-sm text-[#a1a1a6] hover:text-white hover:bg-white/5 rounded-lg transition-all">
+              Browse
+            </Link>
+          </nav>
+        </div>
 
         {/* Search (optional) */}
         {showSearch && (

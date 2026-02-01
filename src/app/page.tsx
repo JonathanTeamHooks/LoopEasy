@@ -230,12 +230,12 @@ export default function Home() {
                       </div>
 
                       <div className="flex gap-3">
-                        <button className="flex-1 py-3 bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-white font-semibold rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                        <Link href="/browse" className="flex-1 py-3 bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-white font-semibold rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2">
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M8 5v14l11-7z"/>
                           </svg>
                           Start Watching
-                        </button>
+                        </Link>
                         <button 
                           onClick={() => { setAiState("idle"); setSelectedMood(null); }}
                           className="px-4 py-3 bg-[#1c1c1f] text-white rounded-xl hover:bg-[#2a2a2e] transition-all"
@@ -455,12 +455,12 @@ export default function Home() {
                   ))}
                 </div>
 
-                <button className="mt-6 w-full py-3 bg-[#1c1c1f] border border-[#2a2a2e] text-white font-medium rounded-xl flex items-center justify-center gap-2 hover:border-[#6366f1] transition-all">
+                <Link href="/browse" className="mt-6 w-full py-3 bg-[#1c1c1f] border border-[#2a2a2e] text-white font-medium rounded-xl flex items-center justify-center gap-2 hover:border-[#6366f1] transition-all">
                   Discover More Curators
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                </button>
+                </Link>
               </div>
             </div>
           </div>
