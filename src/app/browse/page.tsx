@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import type { Channel, Video } from "@/types/database";
 import type { User } from "@supabase/supabase-js";
@@ -77,12 +78,26 @@ const ChannelCard = ({ channel }: { channel: Channel }) => {
 };
 
 export default function BrowsePage() {
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  const searchParam = searchParams.get("search");
+  
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [channels, setChannels] = useState<Channel[]>([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
   const [showUserMenu, setShowUserMenu] = useState(false);
+
+  // Set category and search from URL params on mount
+  useEffect(() => {
+    if (categoryParam && categories.includes(categoryParam)) {
+      setActiveCategory(categoryParam);
+    }
+    if (searchParam) {
+      setSearchQuery(searchParam);
+    }
+  }, [categoryParam, searchParam]);
 
   useEffect(() => {
     const supabase = createClient();

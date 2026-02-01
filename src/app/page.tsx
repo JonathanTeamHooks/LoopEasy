@@ -11,26 +11,18 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [aiPrompt, setAiPrompt] = useState("");
-  const [aiState, setAiState] = useState<"idle" | "thinking" | "result">("idle");
-  const [selectedMood, setSelectedMood] = useState<number | null>(null);
   const videoRef = useRef<HTMLDivElement>(null);
 
   const moods = [
-    { emoji: "☀️", label: "Morning devotional", result: "Your Morning Ritual", channels: ["Your saved devotionals", "New from creators you follow", "Recommended for you"], color: "from-amber-400 to-orange-500" },
-    { emoji: "💪", label: "Kettlebell workout", result: "Your Fitness Curators", channels: ["@KettlebellKing (subscribed)", "@FitWithMaria (subscribed)", "New: @IronCore"], color: "from-orange-500 to-red-500" },
-    { emoji: "🔥", label: "Get me motivated", result: "Motivation Boost", channels: ["Your saved speakers", "Trending motivation", "Quick 5-min fire-ups"], color: "from-red-500 to-pink-500" },
-    { emoji: "💻", label: "Help me code React", result: "Coding Tutorials", channels: ["React tutorials", "Live coding sessions", "Code-along projects"], color: "from-cyan-500 to-blue-500" },
-    { emoji: "🎵", label: "Chill vibes while I work", result: "Background Flow", channels: ["Lo-fi + visuals", "Coffee shop ambience", "Gentle movement scenes"], color: "from-violet-500 to-purple-500" },
-    { emoji: "😂", label: "Funny ski fails", result: "Comedy Clips", channels: ["Ski & snowboard fails", "Winter sports bloopers", "Viral snow moments"], color: "from-yellow-500 to-orange-500" },
-    { emoji: "🎬", label: "Watch a movie", result: "Long-Form Content", channels: ["Indie films", "Blockbuster hits", "Binge-worthy series"], color: "from-rose-500 to-red-500" },
-    { emoji: "🧘", label: "Wind down for bed", result: "Evening Routine", channels: ["Gentle yoga", "Guided meditation", "Sound machine"], color: "from-indigo-500 to-purple-500" },
+    { emoji: "☀️", label: "Morning devotional", category: "Music", color: "from-amber-400 to-orange-500" },
+    { emoji: "💪", label: "Kettlebell workout", category: "Fitness", color: "from-orange-500 to-red-500" },
+    { emoji: "🔥", label: "Get me motivated", category: "Entertainment", color: "from-red-500 to-pink-500" },
+    { emoji: "💻", label: "Help me code React", category: "Technology", color: "from-cyan-500 to-blue-500" },
+    { emoji: "🎵", label: "Chill vibes while I work", category: "Music", color: "from-violet-500 to-purple-500" },
+    { emoji: "😂", label: "Funny ski fails", category: "Entertainment", color: "from-yellow-500 to-orange-500" },
+    { emoji: "🎬", label: "Watch a movie", category: "Entertainment", color: "from-rose-500 to-red-500" },
+    { emoji: "🧘", label: "Wind down for bed", category: "Fitness", color: "from-indigo-500 to-purple-500" },
   ];
-
-  const handleMoodClick = (index: number) => {
-    setSelectedMood(index);
-    setAiState("thinking");
-    setTimeout(() => setAiState("result"), 1500);
-  };
 
   useEffect(() => {
     setIsLoaded(true);
@@ -106,9 +98,7 @@ export default function Home() {
               <div className="relative rounded-3xl bg-[#141416] border border-[#2a2a2e] overflow-hidden">
                 {/* Content Area */}
                 <div className="p-6">
-                  {aiState === "idle" && (
-                    <>
-                      <div className="text-xl font-semibold text-white mb-2 text-left">What are you in the mood for?</div>
+                  <div className="text-xl font-semibold text-white mb-2 text-left">What are you in the mood for?</div>
                       <p className="text-[#6b6b70] text-sm mb-4 text-left">Just say it — we'll pull from your curators or find new ones you'll love</p>
                       
                       {/* Text Input */}
@@ -118,11 +108,19 @@ export default function Home() {
                           placeholder="I want to..."
                           value={aiPrompt}
                           onChange={(e) => setAiPrompt(e.target.value)}
-                          onKeyDown={(e) => e.key === "Enter" && aiPrompt.trim() && handleMoodClick(2)}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" && aiPrompt.trim()) {
+                              window.location.href = `/browse?search=${encodeURIComponent(aiPrompt.trim())}`;
+                            }
+                          }}
                           className="w-full px-5 py-4 bg-[#1c1c1f] border border-[#2a2a2e] rounded-2xl text-white placeholder-[#6b6b70] focus:outline-none focus:border-[#6366f1] transition-all"
                         />
                         <button 
-                          onClick={() => aiPrompt.trim() && handleMoodClick(2)}
+                          onClick={() => {
+                            if (aiPrompt.trim()) {
+                              window.location.href = `/browse?search=${encodeURIComponent(aiPrompt.trim())}`;
+                            }
+                          }}
                           className="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-2 bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-white text-sm font-medium rounded-xl hover:shadow-lg transition-all"
                         >
                           Go ✨
@@ -133,14 +131,14 @@ export default function Home() {
                       <div className="text-xs text-[#6b6b70] mb-3 text-left">Or try a quick pick:</div>
                       <div className="flex flex-wrap gap-2">
                         {moods.map((mood, i) => (
-                          <button
+                          <Link
                             key={i}
-                            onClick={() => handleMoodClick(i)}
+                            href={`/browse?category=${encodeURIComponent(mood.category)}`}
                             className="group px-4 py-2 rounded-full bg-[#1c1c1f] border border-[#2a2a2e] hover:border-[#6366f1] transition-all hover:scale-[1.02] flex items-center gap-2"
                           >
                             <span>{mood.emoji}</span>
                             <span className="text-sm text-white group-hover:text-[#a855f7] transition-colors">{mood.label}</span>
-                          </button>
+                          </Link>
                         ))}
                       </div>
                       
@@ -169,82 +167,6 @@ export default function Home() {
                         </div>
                         <span>Powered by <span className="text-[#a855f7]">LoopEasy AI</span></span>
                       </div>
-                    </>
-                  )}
-
-                  {aiState === "thinking" && selectedMood !== null && (
-                    <div className="py-8 text-center">
-                      <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#6366f1]/20 text-[#a855f7] font-medium mb-4">
-                        <div className="w-5 h-5 border-2 border-[#a855f7] border-t-transparent rounded-full animate-spin" />
-                        AI is building your stream...
-                      </div>
-                      <div className="text-[#6b6b70]">Curating channels for "{moods[selectedMood].label}"</div>
-                    </div>
-                  )}
-
-                  {aiState === "result" && selectedMood !== null && (
-                    <div className="text-left">
-                      <div className="flex items-center gap-2 mb-4">
-                        <span className="text-[#22c55e]">✓</span>
-                        <span className="text-white font-semibold">Your stream is ready</span>
-                      </div>
-                      
-                      {/* Result Preview */}
-                      <div className={`p-4 rounded-2xl bg-gradient-to-br ${moods[selectedMood].color} mb-4`}>
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="text-3xl">{moods[selectedMood].emoji}</div>
-                          <div>
-                            <div className="font-bold text-white text-lg">{moods[selectedMood].result}</div>
-                            <div className="text-white/70 text-sm">Curated for you • Plays continuously</div>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                          <span className="text-white/90 text-sm">Ready to play</span>
-                        </div>
-                      </div>
-
-                      {/* Channel List with follow status */}
-                      <div className="space-y-2 mb-4">
-                        {moods[selectedMood].channels.map((channel, i) => (
-                          <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-[#1c1c1f]">
-                            <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${moods[selectedMood].color} flex items-center justify-center text-white font-bold`}>
-                              {i + 1}
-                            </div>
-                            <div className="flex-1">
-                              <div className="font-medium text-white">{channel}</div>
-                            </div>
-                            {channel.includes("subscribed") ? (
-                              <div className="text-xs text-[#22c55e] flex items-center gap-1">
-                                <span>✓</span> Following
-                              </div>
-                            ) : channel.includes("New:") || channel.includes("Recommended") || channel.includes("Trending") ? (
-                              <button className="text-xs px-2 py-1 rounded-full bg-[#6366f1]/20 text-[#a855f7] hover:bg-[#6366f1]/30 transition-all">
-                                + Follow
-                              </button>
-                            ) : (
-                              <div className="text-xs text-[#6b6b70]">24/7</div>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="flex gap-3">
-                        <Link href="/browse" className="flex-1 py-3 bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-white font-semibold rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2">
-                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z"/>
-                          </svg>
-                          Start Watching
-                        </Link>
-                        <button 
-                          onClick={() => { setAiState("idle"); setSelectedMood(null); }}
-                          className="px-4 py-3 bg-[#1c1c1f] text-white rounded-xl hover:bg-[#2a2a2e] transition-all"
-                        >
-                          Try Another
-                        </button>
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
