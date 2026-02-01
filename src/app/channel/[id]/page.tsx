@@ -8,10 +8,14 @@ import type { Channel, Video } from "@/types/database";
 import type { User } from "@supabase/supabase-js";
 import { useToast } from "@/components/Toast";
 
-function formatDuration(seconds: number | null): string {
-  if (!seconds) return "0:00";
-  const mins = Math.floor(seconds / 60);
+function formatDuration(seconds: number | null): string | null {
+  if (!seconds || seconds === 0) return null; // Return null for live streams
+  const hours = Math.floor(seconds / 3600);
+  const mins = Math.floor((seconds % 3600) / 60);
   const secs = seconds % 60;
+  if (hours > 0) {
+    return `${hours}:${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+  }
   return `${mins}:${secs.toString().padStart(2, "0")}`;
 }
 
@@ -253,12 +257,17 @@ export default function ChannelPage() {
                     </div>
                   )}
                   
-                  {/* Duration badge */}
-                  {video.duration && (
-                    <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-xs">
-                      {formatDuration(video.duration)}
-                    </div>
-                  )}
+                  {/* Duration or LIVE badge */}
+                  <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded text-xs font-medium">
+                    {formatDuration(video.duration) ? (
+                      <span className="bg-black/80 px-2 py-0.5 rounded">{formatDuration(video.duration)}</span>
+                    ) : (
+                      <span className="bg-red-600 px-2 py-0.5 rounded flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                        LIVE
+                      </span>
+                    )}
+                  </div>
                   
                   {/* Play overlay */}
                   <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">

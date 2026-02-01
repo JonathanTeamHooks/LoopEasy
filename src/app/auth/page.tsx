@@ -199,6 +199,7 @@ export default function AuthPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Enter your name"
+                  autoComplete="name"
                   className="w-full px-4 py-3 rounded-xl bg-[#1c1c1f] border border-[#2a2a2e] text-white placeholder-[#6b6b70] focus:outline-none focus:border-[#6366f1] transition-colors"
                   required
                   disabled={loading}
@@ -213,6 +214,7 @@ export default function AuthPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
+                autoComplete="email"
                 className="w-full px-4 py-3 rounded-xl bg-[#1c1c1f] border border-[#2a2a2e] text-white placeholder-[#6b6b70] focus:outline-none focus:border-[#6366f1] transition-colors"
                 required
                 disabled={loading}
@@ -226,6 +228,7 @@ export default function AuthPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder={mode === "signup" ? "Create a password" : "Enter your password"}
+                autoComplete={mode === "signup" ? "new-password" : "current-password"}
                 className="w-full px-4 py-3 rounded-xl bg-[#1c1c1f] border border-[#2a2a2e] text-white placeholder-[#6b6b70] focus:outline-none focus:border-[#6366f1] transition-colors"
                 required
                 minLength={6}
