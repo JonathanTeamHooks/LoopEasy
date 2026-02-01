@@ -114,11 +114,37 @@ function WatchContent() {
 
   if (!video) {
     return (
-      <div className="fixed inset-0 bg-black text-white flex flex-col items-center justify-center">
-        <h1 className="text-2xl font-bold mb-4">Video not found</h1>
-        <Link href="/browse" className="text-[#6366f1] hover:underline">
-          Back to Browse
-        </Link>
+      <div className="fixed inset-0 bg-[#0f0f10] text-white flex flex-col items-center justify-center px-4">
+        {/* Animated Play Button */}
+        <div className="relative w-24 h-24 mb-6">
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] opacity-20 animate-ping" />
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] opacity-40 animate-pulse" />
+          <div className="relative w-full h-full rounded-full bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center">
+            <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+        </div>
+        
+        <h1 className="text-3xl font-bold mb-2">Video Not Found</h1>
+        <p className="text-gray-400 mb-6 text-center max-w-md">
+          This video may have been removed or the link is incorrect.
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Link 
+            href="/browse" 
+            className="px-6 py-3 rounded-full bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white font-medium hover:opacity-90 transition-opacity"
+          >
+            Browse Channels
+          </Link>
+          <Link 
+            href="/" 
+            className="px-6 py-3 rounded-full bg-white/10 text-white font-medium hover:bg-white/20 transition-colors"
+          >
+            Go Home
+          </Link>
+        </div>
       </div>
     );
   }

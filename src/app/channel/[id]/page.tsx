@@ -97,11 +97,37 @@ export default function ChannelPage() {
 
   if (!channel) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-900 to-black text-white flex flex-col items-center justify-center">
-        <h1 className="text-2xl font-bold mb-4">Channel not found</h1>
-        <Link href="/browse" className="text-[#6366f1] hover:underline">
-          Back to Browse
-        </Link>
+      <div className="min-h-screen bg-[#0f0f10] text-white flex flex-col items-center justify-center px-4">
+        {/* Animated Icon */}
+        <div className="relative w-24 h-24 mb-6">
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] opacity-20 animate-ping" />
+          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] opacity-40 animate-pulse" />
+          <div className="relative w-full h-full rounded-full bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] flex items-center justify-center">
+            <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+          </div>
+        </div>
+        
+        <h1 className="text-3xl font-bold mb-2">Channel Not Found</h1>
+        <p className="text-gray-400 mb-6 text-center max-w-md">
+          This channel may have been removed or the link is incorrect.
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Link 
+            href="/browse" 
+            className="px-6 py-3 rounded-full bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] text-white font-medium hover:opacity-90 transition-opacity"
+          >
+            Browse Channels
+          </Link>
+          <Link 
+            href="/" 
+            className="px-6 py-3 rounded-full bg-white/10 text-white font-medium hover:bg-white/20 transition-colors"
+          >
+            Go Home
+          </Link>
+        </div>
       </div>
     );
   }
