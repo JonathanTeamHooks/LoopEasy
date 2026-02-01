@@ -44,11 +44,13 @@ export default function VideoPlayer({
       <div className="relative w-full h-full bg-black">
         <iframe
           ref={iframeRef}
-          src={`https://www.youtube.com/embed/${embedId}?autoplay=${autoPlay ? 1 : 0}&loop=${loop ? 1 : 0}&playlist=${embedId}&rel=0&modestbranding=1&showinfo=0`}
+          src={`https://www.youtube-nocookie.com/embed/${embedId}?autoplay=1&mute=1&loop=${loop ? 1 : 0}&playlist=${embedId}&rel=0&modestbranding=1&playsinline=1&enablejsapi=1`}
           title={title}
           className="absolute inset-0 w-full h-full"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
+          loading="lazy"
         />
       </div>
     );

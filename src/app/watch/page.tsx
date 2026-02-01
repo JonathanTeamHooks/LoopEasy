@@ -250,9 +250,9 @@ function WatchContent() {
         </div>
       </div>
       
-      {/* Chat Panel */}
+      {/* Chat Panel - Hidden on mobile, fixed sidebar on desktop */}
       {showChat && (
-        <div className="w-80 bg-gray-900 border-l border-white/10 flex flex-col">
+        <div className="hidden md:flex w-80 bg-gray-900 border-l border-white/10 flex-col">
           <div className="p-4 border-b border-white/10">
             <h3 className="font-bold">Live Chat</h3>
           </div>
