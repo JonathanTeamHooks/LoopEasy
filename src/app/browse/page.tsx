@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import type { Channel, Video } from "@/types/database";
+import type { User } from "@supabase/supabase-js";
 
 const categories = ["All", "Music", "Technology", "Fitness", "Food", "Gaming", "Entertainment", "Education"];
 
@@ -80,6 +81,23 @@ export default function BrowsePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [channels, setChannels] = useState<Channel[]>([]);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User | null>(null);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+
+  useEffect(() => {
+    const supabase = createClient();
+    
+    // Get user session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
     async function fetchChannels() {
@@ -145,12 +163,63 @@ export default function BrowsePage() {
             
             {/* Auth buttons */}
             <div className="flex items-center gap-3">
-              <Link href="/auth" className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-sm font-medium">
-                Sign In
-              </Link>
-              <Link href="/auth" className="px-4 py-2 rounded-full bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:opacity-90 transition-opacity text-sm font-medium">
-                Get Started
-              </Link>
+              {user ? (
+                <div className="relative">
+                  <button
+                    onClick={() => setShowUserMenu(!showUserMenu)}
+                    className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                  >
+                    {user.user_metadata?.avatar_url ? (
+                      <img 
+                        src={user.user_metadata.avatar_url} 
+                        alt={user.user_metadata?.full_name || "User"}
+                        className="w-9 h-9 rounded-full border-2 border-[#6366f1]"
+                      />
+                    ) : (
+                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#6366f1] to-[#a855f7] flex items-center justify-center text-white font-medium">
+                        {(user.user_metadata?.full_name || user.email || "U").charAt(0).toUpperCase()}
+                      </div>
+                    )}
+                  </button>
+                  {showUserMenu && (
+                    <>
+                      <div className="fixed inset-0 z-40" onClick={() => setShowUserMenu(false)} />
+                      <div className="absolute right-0 mt-2 w-48 rounded-xl bg-gray-800 border border-white/10 shadow-xl z-50 overflow-hidden">
+                        <div className="px-4 py-3 border-b border-white/10">
+                          <p className="text-sm font-medium">{user.user_metadata?.full_name || "User"}</p>
+                          <p className="text-xs text-gray-400">{user.email}</p>
+                        </div>
+                        <div className="py-2">
+                          <Link href="/dashboard" className="block px-4 py-2 text-sm hover:bg-white/10">Dashboard</Link>
+                          <Link href="/upload" className="block px-4 py-2 text-sm hover:bg-white/10">Upload</Link>
+                          <Link href="/profile" className="block px-4 py-2 text-sm hover:bg-white/10">Profile</Link>
+                        </div>
+                        <div className="border-t border-white/10 py-2">
+                          <button 
+                            onClick={async () => {
+                              const supabase = createClient();
+                              await supabase.auth.signOut();
+                              window.location.href = "/";
+                            }}
+                            className="block w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-white/10"
+                          >
+                            Sign Out
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              ) : (
+                <>
+                  <Link href="/auth" className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-sm font-medium">
+                    Sign In
+                  </Link>
+                  <Link href="/auth" className="px-4 py-2 rounded-full bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:opacity-90 transition-opacity text-sm font-medium">
+                    Get Started
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
