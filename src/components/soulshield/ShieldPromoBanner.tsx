@@ -27,11 +27,11 @@ export default function ShieldPromoBanner({ onSetup, onDismiss }: ShieldPromoBan
             <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-medium">NEW</span>
           </div>
           <h3 className="text-xl font-bold text-white mb-1">
-            Protect your viewing with AI
+            Guard your soul from negative influences
           </h3>
           <p className="text-gray-300 text-sm mb-4 max-w-xl">
-            SoulShield filters content to match your values — block violence, nudity, and more, 
-            or show only content aligned with your faith and beliefs.
+            SoulShield protects your mind from harmful digital content — for adults and kids alike. 
+            You decide what enters your soul.
           </p>
           
           <div className="flex items-center gap-3">

@@ -1,11 +1,14 @@
 // SoulShield Integration for LoopEasy
-// AI-powered content protection that aligns with your values
+// AI-powered soul protection for everyone — adults and kids alike.
+// Protects your mind and soul from negative digital influences.
+// Not just parental controls — it's personal protection for anyone
+// who wants to guard what enters their mind through digital content.
 
 export interface SoulShieldProfile {
   id: string;
   name: string;
   isActive: boolean;
-  protectionLevel: 'kids' | 'family' | 'faith' | 'custom';
+  protectionLevel: 'personal' | 'focused' | 'faith' | 'family' | 'custom';
   beliefSystem?: string; // e.g., "Christian", "Family-friendly", etc.
   blockedCategories: string[];
   allowedCategories: string[];
@@ -19,32 +22,40 @@ export interface SoulShieldSettings {
 }
 
 // Protection level presets
+// Designed for everyone — adults protecting their own minds, not just parents protecting kids
 export const PROTECTION_PRESETS = {
-  kids: {
-    name: 'Kids Mode',
-    emoji: '👶',
-    description: 'Age-appropriate content only',
-    blockedCategories: ['violence', 'nudity', 'drugs', 'alcohol', 'horror', 'adult-themes', 'strong-language'],
-    color: 'from-green-400 to-emerald-500',
-  },
-  family: {
-    name: 'Family Friendly',
-    emoji: '👨‍👩‍👧‍👦',
-    description: 'Safe for the whole family',
-    blockedCategories: ['nudity', 'drugs', 'extreme-violence', 'adult-themes'],
+  personal: {
+    name: 'Personal Shield',
+    emoji: '🛡️',
+    description: 'Protect your peace of mind',
+    blockedCategories: ['nudity', 'extreme-violence', 'drugs', 'adult-themes'],
     color: 'from-blue-400 to-cyan-500',
   },
+  focused: {
+    name: 'Focused Mind',
+    emoji: '🧘',
+    description: 'Block distractions & negativity',
+    blockedCategories: ['violence', 'horror', 'strong-language', 'adult-themes', 'gambling'],
+    color: 'from-teal-400 to-emerald-500',
+  },
   faith: {
-    name: 'Faith-Based',
+    name: 'Faith-Aligned',
     emoji: '🙏',
-    description: 'Content aligned with your beliefs',
-    blockedCategories: ['nudity', 'drugs', 'violence', 'occult', 'anti-religious'],
+    description: 'Content that honors your beliefs',
+    blockedCategories: ['nudity', 'drugs', 'violence', 'occult', 'anti-religious', 'adult-themes'],
     color: 'from-purple-400 to-indigo-500',
   },
+  family: {
+    name: 'Family Home',
+    emoji: '🏠',
+    description: 'Safe for everyone in the house',
+    blockedCategories: ['nudity', 'drugs', 'extreme-violence', 'adult-themes', 'strong-language', 'horror'],
+    color: 'from-rose-400 to-pink-500',
+  },
   custom: {
-    name: 'Custom',
+    name: 'My Rules',
     emoji: '⚙️',
-    description: 'Your own protection rules',
+    description: 'Set your own boundaries',
     blockedCategories: [],
     color: 'from-gray-400 to-gray-500',
   },

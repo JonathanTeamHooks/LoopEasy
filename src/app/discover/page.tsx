@@ -32,10 +32,10 @@ export default function DiscoverPage() {
   const [showShieldSettings, setShowShieldSettings] = useState(false);
   const [shieldProfile, setShieldProfile] = useState<SoulShieldProfile | undefined>({
     id: 'default',
-    name: 'Family Friendly',
+    name: 'Personal Shield',
     isActive: true,
-    protectionLevel: 'family',
-    blockedCategories: PROTECTION_PRESETS.family.blockedCategories,
+    protectionLevel: 'personal',
+    blockedCategories: PROTECTION_PRESETS.personal.blockedCategories,
     allowedCategories: [],
     customRules: [],
   });

@@ -24,8 +24,8 @@ export default function ShieldSettingsModal({
   isConnected 
 }: ShieldSettingsModalProps) {
   const [step, setStep] = useState<'connect' | 'level' | 'belief' | 'categories'>('connect');
-  const [selectedLevel, setSelectedLevel] = useState<'kids' | 'family' | 'faith' | 'custom'>(
-    profile?.protectionLevel || 'family'
+  const [selectedLevel, setSelectedLevel] = useState<'personal' | 'focused' | 'faith' | 'family' | 'custom'>(
+    profile?.protectionLevel || 'personal'
   );
   const [selectedBelief, setSelectedBelief] = useState(profile?.beliefSystem || '');
   const [blockedCategories, setBlockedCategories] = useState<string[]>(
@@ -75,7 +75,7 @@ export default function ShieldSettingsModal({
             </div>
             <div>
               <h2 className="text-lg font-bold text-white">SoulShield</h2>
-              <p className="text-xs text-gray-400">Content protection that aligns with your values</p>
+              <p className="text-xs text-gray-400">Protect your soul from negative digital influences</p>
             </div>
           </div>
           <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-full transition-colors">
@@ -96,17 +96,17 @@ export default function ShieldSettingsModal({
                   <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Protect Your Viewing</h3>
+              <h3 className="text-xl font-bold text-white mb-2">Guard Your Mind</h3>
               <p className="text-gray-400 mb-6 max-w-sm mx-auto">
-                SoulShield uses AI to filter content based on your values — not just blocking bad stuff, 
-                but actively showing what aligns with your beliefs.
+                SoulShield protects your soul from negative digital influences — for adults and kids alike. 
+                You decide what enters your mind.
               </p>
               
               <div className="space-y-3 text-left max-w-sm mx-auto mb-6">
                 {[
-                  { icon: '🚫', text: 'Block violence, nudity, drugs & more' },
-                  { icon: '🙏', text: 'Filter by your faith or belief system' },
-                  { icon: '👨‍👩‍👧‍👦', text: 'Keep your family safe' },
+                  { icon: '🛡️', text: 'Protect yourself from harmful content' },
+                  { icon: '🙏', text: 'Align your viewing with your values' },
+                  { icon: '🧘', text: 'Guard your peace of mind' },
                   { icon: '🤖', text: 'AI understands context, not just keywords' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3 text-sm">
