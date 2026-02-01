@@ -1,16 +1,8 @@
 import { stripe, LAUNCH_MODE } from '@/lib/stripe'
-import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
 import type Stripe from 'stripe'
-
-// Create supabase admin client lazily (not at module load time for build)
-function getSupabaseAdmin(): SupabaseClient {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  )
-}
+import { getSupabaseAdmin } from '@/lib/supabase/admin'
 
 export async function POST(req: Request) {
   // Skip webhooks if in launch mode

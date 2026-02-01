@@ -41,7 +41,10 @@ function sanitizeServerSide(input: string): string {
     .slice(0, 2000);
 }
 
-// Simple rate limiting using IP (in production, use Redis)
+// Simple rate limiting using IP
+// WARNING: In-memory Map doesn't persist across serverless instances
+// For production scale, use Redis/Upstash. Current implementation provides
+// basic protection but may allow more requests than intended under high load.
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 
 function checkRateLimit(ip: string): boolean {

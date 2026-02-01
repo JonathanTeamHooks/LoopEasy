@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { getSafeAvatarUrl } from "@/lib/utils/avatar";
 import type { User } from "@supabase/supabase-js";
 
 interface HeaderProps {
@@ -45,7 +46,10 @@ export default function Header({ variant = "default", showSearch = false }: Head
 
   const getUserAvatar = () => {
     if (!user) return null;
-    return user.user_metadata?.avatar_url || user.user_metadata?.picture || null;
+    // Validate avatar URL to prevent XSS from untrusted sources
+    return getSafeAvatarUrl(user.user_metadata?.avatar_url) || 
+           getSafeAvatarUrl(user.user_metadata?.picture) || 
+           null;
   };
 
   const bgClass = variant === "transparent" 

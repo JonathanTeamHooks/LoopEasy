@@ -35,7 +35,9 @@ export default function VideoPlayer({
         func: command,
         args: args || []
       });
-      iframeRef.current.contentWindow.postMessage(message, "*");
+      // YouTube iframe API requires "*" origin - this is safe as we only send mute/unmute commands
+      // and YouTube validates the message format
+      iframeRef.current.contentWindow.postMessage(message, "https://www.youtube-nocookie.com");
     }
   }, []);
 

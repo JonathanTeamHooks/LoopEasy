@@ -1,16 +1,8 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
 import crypto from 'crypto'
 import { getThumbnailUrl } from '@/lib/mux'
-
-// Create supabase admin client lazily (not at module load time for build)
-function getSupabaseAdmin(): SupabaseClient {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  )
-}
+import { getSupabaseAdmin } from '@/lib/supabase/admin'
 
 // Verify Mux webhook signature
 function verifyWebhookSignature(body: string, signature: string): boolean {
@@ -31,11 +23,18 @@ export async function POST(req: Request) {
   const headersList = await headers()
   const signature = headersList.get('mux-signature') as string
 
-  // Verify signature in production
-  if (process.env.NODE_ENV === 'production' && signature) {
+  // Verify signature in production (REQUIRED)
+  if (process.env.NODE_ENV === 'production') {
+    if (!signature) {
+      return NextResponse.json({ error: 'Missing signature' }, { status: 401 })
+    }
+    if (!process.env.MUX_WEBHOOK_SECRET) {
+      console.error('MUX_WEBHOOK_SECRET not configured')
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
+    }
     const isValid = verifyWebhookSignature(body, signature)
     if (!isValid) {
-      return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
+      return NextResponse.json({ error: 'Invalid signature' }, { status: 401 })
     }
   }
 
