@@ -226,18 +226,23 @@ export default function DiscoverPage() {
         ) : (
           <>
             {/* Greeting */}
-            <h1 className="text-3xl font-bold mb-6">{getGreeting()}</h1>
+            <div className="mb-8 animate-slide-up">
+              <h1 className="text-3xl font-bold text-white">
+                {getGreeting()}{userName ? `, ${userName}` : ''}
+              </h1>
+              <p className="text-gray-400 mt-1">What do you want to watch?</p>
+            </div>
             
             {/* Quick Access Grid - Recently Played / Shortcuts */}
             {(recentChannels.length > 0 || suggestedAIChannels.length > 0) && (
               <section className="mb-8">
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
                   {/* Mix of recent and suggested */}
-                  {suggestedAIChannels.slice(0, 2).map((channel) => (
-                    <QuickAccessCard key={channel.id} type="ai" channel={channel} />
+                  {suggestedAIChannels.slice(0, 2).map((channel, i) => (
+                    <QuickAccessCard key={channel.id} type="ai" channel={channel} index={i} />
                   ))}
-                  {recentChannels.slice(0, 4).map((channel) => (
-                    <QuickAccessCard key={channel.id} type="creator" channel={channel} />
+                  {recentChannels.slice(0, 4).map((channel, i) => (
+                    <QuickAccessCard key={channel.id} type="creator" channel={channel} index={i + 2} />
                   ))}
                 </div>
               </section>
@@ -321,7 +326,7 @@ export default function DiscoverPage() {
             
             {/* Browse All Section */}
             <section className="mt-12 mb-8">
-              <h2 className="text-xl font-bold mb-4">Browse all</h2>
+              <h2 className="text-xl font-bold mb-5">Browse all</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {[
                   { name: 'Devotional', color: 'from-purple-600 to-indigo-600', emoji: '🙏' },
@@ -334,14 +339,33 @@ export default function DiscoverPage() {
                   { name: 'Food', color: 'from-amber-500 to-orange-500', emoji: '🍳' },
                   { name: 'Family', color: 'from-rose-400 to-pink-500', emoji: '👨‍👩‍👧‍👦' },
                   { name: 'Wellness', color: 'from-teal-400 to-emerald-500', emoji: '🧘' },
-                ].map((cat) => (
+                ].map((cat, i) => (
                   <Link 
                     key={cat.name}
                     href={`/browse?category=${cat.name}`}
-                    className={`aspect-[16/10] rounded-lg bg-gradient-to-br ${cat.color} p-4 flex flex-col justify-end hover:scale-105 transition-transform relative overflow-hidden`}
+                    className="group animate-fade-in"
+                    style={{ animationDelay: `${i * 40}ms` }}
                   >
-                    <span className="absolute top-2 right-2 text-3xl opacity-70">{cat.emoji}</span>
-                    <span className="font-bold text-white text-lg">{cat.name}</span>
+                    <div className={`
+                      aspect-[16/10] rounded-xl bg-gradient-to-br ${cat.color} 
+                      p-4 flex flex-col justify-end relative overflow-hidden
+                      transition-all duration-300 ease-out
+                      group-hover:scale-[1.03] group-hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)]
+                    `}>
+                      {/* Subtle noise texture */}
+                      <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIvPjwvc3ZnPg==')]" />
+                      
+                      {/* Shimmer on hover */}
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                      </div>
+                      
+                      {/* Emoji */}
+                      <span className="absolute top-3 right-3 text-4xl opacity-80 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">{cat.emoji}</span>
+                      
+                      {/* Category name */}
+                      <span className="font-bold text-white text-lg drop-shadow-lg relative z-10">{cat.name}</span>
+                    </div>
                   </Link>
                 ))}
               </div>
@@ -363,7 +387,7 @@ export default function DiscoverPage() {
 }
 
 // Quick Access Card Component (Spotify-style shortcut tiles)
-function QuickAccessCard({ type, channel }: { type: 'ai' | 'creator', channel: AIChannel | Channel }) {
+function QuickAccessCard({ type, channel, index = 0 }: { type: 'ai' | 'creator', channel: AIChannel | Channel, index?: number }) {
   const isAI = type === 'ai';
   const aiChannel = channel as AIChannel;
   const creatorChannel = channel as Channel;
@@ -371,27 +395,28 @@ function QuickAccessCard({ type, channel }: { type: 'ai' | 'creator', channel: A
   return (
     <Link 
       href={isAI ? `/discover/${aiChannel.id}` : `/channel/${creatorChannel.id}`}
-      className="group flex items-center gap-3 bg-white/10 hover:bg-white/20 rounded-md overflow-hidden transition-colors"
+      className="group flex items-center gap-3 bg-white/[0.07] hover:bg-white/[0.15] rounded-md overflow-hidden transition-all duration-200 animate-fade-in"
+      style={{ animationDelay: `${index * 50}ms` }}
     >
       {/* Thumbnail */}
-      <div className={`w-12 h-12 flex-shrink-0 ${isAI ? `bg-gradient-to-br ${aiChannel.gradient}` : 'bg-gray-700'} flex items-center justify-center`}>
+      <div className={`w-14 h-14 flex-shrink-0 ${isAI ? `bg-gradient-to-br ${aiChannel.gradient}` : 'bg-gray-700'} flex items-center justify-center relative overflow-hidden`}>
         {isAI ? (
-          <span className="text-xl">{aiChannel.emoji}</span>
+          <span className="text-2xl group-hover:scale-110 transition-transform duration-200">{aiChannel.emoji}</span>
         ) : creatorChannel.thumbnail_url ? (
-          <img src={creatorChannel.thumbnail_url} alt="" className="w-full h-full object-cover" />
+          <img src={creatorChannel.thumbnail_url} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
         ) : (
-          <span className="text-lg">📺</span>
+          <span className="text-xl">📺</span>
         )}
       </div>
       
       {/* Title */}
-      <span className="font-medium text-white text-sm truncate pr-2">
+      <span className="font-semibold text-white text-sm truncate pr-2 flex-1">
         {isAI ? aiChannel.name : creatorChannel.name}
       </span>
       
       {/* Play button on hover */}
-      <div className="ml-auto pr-2 opacity-0 group-hover:opacity-100 transition-opacity">
-        <div className="w-8 h-8 rounded-full bg-[#6366f1] flex items-center justify-center shadow-lg">
+      <div className="mr-3 transform scale-0 group-hover:scale-100 transition-transform duration-200 ease-out">
+        <div className="w-10 h-10 rounded-full bg-[#6366f1] flex items-center justify-center shadow-[0_4px_12px_rgba(99,102,241,0.4)] hover:bg-[#5558e3] hover:scale-105 transition-all">
           <svg className="w-4 h-4 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M8 5v14l11-7z"/>
           </svg>
