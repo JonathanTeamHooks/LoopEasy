@@ -1,15 +1,12 @@
 import { createClient } from '@/lib/supabase/server'
 import { stripe, PLANS, LAUNCH_MODE } from '@/lib/stripe'
-import { NextResponse } from 'next/server'
+import { successResponse, ApiErrors } from '@/lib/api-response'
 
 // POST /api/checkout - Create a Stripe checkout session
-export async function POST(req: Request) {
+export async function POST() {
   // Payments disabled during launch
   if (LAUNCH_MODE || !PLANS.premium.priceId) {
-    return NextResponse.json(
-      { error: 'Payments are not yet enabled. Everything is free during launch!' },
-      { status: 503 }
-    )
+    return ApiErrors.badRequest('Payments are not yet enabled. Everything is free during launch!')
   }
 
   try {
@@ -18,7 +15,7 @@ export async function POST(req: Request) {
     // Check auth
     const { data: { user }, error: authError } = await supabase.auth.getUser()
     if (authError || !user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      return ApiErrors.unauthorized()
     }
 
     // Get user profile
@@ -29,7 +26,7 @@ export async function POST(req: Request) {
       .single()
 
     if (profile?.is_premium) {
-      return NextResponse.json({ error: 'Already premium' }, { status: 400 })
+      return ApiErrors.badRequest('Already on premium plan')
     }
 
     // Create or reuse Stripe customer
@@ -75,9 +72,9 @@ export async function POST(req: Request) {
       },
     })
 
-    return NextResponse.json({ url: session.url })
+    return successResponse({ url: session.url })
   } catch (err) {
     console.error('Checkout error:', err)
-    return NextResponse.json({ error: 'Failed to create checkout' }, { status: 500 })
+    return ApiErrors.internal('Failed to create checkout session')
   }
 }

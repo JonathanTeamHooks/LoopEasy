@@ -1,5 +1,8 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
+import { successResponse, ApiErrors } from '@/lib/api-response'
+import { channelInputSchema, safeParseWithError } from '@/lib/validations'
+import { z } from 'zod'
 
 // Enable edge runtime for faster response
 export const runtime = 'edge'
@@ -7,17 +10,35 @@ export const runtime = 'edge'
 // Revalidate every 60 seconds for ISR-like behavior
 export const revalidate = 60
 
+// GET query params schema
+const getQuerySchema = z.object({
+  category: z.string().optional(),
+  search: z.string().optional(),
+  user: z.string().uuid().optional(),
+  limit: z.coerce.number().int().positive().max(100).default(20),
+  offset: z.coerce.number().int().nonnegative().default(0),
+})
+
 // GET /api/channels - List channels (with optional filters)
 export async function GET(req: Request) {
   try {
     const supabase = await createClient()
     const { searchParams } = new URL(req.url)
     
-    const category = searchParams.get('category')
-    const search = searchParams.get('search')
-    const userId = searchParams.get('user')
-    const limit = parseInt(searchParams.get('limit') || '20')
-    const offset = parseInt(searchParams.get('offset') || '0')
+    // Parse and validate query params
+    const queryValidation = safeParseWithError(getQuerySchema, {
+      category: searchParams.get('category') || undefined,
+      search: searchParams.get('search') || undefined,
+      user: searchParams.get('user') || undefined,
+      limit: searchParams.get('limit') || 20,
+      offset: searchParams.get('offset') || 0,
+    })
+    
+    if (!queryValidation.success) {
+      return ApiErrors.validation(queryValidation.error)
+    }
+    
+    const { category, search, user, limit, offset } = queryValidation.data
 
     let query = supabase
       .from('channels')
@@ -37,20 +58,20 @@ export async function GET(req: Request) {
       query = query.ilike('name', `%${search}%`)
     }
 
-    if (userId) {
-      query = query.eq('owner_id', userId)
+    if (user) {
+      query = query.eq('owner_id', user)
     }
 
     const { data, error } = await query
 
     if (error) {
       console.error('Channels query error:', error)
-      return NextResponse.json({ error: 'Failed to fetch channels' }, { status: 500 })
+      return ApiErrors.internal('Failed to fetch channels')
     }
 
     // Add cache headers for better performance
     return NextResponse.json(
-      { channels: data },
+      { success: true, data: { channels: data } },
       {
         headers: {
           'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
@@ -59,7 +80,7 @@ export async function GET(req: Request) {
     )
   } catch (err) {
     console.error('Channels route error:', err)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return ApiErrors.internal()
   }
 }
 
@@ -71,15 +92,18 @@ export async function POST(req: Request) {
     // Check auth
     const { data: { user }, error: authError } = await supabase.auth.getUser()
     if (authError || !user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      return ApiErrors.unauthorized()
     }
 
     const body = await req.json()
-    const { name, description, category } = body
-
-    if (!name) {
-      return NextResponse.json({ error: 'Name is required' }, { status: 400 })
+    
+    // Validate input
+    const validation = safeParseWithError(channelInputSchema, body)
+    if (!validation.success) {
+      return ApiErrors.validation(validation.error)
     }
+    
+    const { name, description, category } = validation.data
 
     // Generate slug from name
     const slug = name
@@ -102,12 +126,12 @@ export async function POST(req: Request) {
 
     if (error) {
       console.error('Channel insert error:', error)
-      return NextResponse.json({ error: 'Failed to create channel' }, { status: 500 })
+      return ApiErrors.internal('Failed to create channel')
     }
 
-    return NextResponse.json({ channel }, { status: 201 })
+    return successResponse({ channel }, 201)
   } catch (err) {
     console.error('Channels route error:', err)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return ApiErrors.internal()
   }
 }

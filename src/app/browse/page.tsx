@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import type { Channel, Video } from "@/types/database";
+import type { Channel } from "@/types/database";
 import type { User } from "@supabase/supabase-js";
 
 const categories = ["All", "Devotional", "Wellness", "Music", "Technology", "Fitness", "Food", "Gaming", "Entertainment", "Education"];

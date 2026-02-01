@@ -1,19 +1,28 @@
 import { createClient } from '@/lib/supabase/server'
-import { NextResponse } from 'next/server'
+import { successResponse, ApiErrors } from '@/lib/api-response'
+import { channelParamsSchema, safeParseWithError } from '@/lib/validations'
 
 // POST /api/channels/[id]/follow - Follow a channel
 export async function POST(
-  req: Request,
+  _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id: channelId } = await params
+    const rawParams = await params
+    
+    // Validate params
+    const validation = safeParseWithError(channelParamsSchema, rawParams)
+    if (!validation.success) {
+      return ApiErrors.validation(validation.error)
+    }
+    
+    const { id: channelId } = validation.data
     const supabase = await createClient()
     
     // Check auth
     const { data: { user }, error: authError } = await supabase.auth.getUser()
     if (authError || !user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      return ApiErrors.unauthorized()
     }
 
     // Check if channel exists
@@ -24,7 +33,7 @@ export async function POST(
       .single()
 
     if (channelError || !channel) {
-      return NextResponse.json({ error: 'Channel not found' }, { status: 404 })
+      return ApiErrors.notFound('Channel')
     }
 
     // Check if already following
@@ -36,7 +45,7 @@ export async function POST(
       .single()
 
     if (existingFollow) {
-      return NextResponse.json({ error: 'Already following' }, { status: 400 })
+      return ApiErrors.badRequest('Already following this channel')
     }
 
     // Create follow
@@ -49,29 +58,37 @@ export async function POST(
 
     if (followError) {
       console.error('Follow error:', followError)
-      return NextResponse.json({ error: 'Failed to follow' }, { status: 500 })
+      return ApiErrors.internal('Failed to follow channel')
     }
 
-    return NextResponse.json({ success: true, following: true })
+    return successResponse({ following: true })
   } catch (err) {
     console.error('Follow route error:', err)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return ApiErrors.internal()
   }
 }
 
 // DELETE /api/channels/[id]/follow - Unfollow a channel
 export async function DELETE(
-  req: Request,
+  _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id: channelId } = await params
+    const rawParams = await params
+    
+    // Validate params
+    const validation = safeParseWithError(channelParamsSchema, rawParams)
+    if (!validation.success) {
+      return ApiErrors.validation(validation.error)
+    }
+    
+    const { id: channelId } = validation.data
     const supabase = await createClient()
     
     // Check auth
     const { data: { user }, error: authError } = await supabase.auth.getUser()
     if (authError || !user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      return ApiErrors.unauthorized()
     }
 
     // Delete follow
@@ -83,12 +100,12 @@ export async function DELETE(
 
     if (unfollowError) {
       console.error('Unfollow error:', unfollowError)
-      return NextResponse.json({ error: 'Failed to unfollow' }, { status: 500 })
+      return ApiErrors.internal('Failed to unfollow channel')
     }
 
-    return NextResponse.json({ success: true, following: false })
+    return successResponse({ following: false })
   } catch (err) {
     console.error('Unfollow route error:', err)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return ApiErrors.internal()
   }
 }

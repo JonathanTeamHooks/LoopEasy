@@ -1,0 +1,8 @@
+export { default as HeroSection } from './HeroSection'
+export { default as DayTimelineSection } from './DayTimelineSection'
+export { default as CuratorsSection } from './CuratorsSection'
+export { default as ProductDemoSection } from './ProductDemoSection'
+export { default as AIFeaturesSection } from './AIFeaturesSection'
+export { default as TestimonialsSection } from './TestimonialsSection'
+export { default as FinalCTASection } from './FinalCTASection'
+export { default as Footer } from './Footer'

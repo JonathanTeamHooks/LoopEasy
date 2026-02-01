@@ -118,7 +118,7 @@ export default function ChannelPage() {
         
         <h1 className="text-3xl font-bold mb-2">Channel Not Found</h1>
         <p className="text-gray-400 mb-6 text-center max-w-md">
-          This channel may have been removed or the link is incorrect.
+          This channel may have been removed or the link may be incorrect.
         </p>
         
         <div className="flex flex-col sm:flex-row gap-3">

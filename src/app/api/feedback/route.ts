@@ -1,6 +1,7 @@
-import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { headers } from "next/headers";
+import { successResponse, ApiErrors } from "@/lib/api-response";
+import { feedbackSchema, safeParseWithError } from "@/lib/validations";
 
 // Server-side sanitization - extra security layer
 function sanitizeServerSide(input: string): string {
@@ -76,32 +77,24 @@ export async function POST(request: Request) {
 
     // Check rate limit
     if (!checkRateLimit(ip)) {
-      return NextResponse.json(
-        { error: "Too many requests. Please wait a moment." },
-        { status: 429 }
-      );
+      return ApiErrors.rateLimit();
     }
 
     const body = await request.json();
     
-    // Validate input exists
-    if (!body.message || typeof body.message !== "string") {
-      return NextResponse.json(
-        { error: "Message is required" },
-        { status: 400 }
-      );
+    // Validate input
+    const validation = safeParseWithError(feedbackSchema, body);
+    if (!validation.success) {
+      return ApiErrors.validation(validation.error);
     }
 
     // Server-side sanitization (don't trust client)
-    const sanitizedMessage = sanitizeServerSide(body.message);
-    const sanitizedPageUrl = sanitizeServerSide(body.pageUrl || "");
+    const sanitizedMessage = sanitizeServerSide(validation.data.message);
+    const sanitizedPageUrl = sanitizeServerSide(validation.data.pageUrl || "");
 
     // Validate sanitized content
     if (sanitizedMessage.length < 10) {
-      return NextResponse.json(
-        { error: "Message too short after sanitization" },
-        { status: 400 }
-      );
+      return ApiErrors.validation("Message too short after sanitization");
     }
 
     // Get user agent for context (also sanitized)
@@ -124,23 +117,17 @@ export async function POST(request: Request) {
 
     if (error) {
       console.error("Feedback insert error:", error);
-      return NextResponse.json(
-        { error: "Failed to save feedback" },
-        { status: 500 }
-      );
+      return ApiErrors.internal("Failed to save feedback");
     }
 
-    return NextResponse.json({ success: true });
+    return successResponse({ message: "Feedback submitted successfully" });
   } catch (error) {
     console.error("Feedback API error:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return ApiErrors.internal();
   }
 }
 
 // Disable GET to prevent enumeration
 export async function GET() {
-  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
+  return ApiErrors.badRequest("Method not allowed");
 }

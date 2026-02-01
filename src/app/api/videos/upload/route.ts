@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { createUploadUrl } from '@/lib/mux'
-import { NextResponse } from 'next/server'
+import { successResponse, ApiErrors } from '@/lib/api-response'
+import { videoUploadSchema, safeParseWithError } from '@/lib/validations'
 
 export async function POST(req: Request) {
   try {
@@ -9,18 +10,18 @@ export async function POST(req: Request) {
     // Check auth
     const { data: { user }, error: authError } = await supabase.auth.getUser()
     if (authError || !user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      return ApiErrors.unauthorized()
     }
 
     const body = await req.json()
-    const { channelId, title, description } = body
-
-    if (!channelId || !title) {
-      return NextResponse.json(
-        { error: 'Channel ID and title are required' },
-        { status: 400 }
-      )
+    
+    // Validate input
+    const validation = safeParseWithError(videoUploadSchema, body)
+    if (!validation.success) {
+      return ApiErrors.validation(validation.error)
     }
+    
+    const { channelId, title, description } = validation.data
 
     // Verify user owns this channel
     const { data: channel, error: channelError } = await supabase
@@ -30,11 +31,11 @@ export async function POST(req: Request) {
       .single()
 
     if (channelError || !channel) {
-      return NextResponse.json({ error: 'Channel not found' }, { status: 404 })
+      return ApiErrors.notFound('Channel')
     }
 
     if (channel.owner_id !== user.id) {
-      return NextResponse.json({ error: 'Not your channel' }, { status: 403 })
+      return ApiErrors.forbidden()
     }
 
     // Create the video record first
@@ -52,7 +53,7 @@ export async function POST(req: Request) {
 
     if (videoError) {
       console.error('Video insert error:', videoError)
-      return NextResponse.json({ error: 'Failed to create video' }, { status: 500 })
+      return ApiErrors.internal('Failed to create video')
     }
 
     // Create Mux upload URL
@@ -64,13 +65,13 @@ export async function POST(req: Request) {
       .update({ mux_asset_id: uploadId }) // Temporarily store upload ID
       .eq('id', video.id)
 
-    return NextResponse.json({
+    return successResponse({
       videoId: video.id,
       uploadUrl,
       uploadId,
     })
   } catch (err) {
     console.error('Upload route error:', err)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    return ApiErrors.internal()
   }
 }
