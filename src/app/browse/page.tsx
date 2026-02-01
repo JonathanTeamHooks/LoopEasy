@@ -129,7 +129,8 @@ function BrowseContent() {
       }
       
       if (searchQuery) {
-        query = query.ilike("name", `%${searchQuery}%`);
+        // Search in both name and description
+        query = query.or(`name.ilike.%${searchQuery}%,description.ilike.%${searchQuery}%`);
       }
       
       const { data, error } = await query;

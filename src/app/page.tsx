@@ -133,7 +133,7 @@ export default function Home() {
                         {moods.map((mood, i) => (
                           <Link
                             key={i}
-                            href={`/browse?category=${encodeURIComponent(mood.category)}`}
+                            href={`/browse?search=${encodeURIComponent(mood.label)}&category=${encodeURIComponent(mood.category)}`}
                             className="group px-4 py-2 rounded-full bg-[#1c1c1f] border border-[#2a2a2e] hover:border-[#6366f1] transition-all hover:scale-[1.02] flex items-center gap-2"
                           >
                             <span>{mood.emoji}</span>
@@ -186,22 +186,13 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Live Stats Bar */}
-          <div className={`flex flex-wrap items-center justify-center gap-6 sm:gap-12 transition-all duration-1000 delay-400 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="flex items-center gap-2">
+          {/* Launch Banner */}
+          <div className={`flex flex-wrap items-center justify-center gap-4 transition-all duration-1000 delay-400 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-[#6366f1]/20 to-[#a855f7]/20 border border-[#6366f1]/30">
               <span className="w-2.5 h-2.5 rounded-full bg-[#22c55e] animate-pulse" />
-              <span className="text-[#22c55e] font-semibold">12,847</span>
-              <span className="text-[#6b6b70]">watching now</span>
-            </div>
-            <div className="text-[#6b6b70]">•</div>
-            <div className="flex items-center gap-2">
-              <span className="text-white font-semibold">10,000+</span>
-              <span className="text-[#6b6b70]">channels</span>
-            </div>
-            <div className="text-[#6b6b70]">•</div>
-            <div className="flex items-center gap-2">
-              <span className="text-[#f59e0b] font-semibold">$2.4M+</span>
-              <span className="text-[#6b6b70]">paid to creators</span>
+              <span className="text-white font-medium">🚀 Just Launched</span>
+              <span className="text-[#a1a1a6]">—</span>
+              <span className="text-[#a855f7] font-semibold">Join the early creators</span>
             </div>
           </div>
         </div>
