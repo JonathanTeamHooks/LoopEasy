@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import PlatformShowcase from "@/components/PlatformShowcase";
+import Header from "@/components/Header";
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -55,22 +56,7 @@ export default function Home() {
       </div>
 
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1] via-[#8b5cf6] to-[#a855f7] flex items-center justify-center shadow-lg shadow-[#6366f1]/25">
-              <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/>
-              </svg>
-            </div>
-            <span className="text-xl font-bold">Loop<span className="bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#ec4899] bg-clip-text text-transparent">Easy</span><span className="text-xs ml-0.5">✨</span></span>
-          </Link>
-          
-          <div className="flex items-center gap-4">
-            <Link href="/auth" className="text-sm text-[#a1a1a6] hover:text-white transition-colors">Sign In</Link>
-          </div>
-        </div>
-      </nav>
+      <Header variant="transparent" />
 
       {/* HERO - Pain → AI Magic */}
       <section className="relative min-h-screen flex items-center justify-center px-6 pt-20">
@@ -736,7 +722,8 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <div className="relative rounded-3xl overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7]" />
-            <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10" />
+            {/* Noise texture overlay */}
+            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")" }} />
             
             <div className="relative p-12 md:p-20 text-center">
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
@@ -781,23 +768,31 @@ export default function Home() {
       {/* FOOTER */}
       <footer className="border-t border-[#1c1c1f] py-12 px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1] to-[#a855f7] flex items-center justify-center shadow-lg shadow-[#6366f1]/25">
-                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/>
-                </svg>
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1] to-[#a855f7] flex items-center justify-center shadow-lg shadow-[#6366f1]/25">
+                  <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/>
+                  </svg>
+                </div>
+                <span className="font-bold">Loop<span className="bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#ec4899] bg-clip-text text-transparent">Easy</span><span className="text-xs ml-0.5">✨</span></span>
+              </Link>
+              <div className="flex flex-wrap justify-center gap-6 text-sm text-[#6b6b70]">
+                <Link href="/browse" className="hover:text-white transition-colors">Browse</Link>
+                <Link href="/upload" className="hover:text-white transition-colors">Creators</Link>
+                <Link href="/auth" className="hover:text-white transition-colors">Sign Up</Link>
+                <Link href="/dashboard" className="hover:text-white transition-colors">Dashboard</Link>
+                <Link href="/profile" className="hover:text-white transition-colors">Account</Link>
               </div>
-              <span className="font-bold">Loop<span className="bg-gradient-to-r from-[#6366f1] via-[#a855f7] to-[#ec4899] bg-clip-text text-transparent">Easy</span><span className="text-xs ml-0.5">✨</span></span>
-            </Link>
-            <div className="flex gap-8 text-sm text-[#6b6b70]">
-              <Link href="/browse" className="hover:text-white transition-colors">Browse</Link>
-              <Link href="/upload" className="hover:text-white transition-colors">Creators</Link>
-              <Link href="/auth" className="hover:text-white transition-colors">Sign Up</Link>
-              <Link href="/dashboard" className="hover:text-white transition-colors">Dashboard</Link>
-              <Link href="/profile" className="hover:text-white transition-colors">Account</Link>
             </div>
-            <div className="text-sm text-[#6b6b70]">© 2026 LoopEasy</div>
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-6 border-t border-[#1c1c1f]">
+              <div className="flex gap-6 text-sm text-[#6b6b70]">
+                <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+                <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+              </div>
+              <div className="text-sm text-[#6b6b70]">© 2026 LoopEasy. All rights reserved.</div>
+            </div>
           </div>
         </div>
       </footer>
