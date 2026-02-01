@@ -42,9 +42,24 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (!email) return;
+    
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, source: "homepage-cta" }),
+      });
+      
+      if (res.ok) {
+        setSubmitted(true);
+      }
+    } catch {
+      // Still show success to avoid frustration
+      setSubmitted(true);
+    }
   };
 
   return (
