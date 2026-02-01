@@ -1,0 +1,25 @@
+{
+  "name": "LoopEasy",
+  "short_name": "LoopEasy",
+  "description": "Video Channels Curated by AI, Built by Creators",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0b",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "256x256",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["entertainment", "video"],
+  "prefer_related_applications": false
+}

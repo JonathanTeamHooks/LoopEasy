@@ -1,6 +1,12 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 
+// Enable edge runtime for faster response
+export const runtime = 'edge'
+
+// Revalidate every 60 seconds for ISR-like behavior
+export const revalidate = 60
+
 // GET /api/channels - List channels (with optional filters)
 export async function GET(req: Request) {
   try {
@@ -42,7 +48,15 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: 'Failed to fetch channels' }, { status: 500 })
     }
 
-    return NextResponse.json({ channels: data })
+    // Add cache headers for better performance
+    return NextResponse.json(
+      { channels: data },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
+        },
+      }
+    )
   } catch (err) {
     console.error('Channels route error:', err)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })

@@ -52,12 +52,19 @@ export default function ChannelPage() {
     async function fetchChannel() {
       const supabase = createClient();
       
-      // Fetch channel
-      const { data: channelData, error: channelError } = await supabase
-        .from("channels")
-        .select("*")
-        .eq("id", channelId)
-        .single();
+      // Check if channelId is a UUID or slug
+      const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(channelId);
+      
+      // Fetch channel by UUID or slug
+      let query = supabase.from("channels").select("*");
+      
+      if (isUUID) {
+        query = query.eq("id", channelId);
+      } else {
+        query = query.eq("slug", channelId);
+      }
+      
+      const { data: channelData, error: channelError } = await query.single();
       
       if (channelError) {
         console.error("Error fetching channel:", channelError);
@@ -67,11 +74,11 @@ export default function ChannelPage() {
       
       setChannel(channelData);
       
-      // Fetch videos
+      // Fetch videos using the actual channel ID (important when found by slug)
       const { data: videosData, error: videosError } = await supabase
         .from("videos")
         .select("*")
-        .eq("channel_id", channelId)
+        .eq("channel_id", channelData.id)
         .eq("status", "ready")
         .order("created_at", { ascending: false });
       
