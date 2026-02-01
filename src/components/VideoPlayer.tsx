@@ -67,31 +67,34 @@ export default function VideoPlayer({
     }
   }, [isMuted]);
 
-  // YouTube embed - NO blocking overlay, just a positioned button
+  // YouTube embed - Use standard YouTube player with controls
   if (embedType === "youtube" && embedId) {
     return (
-      <div className="relative w-full h-full bg-black">
-        <iframe
-          ref={iframeRef}
-          src={`https://www.youtube-nocookie.com/embed/${embedId}?autoplay=1&mute=1&loop=${loop ? 1 : 0}&playlist=${embedId}&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${typeof window !== 'undefined' ? window.location.origin : ''}`}
-          title={title}
-          className="absolute inset-0 w-full h-full"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        />
+      <div className="relative w-full h-full bg-black flex items-center justify-center">
+        {/* 16:9 aspect ratio container */}
+        <div className="relative w-full" style={{ paddingBottom: '56.25%', maxHeight: '100%' }}>
+          <iframe
+            ref={iframeRef}
+            src={`https://www.youtube-nocookie.com/embed/${embedId}?autoplay=1&mute=1&controls=1&loop=${loop ? 1 : 0}&playlist=${embedId}&rel=0&playsinline=1&enablejsapi=1&modestbranding=1`}
+            title={title}
+            className="absolute top-0 left-0 w-full h-full"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        </div>
         
-        {/* Unmute button - positioned, NOT blocking iframe */}
+        {/* Unmute prompt - top right, doesn't interfere with YouTube controls */}
         {isMuted && (
           <button
             onClick={handleYouTubeMuteToggle}
-            className="absolute bottom-20 left-4 z-10 flex items-center gap-2 px-4 py-3 rounded-full bg-white text-black text-sm font-semibold shadow-lg hover:bg-gray-100 transition-all animate-pulse"
+            className="absolute top-4 right-4 z-10 flex items-center gap-2 px-4 py-2 rounded-full bg-black/80 text-white text-sm font-medium shadow-lg hover:bg-black transition-all"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
             </svg>
-            Tap to unmute
+            🔇 Tap for sound
           </button>
         )}
       </div>
