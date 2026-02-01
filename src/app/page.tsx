@@ -56,10 +56,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0b] text-white overflow-hidden">
-      {/* Ambient background */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-[#6366f1]/20 rounded-full blur-[200px]" />
-        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-[#a855f7]/15 rounded-full blur-[200px]" />
+      {/* Ambient background - reduced for performance */}
+      <div className="fixed inset-0 pointer-events-none hidden md:block">
+        <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-[#6366f1]/10 rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-[#a855f7]/10 rounded-full blur-[150px]" />
       </div>
 
       {/* Navigation */}
