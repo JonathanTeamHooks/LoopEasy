@@ -56,10 +56,10 @@ export default function CreatorChannelCard({ channel, size = 'normal' }: Creator
             </div>
           </div>
           
-          {/* Video count badge */}
-          {channel.video_count && channel.video_count > 0 && (
+          {/* Category badge */}
+          {channel.category && (
             <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 backdrop-blur-sm text-xs text-white font-medium">
-              {channel.video_count} videos
+              {channel.category}
             </div>
           )}
         </div>
@@ -71,7 +71,7 @@ export default function CreatorChannelCard({ channel, size = 'normal' }: Creator
           {channel.name}
         </h3>
         <p className="text-xs text-gray-400 truncate mt-0.5">
-          by {channel.creator_name || 'Anonymous'}
+          {channel.description || channel.category || 'Channel'}
         </p>
         <p className="text-xs text-gray-500 flex items-center gap-1 mt-0.5">
           <span>{(channel.follower_count || 0).toLocaleString()}</span>
