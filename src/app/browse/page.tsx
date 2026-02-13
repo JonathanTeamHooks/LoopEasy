@@ -82,20 +82,27 @@ function BrowseContent() {
   const categoryParam = searchParams.get("category");
   const searchParam = searchParams.get("search");
   
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [searchQuery, setSearchQuery] = useState("");
+  // Initialize directly from URL params to avoid race condition
+  const initialCategory = categoryParam && categories.includes(categoryParam) ? categoryParam : "All";
+  const initialSearch = searchParam || "";
+  
+  const [activeCategory, setActiveCategory] = useState(initialCategory);
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
   const [channels, setChannels] = useState<Channel[]>([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
   const [showUserMenu, setShowUserMenu] = useState(false);
 
-  // Set category and search from URL params on mount
+  // Sync with URL params when they change (e.g., back/forward navigation)
   useEffect(() => {
-    if (categoryParam && categories.includes(categoryParam)) {
-      setActiveCategory(categoryParam);
+    const newCategory = categoryParam && categories.includes(categoryParam) ? categoryParam : "All";
+    const newSearch = searchParam || "";
+    
+    if (newCategory !== activeCategory) {
+      setActiveCategory(newCategory);
     }
-    if (searchParam) {
-      setSearchQuery(searchParam);
+    if (newSearch !== searchQuery) {
+      setSearchQuery(newSearch);
     }
   }, [categoryParam, searchParam]);
 
