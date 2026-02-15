@@ -2,6 +2,16 @@
 
 This file provides instructions for AI agents (Claude, Cursor, etc.) working on this project.
 
+## 🗂️ Business Registry — MANDATORY
+Before ANY push, deploy, or file operation:
+1. Read `~/clawd/docs/BUSINESS_REGISTRY.md`
+2. Confirm the correct GitHub remote, branch, local path, and Vercel project for this business
+3. Check the business's current deployment stage for deploy rules
+4. If Stage 2+, do NOT deploy to production without owner approval
+
+This is not optional. Wrong deploys waste hours and risk breaking live products.
+
+
 ## 🎨 Web Design & Development Standards
 
 **All web, UI, and visual work must follow the Team Hooks Web Design Playbook.**
